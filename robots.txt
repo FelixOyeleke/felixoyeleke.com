@@ -1,0 +1,75 @@
+# Robots.txt for felixoyeleke.com
+# Professional portfolio website of Felix Oyeleke
+# Updated: 2024-12-19
+
+# Allow all crawlers access to most content
+User-agent: *
+Allow: /
+
+# Block access to administrative and private directories
+Disallow: /admin.html
+Disallow: /backend/
+Disallow: /logs/
+Disallow: /.env*
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /temp/
+Disallow: /cache/
+
+# Allow important directories
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /documents/
+Allow: /components/
+Allow: /icons/
+
+# Block sensitive files
+Disallow: /*.log$
+Disallow: /*.env$
+Disallow: /*.config$
+Disallow: /sw.js
+Disallow: /manifest.json
+
+# Allow specific crawlers with optimized settings
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: LinkedInBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: TwitterBot
+Allow: /
+
+# Block problematic crawlers
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap locations
+Sitemap: https://felixoyeleke.com/sitemap.xml
+Sitemap: https://felixoyeleke.com/sitemap-images.xml
+
+# Host directive (preferred domain)
+Host: felixoyeleke.com
+
+# Default crawl delay
+Crawl-delay: 1

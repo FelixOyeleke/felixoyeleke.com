@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page not found - Felix Oyeleke">
+    <meta name="robots" content="noindex, nofollow">
+    <title>404 - Page Not Found | Felix Oyeleke</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="images/profile-picture.jpg">
+    <link rel="touch-icon" href="images/profile-picture.jpg">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/main-styles.css">
+    
+    <style>
+        .error-page {
+            min-height: calc(100vh - 160px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--spacing-xl);
+            background: var(--background-secondary);
+        }
+        
+        .error-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .error-code {
+            font-size: 6rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1;
+        }
+        
+        .error-title {
+            font-size: var(--font-size-h1);
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-md);
+            font-weight: 400;
+        }
+        
+        .error-description {
+            font-size: var(--font-size-body);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+            line-height: 1.6;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .error-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border: 2px solid var(--gold);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            color: var(--gold);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+        
+        .error-btn:hover {
+            background: var(--gold);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .error-btn.primary {
+            background: var(--gold);
+            color: white;
+        }
+        
+        .error-btn.primary:hover {
+            background: var(--gold-dark);
+        }
+        
+        .error-links {
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .error-links h3 {
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-h4);
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+        
+        .quick-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: var(--spacing-xs);
+            border-radius: var(--radius-xs);
+            transition: color 0.2s ease;
+        }
+        
+        .quick-link:hover {
+            color: var(--gold);
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 4rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    
+    <!-- SEO Analytics -->
+    <script>
+        fetch('components/seo-analytics.html')
+            .then(response => response.text())
+            .then(html => {
+                document.head.insertAdjacentHTML('beforeend', html);
+            });
+    </script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    
+    <main class="error-page">
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Page Not Found</h1>
+            <p class="error-description">
+                Sorry, the page you're looking for doesn't exist. It might have been moved, deleted, or you entered the wrong URL.
+            </p>
+            
+            <div class="error-actions">
+                <a href="index.html" class="error-btn primary">Go Home</a>
+                <a href="javascript:history.back()" class="error-btn">Go Back</a>
+            </div>
+            
+            <div class="error-links">
+                <h3>Popular Pages</h3>
+                <div class="quick-links">
+                    <a href="index.html" class="quick-link">Portfolio</a>
+                    <a href="blog.html" class="quick-link">Blog</a>
+                    <a href="store.html" class="quick-link">Store</a>
+                    <a href="links.html" class="quick-link">Links</a>
+                    <a href="index.html#contact" class="quick-link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div id="footer-placeholder"></div>
+    
+    <script src="js/modules.js" defer></script>
+</body>
+</html>

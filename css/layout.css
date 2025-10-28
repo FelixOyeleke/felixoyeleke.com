@@ -1,0 +1,53 @@
+/* Layout Structure */
+.site-container {
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+    z-index: 2;
+}
+
+.site-sidebar {
+    width: var(--sidebar-width);
+    background: var(--background-primary);
+    padding: var(--sidebar-padding);
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid var(--border-color);
+    z-index: 10;
+}
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    width: var(--main-content-width);
+    padding: var(--content-padding);
+    min-height: 100vh;
+    position: relative;
+    z-index: 2;
+}
+
+/* Profile Section */
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    text-align: left;
+}
+
+.profile-image {
+    flex-shrink: 0;
+}
+
+.profile-content {
+    flex: 1;
+}
+
+.profile-image img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--gold);
+}
+

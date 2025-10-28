@@ -1,0 +1,27 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="grain">
+      <feTurbulence baseFrequency="0.9" numOctaves="4" result="noise" seed="2"/>
+      <feColorMatrix in="noise" type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="discrete" tableValues="0.02 0.04 0.06 0.08 0.1 0.12 0.14 0.16 0.18 0.2"/>
+      </feComponentTransfer>
+      <feComposite operator="over" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  
+  <!-- Base grain pattern -->
+  <rect width="200" height="200" fill="url(#grainPattern)"/>
+  
+  <defs>
+    <pattern id="grainPattern" patternUnits="userSpaceOnUse" width="4" height="4">
+      <rect width="4" height="4" fill="transparent"/>
+      <circle cx="1" cy="1" r="0.3" fill="rgba(0,0,0,0.03)" opacity="0.8"/>
+      <circle cx="3" cy="2" r="0.2" fill="rgba(0,0,0,0.02)" opacity="0.6"/>
+      <circle cx="2" cy="3" r="0.25" fill="rgba(0,0,0,0.025)" opacity="0.7"/>
+      <circle cx="0.5" cy="3.5" r="0.15" fill="rgba(0,0,0,0.015)" opacity="0.5"/>
+      <circle cx="3.5" cy="0.5" r="0.2" fill="rgba(0,0,0,0.02)" opacity="0.6"/>
+      <circle cx="1.5" cy="2.5" r="0.1" fill="rgba(0,0,0,0.01)" opacity="0.4"/>
+    </pattern>
+  </defs>
+</svg>

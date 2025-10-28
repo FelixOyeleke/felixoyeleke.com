@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Site Owner Guide — How to Update This Website</title>
+  <link rel="icon" type="image/jpeg" href="images/profile-picture.jpg" />
+  <link rel="stylesheet" href="/css/main-styles.css" />
+  <style>
+    .guide h1 { font-size: 3.05rem; margin-bottom: 0.5rem; }
+    .guide h2 { font-size: 2rem; margin-top: 2rem; }
+    .guide code { background: #f6f8fa; padding: 0 .35rem; border-radius: 4px; }
+    .guide pre { background:#f6f8fa; padding:1rem; border-radius:8px; overflow:auto; }
+    .guide .note { color: var(--text-secondary); font-style: italic; }
+    .guide ul { margin-left: 1.25rem; }
+  </style>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <main class="main-content">
+    <div class="container guide">
+      <section class="content-section">
+        <h1>Owner Guide</h1>
+        <p class="project-description" style="max-width: 60ch;">How to update content, add works and posts, refresh the cache for visitors, and deploy changes.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>1) Update “My Works” on the homepage</h2>
+        <ul>
+          <li>Open <code>index.html</code>.</li>
+          <li>Find the section comment <code><!-- My Works Section --></code>.</li>
+          <li>Each work item is a <code>div.project-item</code> with date, title link, description, and image.</li>
+          <li>Edit the link text to your new work (e.g., “Coursera Course”, “Udemy Course”, “Documentary Video”).</li>
+          <li>Swap the image <code>src</code> with a file in <code>/images</code> (keep SVGs or JPGs).</li>
+        </ul>
+      </section>
+
+      <section class="content-section">
+        <h2>2) Add or edit blog posts</h2>
+        <ul>
+          <li>Blog listing is at <code>blog.html</code>.</li>
+          <li>Each post is an <code>&lt;article class="blog-post"&gt;</code> with meta, title, tags, and excerpt.</li>
+          <li>To add a new post page, copy an existing file under <code>/blog/</code> and update the content.</li>
+          <li>Link to the new page from <code>blog.html</code> by adding a new <code>article.blog-post</code> block.</li>
+        </ul>
+      </section>
+
+      <section class="content-section">
+        <h2>3) Update colors and typography</h2>
+        <ul>
+          <li>Design tokens are in <code>css/main-styles.css</code> under <code>:root</code>.</li>
+          <li>Accent black variables: <code>--gold</code> and <code>--gold-dark</code> currently set to softer black.</li>
+          <li>Change spacing, fonts, and sizes via the <code>--font-*</code> and <code>--spacing-*</code> variables.</li>
+        </ul>
+      </section>
+
+      <section class="content-section">
+        <h2>4) Cache busting for visitors (Service Worker)</h2>
+        <p class="note">If visitors don’t see updates, increase the cache version and refresh.</p>
+        <ol>
+          <li>Open <code>sw.js</code>.</li>
+          <li>Change <code>const CACHE_NAME = 'felix-oyeleke-vX'</code> to the next number (e.g., v3).</li>
+          <li>Optionally add new files to <code>urlsToCache</code> (CSS, images, pages).</li>
+          <li>Save, deploy, then reload the site. On desktop, do a hard refresh (Cmd/Ctrl+Shift+R).</li>
+        </ol>
+      </section>
+
+      <section class="content-section">
+        <h2>5) Deployment</h2>
+        <ul>
+          <li>This is a static site (HTML/CSS/JS). Host on Netlify or any static host.</li>
+          <li>Upload the folder or push to your connected repo. Netlify will serve directly (no build step).</li>
+        </ul>
+      </section>
+
+      <section class="content-section">
+        <h2>6) Troubleshooting</h2>
+        <ul>
+          <li><strong>Update not showing?</strong> Bump <code>CACHE_NAME</code> in <code>sw.js</code> and hard refresh.</li>
+          <li><strong>Broken link?</strong> Confirm the <code>href</code> points to an existing file and the path is correct.</li>
+          <li><strong>Images not loading?</strong> Ensure the file is in <code>/images</code> and the name matches exactly.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="js/modules.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,80 @@
+<!-- SEO and Analytics -->
+<!-- Add this to the <head> section of each page -->
+
+<!-- Google Analytics 4 (Replace GA_MEASUREMENT_ID with your actual ID) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID', {
+    page_title: document.title,
+    page_location: window.location.href,
+    content_group1: 'Felix Oyeleke Website'
+  });
+</script>
+
+<!-- Google Search Console Verification (Replace with your verification code) -->
+<meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE">
+
+<!-- Bing Webmaster Tools Verification (Replace with your verification code) -->
+<meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE_HERE">
+
+<!-- Optional: Google Tag Manager (Alternative to GA4) -->
+<!-- Google Tag Manager -->
+<!--
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+-->
+<!-- End Google Tag Manager -->
+
+<!-- Optional: Microsoft Clarity (Heat mapping and user behavior) -->
+<!--
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "YOUR_CLARITY_ID");
+</script>
+-->
+
+<!-- Schema.org for Contact Information -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPoint",
+  "telephone": "+1-709-219-9882",
+  "contactType": "Customer Service",
+  "email": "hello@felixoyeleke.com",
+  "availableLanguage": ["English"],
+  "areaServed": ["CA", "US"]
+}
+</script>
+
+<!-- Rich Snippets for Professional Service -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Felix Oyeleke — Offshore Project Manager & Property Management Specialist",
+  "description": "Project and property management services, business operations, and digital workflow solutions for offshore coordination.",
+  "provider": {
+    "@type": "Person",
+    "name": "Felix Oyeleke",
+    "url": "https://felixoyeleke.com"
+  },
+  "areaServed": ["Newfoundland and Labrador", "Atlantic Canada", "Remote"],
+  "serviceType": [
+    "Project Management",
+    "Property Management",
+    "Business Operations",
+    "Process Optimization",
+    "Digital Solutions"
+  ],
+  "url": "https://felixoyeleke.com"
+}
+</script>

@@ -1,0 +1,10 @@
+<!-- This is a placeholder - Replace with your actual profile photo -->
+<!-- Recommended: Add your photo as profile.jpg in the images folder -->
+<!-- For best results, use a 400x400px or larger square image -->
+
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" rx="12" fill="#f3f4f6"/>
+  <circle cx="100" cy="75" r="30" fill="#9ca3af"/>
+  <path d="M50 150c0-27.614 22.386-50 50-50s50 22.386 50 50v25H50v-25z" fill="#9ca3af"/>
+  <text x="100" y="190" text-anchor="middle" fill="#6b7280" font-family="Arial, sans-serif" font-size="10">Add your photo here</text>
+</svg>

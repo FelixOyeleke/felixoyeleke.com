@@ -1,0 +1,25 @@
+<svg width="400" height="225" viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="225" fill="#f1f2f6"/>
+  <rect x="1" y="1" width="398" height="223" stroke="#222222" stroke-width="2" fill="none"/>
+  
+  <!-- Play button -->
+  <circle cx="200" cy="112.5" r="30" fill="none" stroke="#222222" stroke-width="3" opacity="0.8"/>
+  <polygon points="190,97.5 190,127.5 220,112.5" fill="white"/>
+  
+  <!-- React logo placeholder -->
+  <circle cx="150" cy="80" r="15" stroke="#61dafb" stroke-width="2" fill="none"/>
+  <circle cx="150" cy="80" r="5" fill="#61dafb"/>
+  <ellipse cx="150" cy="80" rx="25" ry="10" stroke="#61dafb" stroke-width="1" fill="none"/>
+  <ellipse cx="150" cy="80" rx="25" ry="10" stroke="#61dafb" stroke-width="1" fill="none" transform="rotate(60 150 80)"/>
+  <ellipse cx="150" cy="80" rx="25" ry="10" stroke="#61dafb" stroke-width="1" fill="none" transform="rotate(-60 150 80)"/>
+  
+  <!-- Course title -->
+  <text x="200" y="180" text-anchor="middle" fill="#404e4d" font-family="Arial, sans-serif" font-size="16" font-weight="600">
+    React Starter Templates
+  </text>
+  
+  <!-- Duration -->
+  <text x="200" y="200" text-anchor="middle" fill="#666" font-family="Arial, sans-serif" font-size="12">
+    Ready-to-use Templates • TypeScript
+  </text>
+</svg>

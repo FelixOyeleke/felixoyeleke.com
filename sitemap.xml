@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://felixoyeleke.com/</loc>
+    <lastmod>2025-10-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- About Page -->
+  <url>
+    <loc>https://felixoyeleke.com/about.html</loc>
+    <lastmod>2025-10-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact Page -->
+  <url>
+    <loc>https://felixoyeleke.com/contact.html</loc>
+    <lastmod>2025-10-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Store Page -->
+  <url>
+    <loc>https://felixoyeleke.com/store.html</loc>
+    <lastmod>2025-10-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Page -->
+  <url>
+    <loc>https://felixoyeleke.com/blog.html</loc>
+    <lastmod>2025-10-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://felixoyeleke.com/blog/automating-property-operations-guide.html</loc>
+    <lastmod>2025-10-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://felixoyeleke.com/blog/building-scalable-business-processes.html</loc>
+    <lastmod>2025-10-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://felixoyeleke.com/blog/managing-offshore-teams.html</loc>
+    <lastmod>2025-10-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://felixoyeleke.com/blog/risk-management-offshore-operations.html</loc>
+    <lastmod>2025-10-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://felixoyeleke.com/blog/tenant-relations-best-practices.html</loc>
+    <lastmod>2025-10-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Links Page -->
+  <url>
+    <loc>https://felixoyeleke.com/links.html</loc>
+    <lastmod>2025-10-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- 404 Page -->
+  <url>
+    <loc>https://felixoyeleke.com/404.html</loc>
+    <lastmod>2025-10-27T00:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+
+  <!-- CV/Resume -->
+  <url>
+    <loc>https://felixoyeleke.com/documents/Felix%20Oyeleke%20-%20Property%20Management.pdf</loc>
+    <lastmod>2025-10-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

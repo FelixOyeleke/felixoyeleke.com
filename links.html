@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <meta name="description" content="All my links in one place - Felix Oyeleke. Quick access to my projects, social media, blog, store and professional profiles." />
+  <meta name="keywords" content="Felix Oyeleke, links, social media, YouTube, GitHub, LinkedIn, Instagram, blog, store, contact" />
+  <meta name="author" content="Felix Oyeleke" />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://felixoyeleke.com/links.html" />
+  <meta property="og:title" content="All My Links - Felix Oyeleke" />
+  <meta property="og:description" content="Quick access to everything I'm working on - projects, social media, blog, store and more." />
+  <meta property="og:image" content="https://felixoyeleke.com/images/profile-picture.jpg" />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://felixoyeleke.com/links.html" />
+  <meta property="twitter:title" content="All My Links - Felix Oyeleke" />
+  <meta property="twitter:description" content="Quick access to everything I'm working on - projects, social media, blog, store and more." />
+  <meta property="twitter:image" content="https://felixoyeleke.com/images/profile-picture.jpg" />
+  
+  <title>All My Links - Felix Oyeleke</title>
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://felixoyeleke.com/links.html" />
+  
+  <!-- Site Stylesheets -->
+  <link rel="stylesheet" href="/css/main-styles.css">
+  <script src="js/modules.js" defer></script>
+  
+  <style>
+    /* Links Page - Matching Your Clean, Minimal Design */
+    body { 
+      background: var(--background-secondary); 
+      color: var(--text-primary); 
+    }
+    
+    .links-page { 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      padding: 48px 16px; 
+      min-height: calc(100vh - 160px); 
+    }
+    
+    .links-container { 
+      width: 100%; 
+      max-width: 720px; 
+    }
+    
+    .links-hero { 
+      text-align: center; 
+      margin-bottom: 32px; 
+    }
+    
+    .links-hero h1 { 
+      font-family: var(--font-family-heading);
+      font-size: var(--font-size-h1);
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: -0.3px; 
+      margin-bottom: 8px; 
+    }
+    
+    .links-hero p { 
+      color: var(--text-secondary); 
+      font-family: var(--font-family-body);
+      font-size: var(--font-size-body);
+      margin-bottom: 24px;
+    }
+    
+    .links-grid { 
+      display: grid; 
+      gap: 12px; 
+      margin-top: 16px; 
+    }
+    
+    @media (min-width: 560px) { 
+      .links-grid { 
+        grid-template-columns: 1fr 1fr; 
+      } 
+    }
+    
+    .link-card { 
+      display: flex; 
+      align-items: center; 
+      gap: 12px; 
+      padding: 16px 18px; 
+      border: 1px solid var(--border-color); 
+      border-radius: 12px; 
+      background: var(--background-primary); 
+      text-decoration: none; 
+      color: var(--text-primary); 
+      transition: all 0.2s ease; 
+      position: relative;
+    }
+    
+    .link-card:hover {
+      background: var(--background-secondary);
+      border-color: var(--gold);
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .link-icon { 
+      width: 32px; 
+      height: 32px; 
+      display: flex; 
+      place-items: center; 
+      justify-content: center;
+      border-radius: 8px; 
+      font-size: 18px; 
+      background: var(--background-secondary); 
+      flex-shrink: 0;
+    }
+    
+    .link-content {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .link-title { 
+      font-family: var(--font-family-body);
+      font-weight: 600; 
+      font-size: var(--font-size-body);
+      color: var(--text-primary);
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+    
+    .link-description { 
+      color: var(--text-secondary); 
+      font-size: var(--font-size-small);
+      font-family: var(--font-family-body);
+      line-height: 1.4;
+    }
+    
+    .link-meta {
+      color: var(--text-secondary);
+      font-size: var(--font-size-xs);
+      font-family: var(--font-family-body);
+      margin-top: 2px;
+    }
+    
+    /* External link indicator */
+    .link-external::after {
+      content: '↗';
+      margin-left: auto;
+      font-size: 16px;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+    }
+    
+    .link-external:hover::after {
+      color: var(--gold);
+    }
+    
+    /* Simple icon styling to match your clean aesthetic */
+    .link-youtube .link-icon { background: #FF0000; color: white; }
+    .link-github .link-icon { background: #333; color: white; }
+    .link-instagram .link-icon { background: #E4405F; color: white; }
+    .link-threads .link-icon { background: #000; color: white; }
+    .link-linkedin .link-icon { background: #0077B5; color: white; }
+    .link-blog .link-icon { background: var(--gold); color: white; }
+    .link-store .link-icon { background: var(--gold); color: white; }
+    .link-contact .link-icon { background: var(--gold); color: white; }
+    .link-portfolio .link-icon { background: var(--gold); color: white; }
+    
+    /* Footer */
+    .links-footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .links-footer p {
+      color: var(--text-secondary);
+      font-size: var(--font-size-xs);
+      margin-bottom: 8px;
+    }
+    
+    .links-footer .back-link {
+      color: var(--gold);
+      text-decoration: none;
+      font-size: var(--font-size-small);
+      transition: color 0.2s ease;
+    }
+    
+    .links-footer .back-link:hover {
+      color: var(--gold-dark);
+    }
+    
+    /* Responsive adjustments */
+    @media (min-width: 768px) {
+      .links-page {
+        padding: 64px 24px;
+      }
+      
+      .links-hero {
+        margin-bottom: 40px;
+      }
+      
+      .link-card {
+        padding: 18px 20px;
+      }
+    }
+  </style>
+  
+  <!-- SEO Analytics -->
+  <script>
+      fetch('components/seo-analytics.html')
+          .then(response => response.text())
+          .then(html => {
+              document.head.insertAdjacentHTML('beforeend', html);
+          });
+  </script>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  
+  <main class="links-page">
+    <div class="links-container">
+      <!-- Hero Section -->
+      <div class="links-hero">
+        <h1>All my links</h1>
+        <p>Quick access to everything I'm working on</p>
+      </div>
+      
+      <!-- Links Grid -->
+      <div class="links-grid">
+        <!-- Portfolio -->
+        <a class="link-card" href="index.html">
+          <div class="link-icon link-portfolio">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9,22 9,12 15,12 15,22"/>
+            </svg>
+          </div>
+          <div class="link-content">
+            <div class="link-title">Portfolio</div>
+            <div class="link-description">My main website and work</div>
+          </div>
+        </a>
+        
+        <!-- YouTube -->
+        <a class="link-card link-youtube link-external" 
+           href="https://youtube.com/@felixoyeleke" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          <div class="link-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+              <polygon points="9.75,15.02 15.5,11.75 9.75,8.48"/>
+            </svg>
+          </div>
+          <div class="link-content">
+            <div class="link-title">YouTube</div>
+            <div class="link-description">Geophysics & tech content</div>
+            <div class="link-meta">@felixoyeleke</div>
+          </div>
+        </a>
+        
+        <!-- GitHub -->
+        <a class="link-card link-github link-external" 
+           href="https://github.com/felixoyeleke" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          <div class="link-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            </svg>
+          </div>
+          <div class="link-content">
+            <div class="link-title">GitHub</div>
+            <div class="link-description">Open-source projects & code</div>
+            <div class="link-meta">felixoyeleke</div>
+          </div>
+        </a>
+        
+        <!-- LinkedIn -->
+        <a class="link-card link-linkedin link-external" 
+           href="https://linkedin.com/in/felixoyeleke" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          <div class="link-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </div>
+          <div class="link-content">
+            <div class="link-title">LinkedIn</div>
+            <div class="link-description">Professional network</div>
+            <div class="link-meta">felixoyeleke</div>
+          </div>
+        </a>
+        
+        <!-- Instagram -->
+        <a class="link-card link-instagram link-external" 
+           href="https://instagram.com/felixoyeleke" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          <div class="link-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </div>
+          <div class="link-content">
+            <div class="link-title">Instagram</div>
+            <div class="link-description">Life, travel & behind the scenes</div>
+            <div class="link-meta">@felixoyeleke</div>
+          </div>
+        </a>
+        
+        <!-- Threads -->
+        <a class="link-card link-threads link-external" 
+           href="https://www.threads.net/@felixoyeleke" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          <div class="link-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div class="link-content">
+            <div class="link-title">Threads</div>
+            <div class="link-description">Quick thoughts & updates</div>
+            <div class="link-meta">@felixoyeleke</div>
+          </div>
+        </a>
+        
+        <!-- Blog -->
+        <a class="link-card link-blog" href="blog.html">
+          <div class="link-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14,2 14,8 20,8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10,9 9,9 8,9"/>
+            </svg>
+          </div>
+          <div class="link-content">
+            <div class="link-title">Blog</div>
+            <div class="link-description">Articles, tutorials & insights</div>
+          </div>
+        </a>
+        
+        <!-- Store -->
+        <a class="link-card link-store" href="store.html">
+          <div class="link-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+          </div>
+          <div class="link-content">
+            <div class="link-title">Store</div>
+            <div class="link-description">Digital products & resources</div>
+          </div>
+        </a>
+        
+        <!-- Contact -->
+        <a class="link-card link-contact" href="index.html#contact">
+          <div class="link-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div class="link-content">
+            <div class="link-title">Contact</div>
+            <div class="link-description">Get in touch</div>
+          </div>
+        </a>
+      </div>
+      
+      <!-- Footer -->
+      <div class="links-footer">
+        <p>© 2025 Felix Oyeleke. All rights reserved.</p>
+        <a href="index.html" class="back-link">← Back to main site</a>
+      </div>
+    </div>
+  </main>
+  
+  <div id="footer-placeholder"></div>
+</body>
+</html>
