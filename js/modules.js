@@ -87,15 +87,31 @@ class ModuleLoader {
             const response = await fetch(`${base}components/footer.html`);
             const footerHTML = await response.text();
 
-            // Find footer placeholder or create one
+            // Mount footer inside the right-side content column (main)
+            const main = document.querySelector('main.main-content');
             let footerContainer = document.getElementById('footer-placeholder');
-            if (!footerContainer) {
-                footerContainer = document.createElement('div');
-                footerContainer.id = 'footer-placeholder';
-                document.body.appendChild(footerContainer);
+
+            if (main) {
+                // If a placeholder exists outside main, move it into main
+                if (footerContainer && !main.contains(footerContainer)) {
+                    main.appendChild(footerContainer);
+                }
+                // If no placeholder inside main, create one at the end of main
+                if (!footerContainer || !main.contains(footerContainer)) {
+                    footerContainer = document.createElement('div');
+                    footerContainer.id = 'footer-placeholder';
+                    main.appendChild(footerContainer);
+                }
+            } else {
+                // Fallback: ensure a placeholder exists somewhere
+                if (!footerContainer) {
+                    footerContainer = document.createElement('div');
+                    footerContainer.id = 'footer-placeholder';
+                    document.body.appendChild(footerContainer);
+                }
             }
 
-            // After footer loads, nothing extra for now
+            // Inject footer HTML
             footerContainer.innerHTML = footerHTML;
             // Adjust absolute root links for local file:// browsing
             if (location && location.protocol === 'file:') {

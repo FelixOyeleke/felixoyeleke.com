@@ -1,5 +1,5 @@
 // Service Worker for Felix Oyeleke Website
-const CACHE_NAME = 'felix-oyeleke-v29';
+const CACHE_NAME = 'felix-oyeleke-v36';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -33,7 +33,8 @@ const urlsToCache = [
   '/images/course-placeholder-2.svg',
   '/images/course-placeholder-3.svg',
   '/guide.html',
-  '/404.html'
+  '/404.html',
+  '/success.html'
 ];
 
 // Install event - cache resources

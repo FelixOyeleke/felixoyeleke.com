@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Newsletter form handling
     const newsletterForm = document.getElementById('newsletterForm');
     if (newsletterForm) {
+        const isNetlify = newsletterForm.hasAttribute('data-netlify');
         newsletterForm.addEventListener('submit', function(e) {
+            if (isNetlify) return; // let Netlify handle the POST
             e.preventDefault();
             const emailInput = this.querySelector('input[type="email"]');
             const email = emailInput.value.trim();

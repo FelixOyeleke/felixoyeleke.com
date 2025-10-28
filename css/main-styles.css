@@ -189,14 +189,16 @@
 
 /* Footer Styles */
 .site-footer {
-    background: var(--background-primary);
-    padding: var(--spacing-lg) var(--spacing-lg);
-    margin-top: var(--spacing-lg);
-    border-top: 1px solid var(--border-color);
+    background: transparent;
+    padding: 0;
+    margin-top: var(--spacing-md);
+    border-top: none;
     width: 100%;
     box-sizing: border-box;
     position: relative; /* ensure it sits above preceding content */
-    z-index: 5;
+    z-index: 9999; /* keep footer above any previous content */
+    isolation: isolate; /* create a new stacking context */
+    clear: both; /* prevent float overlap from preceding sections */
 }
 
 .footer-container {
@@ -296,8 +298,8 @@
 }
 
 .footer-bottom {
-    border-top: 1px solid var(--border-color);
-    padding-top: var(--spacing-md);
+    border-top: none;
+    padding-top: 0;
     text-align: center;
     color: var(--text-secondary);
     font-size: 0.95rem;

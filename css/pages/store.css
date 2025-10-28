@@ -41,7 +41,7 @@
 }
 
 .product-card.featured {
-    border: 2px solid var(--accent-blue);
+    border: 2px solid var(--border-color);
     background: linear-gradient(135deg, var(--background-secondary) 0%, rgba(0, 0, 0, 0.02) 100%);
 }
 

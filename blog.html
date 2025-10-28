@@ -201,9 +201,14 @@
                         Get notified when I publish new insights on project management and business operations.
                         No spam, just quality content for business professionals.
                     </p>
-                    <form class="newsletter-form" id="newsletterForm">
+                    <form class="newsletter-form" id="newsletterForm" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/success.html">
+                        <input type="hidden" name="form-name" value="newsletter">
+                        <p class="hidden" style="display:none;">
+                            <label>Don’t fill this out if you're human: <input name="bot-field"></label>
+                        </p>
                         <input
                             type="email"
+                            name="email"
                             placeholder="Enter your email address"
                             class="newsletter-input"
                             required
