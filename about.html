@@ -38,7 +38,7 @@
     <main class="main-content">
         <div class="container">
             <!-- About Header -->
-            <section class="about-header content-section">
+            <section class="about-header content-section section-card">
                 <h1>About Me</h1>
                 <p class="about-intro">
                     I'm Felix Oyeleke, an offshore project manager and property management specialist 
@@ -46,8 +46,26 @@
                 </p>
             </section>
 
+            <!-- Profile/About Section -->
+            <section class="profile-section fade-in section-card" id="profile" itemscope itemtype="https://schema.org/Person">
+                <div class="profile-image">
+                    <img src="images/profile-picture.jpg"
+                         alt="Felix Oyeleke - Offshore Project Manager & Property Management Specialist"
+                         width="200"
+                         height="200"
+                         loading="eager"
+                         onerror="this.src='images/profile-placeholder.svg'"
+                         itemprop="image">
+                </div>
+                <div class="profile-content">
+                    <p itemprop="description">
+                        Managing offshore projects & property operations with <span itemprop="knowsAbout">strategic coordination</span>, <span itemprop="knowsAbout">digital solutions</span> & <span itemprop="knowsAbout">business expertise</span>. Focused on efficient operations and practical results.
+                    </p>
+                </div>
+            </section>
+
             <!-- Professional Journey -->
-            <section class="content-section">
+            <section class="content-section section-card">
                 <h2>Professional Journey</h2>
                 <div class="journey-content">
                     <p>
@@ -65,7 +83,7 @@
             </section>
 
             <!-- Expertise Areas -->
-            <section class="content-section">
+            <section class="content-section section-card">
                 <h2>Areas of Expertise</h2>
                 <div class="expertise-grid">
                     <div class="expertise-card">
@@ -107,7 +125,7 @@
             </section>
 
             <!-- Philosophy -->
-            <section class="content-section">
+            <section class="content-section section-card">
                 <h2>My Approach</h2>
                 <div class="philosophy-content">
                     <blockquote class="philosophy-quote">
@@ -125,7 +143,7 @@
             </section>
 
             <!-- Skills & Tools -->
-            <section class="content-section">
+            <section class="content-section section-card">
                 <h2>Skills & Tools</h2>
                 <div class="skills-content">
                     <div class="skills-category">
@@ -161,7 +179,7 @@
             </section>
 
             <!-- Contact CTA -->
-            <section class="content-section">
+            <section class="content-section section-card">
                 <div class="contact-cta">
                     <h2>Let's Work Together</h2>
                     <p>

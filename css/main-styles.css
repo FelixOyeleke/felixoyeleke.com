@@ -57,6 +57,20 @@
     margin-bottom: 0;
 }
 
+.section-card {
+    background: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-xl);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+    margin-bottom: var(--spacing-xl);
+    border-bottom: none;
+}
+
+.section-card:last-child {
+    margin-bottom: 0;
+}
+
 
 
 /* Section Separator Line */

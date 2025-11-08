@@ -1,6 +1,15 @@
 /**
  * Module Loader - Loads header and footer across all pages
  */
+// Unregister any existing service workers so the browser stops offering install
+try {
+  if (typeof navigator !== 'undefined' && navigator.serviceWorker) {
+    navigator.serviceWorker.getRegistrations()
+      .then(rs => rs.forEach(r => r.unregister()))
+      .catch(() => {});
+  }
+} catch (_) {}
+
 class ModuleLoader {
     /**
      * Load header and footer modules
