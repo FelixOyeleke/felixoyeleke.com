@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360">
+  <defs>
+    <linearGradient id="bg2" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <style>
+      .grid-border { fill:none; stroke:#38bdf8; stroke-width:1.2; }
+      .tile { fill:#0f172a; stroke:#1e293b; stroke-width:0.8; }
+      .tile--hot { fill:#f97316; }
+      .tile--cold { fill:#1d4ed8; }
+      .label { font-family:"Segoe UI",sans-serif; font-size:16px; fill:#e2e8f0; }
+      .caption { font-family:"Segoe UI",sans-serif; font-size:14px; fill:#94a3b8; }
+      .badge { fill:#1f2937; stroke:#38bdf8; stroke-width:1.5; rx:12; ry:12; }
+      .badge-text { font-family:"Segoe UI",sans-serif; font-size:13px; fill:#bae6fd; }
+    </style>
+  </defs>
+  <rect width="960" height="360" rx="24" fill="url(#bg2)"/>
+
+  <!-- Raster preview -->
+  <rect x="60" y="60" width="320" height="240" fill="#020617" stroke="#38bdf8" stroke-width="2"/>
+  <text class="label" x="70" y="90">Rendered 512x512 raster</text>
+  <!-- Simulated gradient -->
+  <linearGradient id="scanGrad" x1="0" x2="1" y1="0" y2="1">
+    <stop offset="0" stop-color="#0ea5e9"/>
+    <stop offset="0.4" stop-color="#22d3ee"/>
+    <stop offset="1" stop-color="#1d4ed8"/>
+  </linearGradient>
+  <rect x="80" y="110" width="280" height="180" fill="url(#scanGrad)" opacity="0.5"/>
+
+  <!-- Tile grid -->
+  <rect x="420" y="60" width="320" height="240" class="grid-border"/>
+  <text class="label" x="430" y="90">16 x 16 tile map</text>
+  <!-- draw tiles -->
+  <g transform="translate(430 110)">
+    <!-- 10x10 sample grid for visualization -->
+    <rect width="280" height="180" fill="none" stroke="#1e3a8a" stroke-width="0.5"/>
+    <!-- vertical lines -->
+    <g stroke="#1e3a8a" stroke-width="0.5">
+      <path d="M28 0v180"/>
+      <path d="M56 0v180"/>
+      <path d="M84 0v180"/>
+      <path d="M112 0v180"/>
+      <path d="M140 0v180"/>
+      <path d="M168 0v180"/>
+      <path d="M196 0v180"/>
+      <path d="M224 0v180"/>
+      <path d="M252 0v180"/>
+    </g>
+    <!-- horizontal lines -->
+    <g stroke="#1e3a8a" stroke-width="0.5">
+      <path d="M0 18h280"/>
+      <path d="M0 36h280"/>
+      <path d="M0 54h280"/>
+      <path d="M0 72h280"/>
+      <path d="M0 90h280"/>
+      <path d="M0 108h280"/>
+      <path d="M0 126h280"/>
+      <path d="M0 144h280"/>
+      <path d="M0 162h280"/>
+    </g>
+    <!-- highlight tiles -->
+    <rect x="140" y="54" width="28" height="18" class="tile tile--hot" opacity="0.8"/>
+    <rect x="168" y="54" width="28" height="18" class="tile tile--hot" opacity="0.6"/>
+    <rect x="140" y="72" width="28" height="18" class="tile tile--hot" opacity="0.5"/>
+    <rect x="84" y="108" width="28" height="18" class="tile tile--cold" opacity="0.7"/>
+    <rect x="112" y="108" width="28" height="18" class="tile tile--cold" opacity="0.5"/>
+  </g>
+
+  <!-- Descriptor badges -->
+  <rect class="badge" x="760" y="80" width="150" height="54"/>
+  <text class="badge-text" x="775" y="110">Histogram signature</text>
+
+  <rect class="badge" x="760" y="150" width="150" height="54"/>
+  <text class="badge-text" x="775" y="180">Sobel edge map</text>
+
+  <rect class="badge" x="760" y="220" width="150" height="54"/>
+  <text class="badge-text" x="775" y="250">Deterministic token ID</text>
+
+  <text class="caption" x="70" y="320">Figure 2: Each tile is described with lightweight statistics so compressors can reuse tokens across pings.</text>
+</svg>

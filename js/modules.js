@@ -1,216 +1,193 @@
 /**
- * Module Loader - Loads header and footer across all pages
+ * Module Loader - loads header/footer snippets and shared scripts.
  */
-// Unregister any existing service workers so the browser stops offering install
+
 try {
   if (typeof navigator !== 'undefined' && navigator.serviceWorker) {
     navigator.serviceWorker.getRegistrations()
-      .then(rs => rs.forEach(r => r.unregister()))
+      .then((regs) => regs.forEach((reg) => reg.unregister()))
       .catch(() => {});
   }
 } catch (_) {}
 
 class ModuleLoader {
-    /**
-     * Load header and footer modules
-     */
-    static async loadModules() {
-        await Promise.all([
-            this.loadHeader(),
-            this.loadFooter()
-        ]);
-
-        // Set active navigation state
-        this.setActiveNavigation();
-
-        // Ensure app scripts/effects run on every page (HTML remains unchanged)
-        try { await this.ensureAppInit(); } catch (e) { console.warn('ensureAppInit failed', e); }
-
-        // Initialize navigation after header is loaded
-        if (typeof window !== 'undefined' && typeof window.NavigationManager !== 'undefined') {
-            new window.NavigationManager();
-        }
+  static async loadModules() {
+    await Promise.all([this.loadHeader(), this.loadFooter()]);
+    this.setActiveNavigation();
+    try { await this.ensureAppInit(); } catch (err) { console.warn('ensureAppInit failed', err); }
+    if (typeof window !== 'undefined' && typeof window.NavigationManager === 'function') {
+      new window.NavigationManager();
     }
+  }
 
+  static async loadHeader() {
+    try {
+      const base = (location && location.protocol === 'file:') ? '' : '/';
+      const response = await fetch(`${base}components/header.html`);
+      const headerHTML = await response.text();
 
-    /**
-     * Load header module
-     */
-    static async loadHeader() {
-        try {
-            const base = (location && location.protocol === 'file:') ? '' : '/';
-            const response = await fetch(`${base}components/header.html`);
-            const headerHTML = await response.text();
+      let headerContainer = document.getElementById('header-placeholder');
+      if (!headerContainer) {
+        headerContainer = document.createElement('div');
+        headerContainer.id = 'header-placeholder';
+        document.body.insertBefore(headerContainer, document.body.firstChild);
+      }
+      headerContainer.innerHTML = headerHTML;
 
-            // Find header placeholder or create one
-            let headerContainer = document.getElementById('header-placeholder');
-            if (!headerContainer) {
-                headerContainer = document.createElement('div');
-                headerContainer.id = 'header-placeholder';
-                document.body.insertBefore(headerContainer, document.body.firstChild);
-            }
-
-            headerContainer.innerHTML = headerHTML;
-
-            // Adjust absolute root links for local file:// browsing
-            if (location && location.protocol === 'file:') {
-                const map = {
-                    '/': 'index.html',
-                    '/index.html': 'index.html',
-                    '/about.html': 'about.html',
-                    '/contact.html': 'contact.html',
-                    '/blog.html': 'blog.html',
-                    '/store.html': 'store.html',
-                    '/documents/Felix Oyeleke - Property Management.pdf': 'documents/Felix Oyeleke - Property Management.pdf'
-                };
-                headerContainer.querySelectorAll('a[href^="/"]').forEach(a => {
-                    const href = a.getAttribute('href');
-                    a.setAttribute('href', map[href] || href.replace(/^\//, ''));
-                });
-            }
-            // Wire up mobile menu toggle immediately after header injection
-            // Ensure mobile hamburger works even if NavigationManager didn’t init yet
-            const toggle = document.getElementById('mobileMenuToggle');
-            const menu = document.getElementById('navMenu');
-            if (toggle && menu && !toggle.dataset.bound) {
-                toggle.addEventListener('click', () => {
-                    menu.classList.toggle('active');
-                    toggle.classList.toggle('active');
-                });
-                toggle.dataset.bound = '1';
-            }
-            console.log('✅ Header module loaded');
-
-        } catch (error) {
-            console.error('❌ Failed to load header:', error);
-        }
-    }
-
-
-    /**
-     * Load footer module
-     */
-    static async loadFooter() {
-        try {
-            const base = (location && location.protocol === 'file:') ? '' : '/';
-            const response = await fetch(`${base}components/footer.html`);
-            const footerHTML = await response.text();
-
-            // Mount footer inside the right-side content column (main)
-            const main = document.querySelector('main.main-content');
-            let footerContainer = document.getElementById('footer-placeholder');
-
-            if (main) {
-                // If a placeholder exists outside main, move it into main
-                if (footerContainer && !main.contains(footerContainer)) {
-                    main.appendChild(footerContainer);
-                }
-                // If no placeholder inside main, create one at the end of main
-                if (!footerContainer || !main.contains(footerContainer)) {
-                    footerContainer = document.createElement('div');
-                    footerContainer.id = 'footer-placeholder';
-                    main.appendChild(footerContainer);
-                }
-            } else {
-                // Fallback: ensure a placeholder exists somewhere
-                if (!footerContainer) {
-                    footerContainer = document.createElement('div');
-                    footerContainer.id = 'footer-placeholder';
-                    document.body.appendChild(footerContainer);
-                }
-            }
-
-            // Inject footer HTML
-            footerContainer.innerHTML = footerHTML;
-            // Adjust absolute root links for local file:// browsing
-            if (location && location.protocol === 'file:') {
-                const map = {
-                    '/': 'index.html',
-                    '/index.html': 'index.html',
-                    '/about.html': 'about.html',
-                    '/contact.html': 'contact.html',
-                    '/blog.html': 'blog.html',
-                    '/store.html': 'store.html'
-                };
-                footerContainer.querySelectorAll('a[href^="/"]').forEach(a => {
-                    const href = a.getAttribute('href');
-                    a.setAttribute('href', map[href] || href.replace(/^\//, ''));
-                });
-            }
-
-            console.log('✅ Footer module loaded');
-        } catch (error) {
-            console.error('❌ Failed to load footer:', error);
-        }
-    }
-    /**
-     * Set active navigation state based on current page
-     */
-    static setActiveNavigation() {
-        // After sidebar injection
-        setTimeout(() => {
-            const links = document.querySelectorAll('#navMenu .nav-link');
-            const sections = Array.from(links)
-                .map(l => l.getAttribute('href'))
-                .filter(h => h && h.startsWith('#'))
-                .map(id => document.querySelector(id));
-
-            function updateActive() {
-                const scrollPos = window.scrollY + 120; // offset
-                let current = null;
-                sections.forEach(sec => {
-                    if (!sec) return;
-                    if (scrollPos >= sec.offsetTop) current = sec.id;
-                });
-                links.forEach(l => {
-                    l.classList.remove('active');
-                    const href = l.getAttribute('href');
-                    if (href === `#${current}`) l.classList.add('active');
-                });
-            }
-            updateActive();
-            window.addEventListener('scroll', updateActive, { passive: true });
-        }, 150);
-    }
-
-    /**
-     * Ensure Utils/AppCore/AppEffects are available and initialized once
-     */
-    static async ensureAppInit() {
-        const base = (location && location.protocol === 'file:') ? '' : '/';
-
-        const load = (src) => new Promise((resolve, reject) => {
-            if (document.querySelector(`script[src="${src}"]`)) return resolve();
-            const s = document.createElement('script');
-            s.src = src;
-            s.async = true;
-            s.onload = () => resolve();
-            s.onerror = () => reject(new Error(`Failed to load ${src}`));
-            document.head.appendChild(s);
+      if (location && location.protocol === 'file:') {
+        const map = {
+          '/': 'index.html',
+          '/index.html': 'index.html',
+          '/about.html': 'about.html',
+          '/contact.html': 'contact.html',
+          '/blog.html': 'blog.html',
+          '/store.html': 'store.html',
+          '/documents/Felix Oyeleke - Property Management.pdf': 'documents/Felix Oyeleke - Property Management.pdf'
+        };
+        headerContainer.querySelectorAll('a[href^="/"]').forEach((anchor) => {
+          const href = anchor.getAttribute('href');
+          anchor.setAttribute('href', map[href] || href.replace(/^\//, ''));
         });
+      }
 
-        // Make sure Utils is present for shared helpers
-        if (!window.Utils) {
-            try { await load(`${base}js/utils.js`); } catch (e) { console.warn('utils.js failed to load', e); }
-        }
-
-        // Load modular app scripts if missing
-        const pending = [];
-        if (!window.AppCore) pending.push(load(`${base}js/app-core.js`));
-        if (!window.AppEffects) pending.push(load(`${base}js/effects.js`));
-        if (pending.length) {
-            try { await Promise.all(pending); } catch (e) { console.warn('app modules failed to load', e); }
-        }
-
-        // Initialize once
-        try { if (window.AppCore && !window.__appCoreInitDone) window.AppCore.init(); } catch (e) { console.warn('AppCore.init failed', e); }
-        try { if (window.AppEffects && !window.__appEffectsInitDone) window.AppEffects.init(); } catch (e) { console.warn('AppEffects.init failed', e); }
+      this.bindMobileToggle();
+      console.log('[modules] Header module loaded');
+    } catch (error) {
+      console.error('[modules] Failed to load header:', error);
     }
-}
-/* Auth UI removed */
-ModuleLoader.initAuthUI = function() { return; }
+  }
 
-// Auto-load modules when DOM is ready
+  static bindMobileToggle() {
+    const toggle = document.getElementById('mobileMenuToggle');
+    const menu = document.getElementById('navMenu');
+    if (!toggle || !menu) return;
+
+    const setState = (open) => {
+      menu.classList.toggle('is-open', open);
+      toggle.classList.toggle('active', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+
+    setState(false);
+    toggle.addEventListener('click', () => setState(!menu.classList.contains('is-open')));
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (window.matchMedia('(max-width: 900px)').matches) setState(false);
+      });
+    });
+  }
+
+  static async loadFooter() {
+    try {
+      const base = (location && location.protocol === 'file:') ? '' : '/';
+      const response = await fetch(`${base}components/footer.html`);
+      const footerHTML = await response.text();
+
+      const main = document.querySelector('main.main-content');
+      let footerContainer = document.getElementById('footer-placeholder');
+
+      if (main) {
+        if (footerContainer && !main.contains(footerContainer)) main.appendChild(footerContainer);
+        if (!footerContainer || !main.contains(footerContainer)) {
+          footerContainer = document.createElement('div');
+          footerContainer.id = 'footer-placeholder';
+          main.appendChild(footerContainer);
+        }
+      } else if (!footerContainer) {
+        footerContainer = document.createElement('div');
+        footerContainer.id = 'footer-placeholder';
+        document.body.appendChild(footerContainer);
+      }
+
+      footerContainer.innerHTML = footerHTML;
+
+      if (location && location.protocol === 'file:') {
+        const map = {
+          '/': 'index.html',
+          '/index.html': 'index.html',
+          '/about.html': 'about.html',
+          '/contact.html': 'contact.html',
+          '/blog.html': 'blog.html',
+          '/store.html': 'store.html'
+        };
+        footerContainer.querySelectorAll('a[href^="/"]').forEach((anchor) => {
+          const href = anchor.getAttribute('href');
+          anchor.setAttribute('href', map[href] || href.replace(/^\//, ''));
+        });
+      }
+
+      console.log('[modules] Footer module loaded');
+    } catch (error) {
+      console.error('[modules] Failed to load footer:', error);
+    }
+  }
+
+  static setActiveNavigation() {
+    setTimeout(() => {
+      const links = document.querySelectorAll('#navMenu .nav-link');
+      const sections = Array.from(links)
+        .map((link) => link.getAttribute('href'))
+        .filter((href) => href && href.startsWith('#'))
+        .map((id) => document.querySelector(id));
+
+      function updateActive() {
+        const scrollPos = window.scrollY + 120;
+        let current = null;
+        sections.forEach((section) => {
+          if (!section) return;
+          if (scrollPos >= section.offsetTop) current = section.id;
+        });
+        links.forEach((link) => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+        });
+      }
+
+      updateActive();
+      window.addEventListener('scroll', updateActive, { passive: true });
+    }, 150);
+  }
+
+  static async ensureAppInit() {
+    const base = (location && location.protocol === 'file:') ? '' : '/';
+
+    const load = (src) => new Promise((resolve, reject) => {
+      if (document.querySelector(`script[src="${src}"]`)) return resolve();
+      const script = document.createElement('script');
+      script.src = src;
+      script.async = true;
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error(`Failed to load ${src}`));
+      document.head.appendChild(script);
+    });
+
+    if (!window.Utils) {
+      try { await load(`${base}js/utils.js`); } catch (err) { console.warn('utils.js failed to load', err); }
+    }
+
+    const pending = [];
+    if (!window.AppCore) pending.push(load(`${base}js/app-core.js`));
+    if (!window.AppEffects) pending.push(load(`${base}js/effects.js`));
+    if (pending.length) {
+      try { await Promise.all(pending); } catch (err) { console.warn('app modules failed to load', err); }
+    }
+
+    try {
+      if (window.AppCore && !window.__appCoreInitDone) window.AppCore.init();
+    } catch (err) {
+      console.warn('AppCore.init failed', err);
+    }
+    try {
+      if (window.AppEffects && !window.__appEffectsInitDone) window.AppEffects.init();
+    } catch (err) {
+      console.warn('AppEffects.init failed', err);
+    }
+  }
+}
+
+ModuleLoader.initAuthUI = function initAuthUI() { /* auth removed */ };
+
 document.addEventListener('DOMContentLoaded', () => {
-    ModuleLoader.loadModules();
+  ModuleLoader.loadModules();
 });
+

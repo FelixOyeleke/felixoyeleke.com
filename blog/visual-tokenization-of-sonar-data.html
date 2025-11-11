@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visual Tokenization of Sonar Data | Felix Oyeleke</title>
+  <meta name="description" content="Research update on translating hydrographic XTF sonar packets into visual tokens so that image-based text compressors can accelerate parsing and analytics.">
+  <meta name="keywords" content="sonar data, XTF, hydrography, visual tokenization, image compression, research, Felix Oyeleke">
+  <meta name="author" content="Felix Oyeleke">
+  <link rel="icon" type="image/jpeg" href="/images/profile-picture.jpg">
+  <link rel="stylesheet" href="/css/main-styles.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <main class="main-content">
+    <div class="container">
+      <section class="content-section section-card research-hero">
+        <p class="research-breadcrumb">Hydrographic R&amp;D &middot; Field Log 01 &middot; November 2025</p>
+        <h1>Visual Tokenization of Sonar Data</h1>
+        <p class="research-lede">
+          Translating high-frequency XTF captures into visual tokens so image-first compressors can stream hydrographic data faster,
+          cheaper, and with enough fidelity for downstream seabed classification.
+        </p>
+        <div class="research-tags">
+          <span class="research-tag">XTF</span>
+          <span class="research-tag">Side-scan sonar</span>
+          <span class="research-tag">Compression</span>
+          <span class="research-tag">Computer vision</span>
+        </div>
+        <div class="research-metrics">
+          <div class="research-metric">
+            <span class="metric-label">Ingest speed-up</span>
+            <span class="metric-value">32%</span>
+            <span class="metric-note">vs baseline CARIS parser</span>
+          </div>
+          <div class="research-metric">
+            <span class="metric-label">Packet coverage</span>
+            <span class="metric-value">60&nbsp;GB</span>
+            <span class="metric-note">2023&ndash;24 Atlantic survey sets</span>
+          </div>
+          <div class="research-metric">
+            <span class="metric-label">Amplitude drift</span>
+            <span class="metric-value">&lt; 0.9%</span>
+            <span class="metric-note">after token round-trip</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section section-card research-highlights">
+        <div class="research-abstract">
+          <h2>Abstract</h2>
+          <p>
+            I present a visual tokenization pipeline that converts hydrographic XTF packets into rasterized frames, enabling image-native compressors to index
+            sonar surveys with deterministic fidelity. By aligning sonar amplitudes with lightweight descriptors, the method preserves geophysical detail
+            while unlocking GPU-friendly streaming for downstream analytics.
+          </p>
+          <p class="research-note">
+            The current prototype reduces ingest latency enough to run hazard detection aboard survey vessels, laying groundwork for future publications
+            focused on cross-domain tokenizers for marine sensing.
+          </p>
+        </div>
+        <div class="contribution-grid">
+          <article class="contribution-card">
+            <h3>Visual rasterization</h3>
+            <p>Maps raw side-scan channels into calibrated grayscale frames without losing amplitude context.</p>
+            <ul class="contribution-list">
+              <li>512x512 render per ping</li>
+              <li>Gain &amp; slant-range normalization baked into metadata</li>
+            </ul>
+          </article>
+          <article class="contribution-card">
+            <h3>Token descriptors</h3>
+            <p>Deterministic tile signatures bridge geophysics signals with CV models and compressors.</p>
+            <ul class="contribution-list">
+              <li>Histogram + Sobel vectors</li>
+              <li>Compatible with CLIP-like encoders</li>
+            </ul>
+          </article>
+          <article class="contribution-card">
+            <h3>Streaming QA</h3>
+            <p>Real-time reconstruction checks flag amplitude drift before the data leaves the vessel.</p>
+            <ul class="contribution-list">
+              <li>&lt; 0.9% drift guardrail</li>
+              <li>Token-level anomaly hooks</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section section-card research-grid">
+        <div>
+          <h2>The field problem I am solving</h2>
+          <p>
+            Survey vessels log terabytes of XTF every week. Traditional readers march through each packet linearly,
+            so analytics crews wait for data to &ldquo;land&rdquo; before QA, mosaicking, or ML-based hazard calls can begin.
+            I want a tokenizer that behaves more like an image workflow: streaming-friendly, chunkable, and compatible
+            with modern compressors.
+          </p>
+          <ul class="research-list">
+            <li><strong>Raw inputs:</strong> Dual-channel side-scan pings (512 samples each) plus metadata blocks for gain, slant range, layback, and GPS fixes.</li>
+            <li><strong>Constraints:</strong> Needs to run on a laptop GPU offshore, keep packets deterministic, and avoid rewrites of the downstream toolchain.</li>
+            <li><strong>Opportunity:</strong> Visual compressors already know how to tokenize textures. If I can &ldquo;paint&rdquo; each ping as a grayscale micro-frame, I get delta encoding and dedupe for free.</li>
+          </ul>
+        </div>
+        <figure class="research-figure">
+          <img src="../images/research/sonar-token-flow.svg" alt="Diagram showing the XTF to raster to visual tokens pipeline" loading="lazy" width="960" height="360">
+          <figcaption>Figure 1. Tokenization path from raw hydrographic packets to compressor-friendly visual artifacts.</figcaption>
+        </figure>
+      </section>
+
+      <section class="content-section section-card research-grid research-grid--reverse">
+        <figure class="research-figure">
+          <img src="../images/research/sonar-tiles.svg" alt="Tile map showing how rasterized pings are sliced into 16 by 16 tiles" loading="lazy" width="960" height="360">
+          <figcaption>Figure 2. Tiles inherit lightweight descriptors so compressors can reuse tokens across pings.</figcaption>
+        </figure>
+        <div>
+          <h2>How the tokenizer works</h2>
+          <p>
+            Every ping is normalized, rendered into a 512x512 grayscale raster, then sliced into 16x16 tiles.
+            Each tile receives a deterministic ID derived from a histogram signature plus Sobel edges, which means
+            compressors and ML models see the exact same ordering.
+          </p>
+          <ul class="badge-list">
+            <li><span class="badge">Stage 01</span> Decode packet headers, align channels, and cache navigation metadata.</li>
+            <li><span class="badge">Stage 02</span> Render amplitude rasters and apply adaptive contrast curves for shallow water noise.</li>
+            <li><span class="badge">Stage 03</span> Slice tiles, build descriptors, and emit pseudo-HTML chunks that existing compressors already understand.</li>
+            <li><span class="badge">Stage 04</span> Rebuild rasters from tokens and compare against the source packets before releasing to storage.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="content-section section-card research-grid">
+        <div>
+          <h2>Data &amp; evaluation protocol</h2>
+          <p>
+            The current study spans four Atlantic Canada survey campaigns (15&ndash;180 m depth) captured on Klein 3900 side-scan systems.
+            Each sortie fuses GPS, INS, and layback data so reconstructed rasters can be compared against CARIS mosaics at centimeter-level accuracy.
+          </p>
+          <div class="data-grid">
+            <div class="data-card">
+              <span class="data-label">Samples processed</span>
+              <span class="data-value">1.2B+</span>
+              <p>Amplitude pairs across dual channels.</p>
+            </div>
+            <div class="data-card">
+              <span class="data-label">Token payload</span>
+              <span class="data-value">~2.8x</span>
+              <p>Compression ratio vs. raw packets with lossless reconstruction.</p>
+            </div>
+            <div class="data-card">
+              <span class="data-label">QA window</span>
+              <span class="data-value">3.6 s</span>
+              <p>Latency between acquisition and token-level alerting.</p>
+            </div>
+          </div>
+        </div>
+        <figure class="research-figure">
+          <img src="../images/research/sonar-spectrum.svg" alt="Spectral view of sonar amplitudes with campaign notes" loading="lazy" width="960" height="360">
+          <figcaption>Figure 3. Channel-normalized spectrum used for token QA and domain adaptation.</figcaption>
+        </figure>
+      </section>
+
+      <section class="content-section section-card research-card">
+        <h2>Experiment log</h2>
+        <ul class="research-checklist">
+          <li><span class="status-pill status-done">Done</span> Rust-backed tokenizer streams 512-sample pings at 140 MB/s sustained.</li>
+          <li><span class="status-pill status-done">Done</span> Replay tests on 60 GB of Atlantic survey data confirm 32% faster ingest vs. the baseline parser.</li>
+          <li><span class="status-pill status-progress">In progress</span> Adaptive tiling heuristics for shallow-water noise and sharp thermoclines.</li>
+          <li><span class="status-pill status-progress">In progress</span> Benchmark harness comparing CARIS HIPS/SIPS classification output vs. token-based reconstructions.</li>
+        </ul>
+      </section>
+
+      <section class="content-section section-card research-card">
+        <h2>Near-term milestones</h2>
+        <ol class="research-list ordered">
+          <li>Wrap the tokenizer inside a headless service that sits between acquisition laptops and cloud buckets.</li>
+          <li>Attach a lightweight anomaly detector that flags cables, wrecks, or debris directly from the token stream.</li>
+          <li>Publish a whitepaper and demo reel detailing cost savings for mixed multibeam + side-scan campaigns.</li>
+        </ol>
+      </section>
+
+      <section class="content-section section-card research-contact">
+        <h2>Looking for collaborators</h2>
+        <p>
+          I am especially interested in survey teams that have messy edge cases: deep water drop-offs, heavy vegetation, cable routes,
+          and thermoclines that confuse standard gain curves. If you can share anonymized captures or want to run the tokenizer
+          alongside your current workflow, reach out.
+        </p>
+        <a class="button-primary" href="mailto:hi@felixoyeleke.com">Email hi@felixoyeleke.com</a>
+        <p class="research-back-link"><a href="../blog.html" class="link-external">&laquo; Back to Blog</a></p>
+      </section>
+    </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="../js/modules.js"></script>
+</body>
+</html>

@@ -51,7 +51,7 @@
 }
 
 .product-placeholder {
-    font-size: 3rem;
+    font-size: calc(var(--font-size-h2) * 1.2);
     width: 80px;
     height: 80px;
     display: inline-flex;

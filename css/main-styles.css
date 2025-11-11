@@ -34,7 +34,7 @@
 
 .profile-description {
     font-family: var(--font-family-cursive);
-    font-size: 2rem;
+    font-size: calc(var(--font-size-body) * 1.4);
     color: var(--text-primary);
     line-height: 1.4;
     margin-bottom: var(--spacing-lg);
@@ -47,13 +47,9 @@
 /* Content Sections with Separators */
 .content-section {
     margin-bottom: var(--spacing-xl);
-    padding-bottom: var(--spacing-xl);
-    border-bottom: 1px solid var(--border-color);
-    position: relative;
 }
 
 .content-section:last-child {
-    border-bottom: none;
     margin-bottom: 0;
 }
 
@@ -69,6 +65,9 @@
 
 .section-card:last-child {
     margin-bottom: 0;
+}
+.content-section + .content-section {
+    margin-top: var(--spacing-2xl);
 }
 
 
@@ -87,7 +86,8 @@
 .featured-projects {
     display: flex;
     flex-direction: column;
-    gap: 0;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
 }
 
 .project-item {
@@ -96,11 +96,14 @@
     border: none;
     margin-bottom: var(--spacing-lg);
 }
+.project-item:last-child {
+    margin-bottom: 0;
+}
 
 /* Project Date */
 .project-date {
     font-family: var(--font-family-mono);
-    font-size: 1.35rem;
+    font-size: var(--font-size-eyebrow);
     font-weight: 350;
     color: var(--text-primary);
     line-height: 1.35;
@@ -114,7 +117,7 @@
 /* Project Title */
 .project-title {
     font-family: var(--font-family-heading);
-    font-size: 3.05rem;
+    font-size: var(--font-size-h1);
     font-weight: 600;
     line-height: 1.15;
     color: var(--text-primary);
@@ -149,7 +152,7 @@
 /* Project Description */
 .project-description {
     font-family: var(--font-family-cursive);
-    font-size: 1.75rem;
+    font-size: calc(var(--font-size-body) * 1.3);
     font-weight: 400;
     color: var(--text-primary);
     line-height: 1.3;
@@ -166,6 +169,24 @@
     background: var(--background-secondary);
     border: 1px solid var(--border-color);
     aspect-ratio: 16 / 9;
+}
+.featured-card {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+.featured-card + .featured-card {
+    margin-top: var(--spacing-lg);
+}
+
+#store .featured-card,
+#newsletter .featured-card,
+#blog.section-card .featured-card {
+    background: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-xl);
 }
 
 .project-video {
@@ -197,6 +218,14 @@
     display: block;
     margin: var(--spacing-xl) 0;
     width: 100%;
+}
+
+#store.section-card {
+    margin-top: var(--spacing-2xl);
+}
+
+section#store {
+    margin-top: var(--spacing-2xl);
 }
 
 
@@ -306,7 +335,7 @@
 }
 
 .social-icon {
-    font-size: 1.2em;
+    font-size: calc(var(--font-size-body) * 0.9);
     width: 1.5em;
     text-align: center;
 }
@@ -316,7 +345,7 @@
     padding-top: 0;
     text-align: center;
     color: var(--text-secondary);
-    font-size: 0.95rem;
+    font-size: var(--font-size-small);
     line-height: 1.4;
 }
 
@@ -385,7 +414,7 @@
 }
 
 .expertise-icon {
-    font-size: 3rem;
+    font-size: calc(var(--font-size-h2) * 1.2);
     margin-bottom: var(--spacing-md);
 }
 
@@ -422,7 +451,7 @@
 
 .philosophy-quote::before {
     content: '"';
-    font-size: 4rem;
+    font-size: calc(var(--font-size-hero) * 0.85);
     color: var(--text-secondary);
     position: absolute;
     top: -10px;
@@ -461,7 +490,7 @@
 }
 
 .skills-list li::before {
-    content: '→';
+    content: '+';
     color: var(--accent-blue);
     position: absolute;
     left: 0;
@@ -561,7 +590,7 @@
 
 
 .contact-icon {
-    font-size: 3rem;
+    font-size: calc(var(--font-size-h2) * 1.2);
     margin-bottom: var(--spacing-md);
 }
 
@@ -700,21 +729,6 @@
 
 
 /* Mobile responsive for newsletter */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

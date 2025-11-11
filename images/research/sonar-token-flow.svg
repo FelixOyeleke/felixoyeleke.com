@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <style>
+      .panel { fill:#111827; stroke:#1f2937; stroke-width:2; rx:18; ry:18; }
+      .panel-text { font-family:"Segoe UI",sans-serif; font-size:16px; fill:#e2e8f0; }
+      .panel-title { font-size:20px; font-weight:600; fill:#f1f5f9; }
+      .arrow { stroke:#38bdf8; stroke-width:3; marker-end:url(#arrowHead); }
+      .caption { font-family:"Segoe UI",sans-serif; font-size:14px; fill:#94a3b8; }
+    </style>
+    <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6" fill="#38bdf8"/>
+    </marker>
+  </defs>
+  <rect width="960" height="360" fill="url(#bg)" rx="24"/>
+  <!-- Panels -->
+  <rect class="panel" x="40" y="70" width="230" height="220"/>
+  <rect class="panel" x="280" y="70" width="230" height="220"/>
+  <rect class="panel" x="520" y="70" width="230" height="220"/>
+  <rect class="panel" x="760" y="70" width="160" height="220"/>
+  <!-- Panel content -->
+  <text class="panel-title" x="60" y="110">Raw XTF</text>
+  <text class="panel-text" x="60" y="140">• Side-scan channels</text>
+  <text class="panel-text" x="60" y="165">• Gain, slant range</text>
+  <text class="panel-text" x="60" y="190">• 512 samples/ping</text>
+
+  <text class="panel-title" x="300" y="110">Raster Builder</text>
+  <text class="panel-text" x="300" y="140">• Normalize amplitudes</text>
+  <text class="panel-text" x="300" y="165">• Render 512x512 frame</text>
+  <text class="panel-text" x="300" y="190">• Encode metadata tags</text>
+
+  <text class="panel-title" x="540" y="110">Visual Tokens</text>
+  <text class="panel-text" x="540" y="140">• 16x16 tiles</text>
+  <text class="panel-text" x="540" y="165">• Histogram + edges</text>
+  <text class="panel-text" x="540" y="190">• Deterministic IDs</text>
+
+  <text class="panel-title" x="780" y="110">Outputs</text>
+  <text class="panel-text" x="780" y="140">• Token stream</text>
+  <text class="panel-text" x="780" y="165">• Preview raster</text>
+  <text class="panel-text" x="780" y="190">• QA metrics</text>
+
+  <!-- Arrows -->
+  <line class="arrow" x1="270" y1="180" x2="280" y2="180"/>
+  <line class="arrow" x1="510" y1="180" x2="520" y2="180"/>
+  <line class="arrow" x1="750" y1="180" x2="760" y2="180"/>
+
+  <!-- Caption -->
+  <text class="caption" x="60" y="320">Figure 1: Tokenization path from raw hydrographic packets to compressor-friendly visual artifacts.</text>
+</svg>

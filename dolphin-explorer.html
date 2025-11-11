@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dolphin Explorer &mdash; Sonar Operations Software | Felix Oyeleke</title>
+  <meta name="description" content="Dolphin Explorer is my in-house hydrographic console. We already parse XTF archives and stream them in a waterfall view and are now building the interactive GUI workspace.">
+  <meta name="keywords" content="Dolphin Explorer, sonar software, XTF parser, waterfall view, hydrographic toolkit, Felix Oyeleke">
+  <meta name="author" content="Felix Oyeleke">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+
+  <link rel="canonical" href="https://felixoyeleke.com/dolphin-explorer.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://felixoyeleke.com/dolphin-explorer.html">
+  <meta property="og:site_name" content="Felix Oyeleke">
+  <meta property="og:title" content="Dolphin Explorer &mdash; Sonar Operations Software">
+  <meta property="og:description" content="Parsed XTF? Check. Waterfall visualization? Shipped. GUI console? In development. Explore the Dolphin Explorer build log.">
+  <meta property="og:image" content="https://felixoyeleke.com/images/products/dolphin-waterfall.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Dolphin Explorer waterfall preview">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@felixoyeleke">
+  <meta name="twitter:creator" content="@felixoyeleke">
+  <meta name="twitter:url" content="https://felixoyeleke.com/dolphin-explorer.html">
+  <meta name="twitter:title" content="Dolphin Explorer &mdash; Sonar Operations Software">
+  <meta name="twitter:description" content="My hydrographic console parses XTF archives, renders a waterfall view, and is gaining a full GUI workspace.">
+  <meta name="twitter:image" content="https://felixoyeleke.com/images/products/dolphin-waterfall.svg">
+  <meta name="twitter:image:alt" content="Dolphin Explorer waterfall preview">
+
+  <link rel="icon" type="image/jpeg" href="images/profile-picture.jpg">
+  <link rel="stylesheet" href="/css/main-styles.css">
+
+  <script>
+    fetch('components/seo-analytics.html')
+      .then(response => response.text())
+      .then(html => {
+        document.head.insertAdjacentHTML('beforeend', html);
+      });
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Dolphin Explorer",
+    "operatingSystem": "Windows, macOS (planned)",
+    "applicationCategory": "DesktopApplication",
+    "description": "A hydrographic operations console that parses XTF data, renders a real-time waterfall, and will ship with a full GUI workspace.",
+    "creator": {
+      "@type": "Person",
+      "name": "Felix Oyeleke"
+    },
+    "url": "https://felixoyeleke.com/dolphin-explorer.html",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/PreOrder"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="main-content">
+    <div class="container">
+      <section class="content-section section-card research-hero">
+        <p class="research-breadcrumb">Build Log &middot; Dolphin Explorer &middot; 2025</p>
+        <h1>Dolphin Explorer</h1>
+        <p class="research-lede">
+          A field-ready hydrographic console that ingests raw XTF captures, renders a responsive waterfall view, and is gaining a desktop GUI
+          so survey teams can review data on board in minutes.
+        </p>
+        <div class="research-tags">
+          <span class="research-tag">Hydrography</span>
+          <span class="research-tag">XTF</span>
+          <span class="research-tag">Desktop</span>
+          <span class="research-tag">Visualization</span>
+        </div>
+        <div class="research-metrics">
+          <div class="research-metric">
+            <span class="metric-label">XTF parser</span>
+            <span class="metric-value">100%</span>
+            <span class="metric-note">Klein 3900 archives validated</span>
+          </div>
+          <div class="research-metric">
+            <span class="metric-label">Waterfall view</span>
+            <span class="metric-value">Beta</span>
+            <span class="metric-note">60&nbsp;GB stress test passed</span>
+          </div>
+          <div class="research-metric">
+            <span class="metric-label">GUI shell</span>
+            <span class="metric-value">In build</span>
+            <span class="metric-note">PySide + C++/GPU workspace</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section section-card research-highlights">
+        <div class="research-abstract">
+          <h2>Mission</h2>
+          <p>
+            Dolphin Explorer gives small hydrographic teams the tooling usually reserved for enterprise survey suites. By owning the entire
+            parsing stack I can guarantee deterministic playback, faster QA loops, and a pathway to on-board anomaly detection.
+          </p>
+          <p class="research-note">Every milestone is logged so partners can see exactly what is shipping now versus what is on deck.</p>
+        </div>
+        <div class="contribution-grid">
+          <article class="contribution-card">
+            <h3>Parser core</h3>
+            <p>Deterministic decoding for XTF packets, including gain curves, layback, and motion data.</p>
+            <ul class="contribution-list">
+              <li>Streams 140&nbsp;MB/s sustained</li>
+              <li>Normalizes metadata for analytics</li>
+            </ul>
+          </article>
+          <article class="contribution-card">
+            <h3>Waterfall visualizer</h3>
+            <p>GPU-friendly renderer with amplitude and gradient modes for rapid QA.</p>
+            <ul class="contribution-list">
+              <li>Cursor readouts + ping scrubbing</li>
+              <li>Telemetry overlay hooks</li>
+            </ul>
+          </article>
+          <article class="contribution-card">
+            <h3>GUI workspace</h3>
+            <p>Dockable panes, timeline playback, and annotation tools under active development.</p>
+            <ul class="contribution-list">
+              <li>PySide/Qt shell prototype</li>
+              <li>C++ bridge sharing memory with the Rust core</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section section-card research-grid">
+        <div>
+          <h2>PySide performance pass</h2>
+          <p>
+            The desktop client ships with PySide so UI iterations stay fast, but hot paths now live inside native C++ modules that expose Qt-friendly hooks.
+            Those modules stream buffers straight from the Rust parser into GPU textures, eliminating the copy overhead that used to block the event loop.
+          </p>
+          <ul class="research-list">
+            <li>Render loop rewritten in C++ (/O2 on Windows, Clang on macOS) and invoked through Qt signals.</li>
+            <li>Shared-memory bridge keeps PySide widgets in sync with GPU textures without starving the main thread.</li>
+            <li>Optional CUDA/OpenCL kernels accelerate palette transforms and measurement overlays when a capable GPU is available.</li>
+          </ul>
+        </div>
+        <div class="research-card">
+          <h3>Optimization snapshot</h3>
+          <ul class="research-checklist">
+            <li><span class="status-pill status-done">Done</span> 48% faster PySide repaint cycle after moving interpolation to C++.</li>
+            <li><span class="status-pill status-done">Done</span> GPU shaders collapse palette swaps to &lt;10&nbsp;ms even on mid-tier cards.</li>
+            <li><span class="status-pill status-progress">In progress</span> Unified profiler overlay comparing CPU vs. GPU workloads in real time.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="content-section section-card research-grid">
+        <div>
+          <h2>Waterfall view (shipping)</h2>
+          <p>
+            We now render high-density waterfalls with configurable palettes (amplitude, gradient, adaptive gain). Parsed packets stay in GPU memory,
+            so scrubbing through 60&nbsp;GB archives feels instant. Cursor sampling exposes depth, slant range, and ping IDs without leaving the viewer.
+          </p>
+          <ul class="research-list">
+            <li>Packet-to-pixel pipeline built in Rust + wgpu.</li>
+            <li>Telemetry overlay renders layback, GPS, and INS drift per ping.</li>
+            <li>Export path saves annotated frames as GeoTIFF previews.</li>
+          </ul>
+        </div>
+        <figure class="research-figure">
+          <video class="project-video" autoplay muted loop playsinline preload="metadata" aria-label="Dolphin Explorer GUI preview" width="960" height="360">
+            <source src="videos/dolphinexplorer_GUI.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <figcaption>Figure 1. Waterfall module streaming parsed XTF packets with amplitude overlays.</figcaption>
+        </figure>
+      </section>
+
+      <section class="content-section section-card research-grid research-grid--reverse">
+        <figure class="research-figure">
+          <img src="images/products/dolphin-gui.svg" alt="Stylized Dolphin Explorer GUI workspace mock" loading="lazy" width="960" height="360">
+          <figcaption>Figure 2. Upcoming GUI workspace with dockable panes and annotation tools.</figcaption>
+        </figure>
+        <div>
+          <h2>GUI workspace (in development)</h2>
+          <p>
+            The next milestone is a PySide-based shell backed by the same Rust core. It will bundle a map window, waterfall panel, and telemetry console
+            so operators can cross-reference anomalies instantly while the C++ layer streams GPU frames into Qt widgets.
+          </p>
+          <ul class="badge-list">
+            <li><span class="badge">Sprint</span> Integrate WebGL canvas for panning/zooming.</li>
+            <li><span class="badge">Sprint</span> Build measurement + annotation overlays.</li>
+            <li><span class="badge">Sprint</span> Hook keyboard macros for rapid QA workflows.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="content-section section-card research-card">
+        <h2>Build status</h2>
+        <ul class="research-checklist">
+          <li><span class="status-pill status-done">Done</span> XTF parser normalizes dual channels, navigation, and gain metadata.</li>
+          <li><span class="status-pill status-done">Done</span> Waterfall renderer streams archives with amplitude and gradient palettes.</li>
+          <li><span class="status-pill status-done">Done</span> PySide shell now calls C++/GPU modules for raster and palette work.</li>
+          <li><span class="status-pill status-progress">In progress</span> GUI workspace wireframes with dockable panes.</li>
+          <li><span class="status-pill status-progress">In progress</span> Cursor measurements + exporting snapshots for reports.</li>
+        </ul>
+      </section>
+
+      <section class="content-section section-card research-card">
+        <h2>Roadmap</h2>
+        <ol class="research-list ordered">
+          <li>Release a command-line build so teams can batch-parse XTF before the GUI ships.</li>
+          <li>Ship the Electron shell with synchronized map + waterfall panes.</li>
+          <li>Add anomaly detection hooks so partners can plug in their own models.</li>
+        </ol>
+      </section>
+
+      <section class="content-section section-card research-contact">
+        <h2>Want early access?</h2>
+        <p>
+          I am onboarding a small group of survey partners to validate Dolphin Explorer on real projects. If you want the parser,
+          the waterfall view, or to collaborate on the GUI, send me a note and I will share the latest build.
+        </p>
+        <a class="button-primary" href="mailto:hi@felixoyeleke.com?subject=Dolphin%20Explorer%20Early%20Access">Join the early access list</a>
+        <p class="research-back-link"><a href="index.html" class="link-external">&laquo; Back to Home</a></p>
+      </section>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="/js/modules.js"></script>
+</body>
+</html>

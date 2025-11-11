@@ -1,25 +1,35 @@
-<!-- Sidebar Header Component - Joanna Shan Style -->
+<!-- Sidebar Header Component -->
 <aside class="site-sidebar" role="banner">
     <div class="sidebar-inner">
         <div class="nav-brand">
-            <a href="/" class="brand-link" aria-label="Felix Oyeleke – Home">
+            <a href="/" class="brand-link" aria-label="Felix Oyeleke - Home">
                 <h1 class="brand-name">Felix Oyeleke</h1>
             </a>
+            <button id="mobileMenuToggle"
+                    class="mobile-menu-toggle"
+                    type="button"
+                    aria-label="Toggle navigation"
+                    aria-controls="navMenu"
+                    aria-expanded="false">
+                <span class="toggle-line"></span>
+                <span class="toggle-line"></span>
+            </button>
         </div>
-        <nav class="nav-vertical" id="navMenu" aria-label="Primary navigation">
-            <!-- Main Navigation Group -->
+
+        <nav class="nav-vertical is-open" id="navMenu" aria-label="Primary navigation">
             <div class="nav-group">
                 <a href="/" class="nav-btn">// WORKS</a>
                 <a href="/blog.html" class="nav-btn">// BLOG</a>
                 <a href="/store.html" class="nav-btn">// STORE</a>
             </div>
 
-            <!-- Documents Group -->
             <div class="nav-group">
-                <a href="/documents/Felix Oyeleke - Property Management.pdf" class="nav-btn nav-btn-icon" target="_blank" rel="noopener noreferrer">// RESUMÉ</a>
+                <a href="/documents/Felix Oyeleke - Property Management.pdf"
+                   class="nav-btn nav-btn-icon"
+                   target="_blank"
+                   rel="noopener noreferrer">// RESUME</a>
             </div>
 
-            <!-- Info Group -->
             <div class="nav-group">
                 <a href="/about.html" class="nav-btn nav-btn-icon">// ABOUT</a>
                 <a href="/contact.html" class="nav-btn nav-btn-icon">// CONTACT</a>

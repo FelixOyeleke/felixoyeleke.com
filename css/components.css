@@ -1,4 +1,4 @@
-/* Components — navigation, buttons, links, cards, contact, etc. */
+/* Components - navigation, buttons, links, cards, contact, etc. */
 
 /* Navigation */
 .nav-vertical {
@@ -14,14 +14,41 @@
     gap: var(--spacing-sm);
 }
 
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--border-radius-full);
+    border: 1px solid var(--border-color);
+    background: transparent;
+    cursor: pointer;
+    margin-left: auto;
+}
+.mobile-menu-toggle .toggle-line {
+    width: 1.2rem;
+    height: 2px;
+    background: var(--text-primary);
+    transition: transform 0.2s ease;
+}
+.mobile-menu-toggle.active .toggle-line:first-child {
+    transform: translateY(3px) rotate(45deg);
+}
+.mobile-menu-toggle.active .toggle-line:last-child {
+    transform: translateY(-3px) rotate(-45deg);
+}
+
 /* Brand (desktop defaults) */
-.brand-link { font-size: 1.8rem; line-height: 1; }
+.brand-link { font-size: var(--font-size-h3); line-height: 1; }
 .brand-name { font-weight: 500; }
 
 /* Navigation buttons */
 .nav-btn {
     font-family: var(--font-family-mono);
-    font-size: 1.2rem;
+    font-size: var(--font-size-nav);
     font-weight: 350;
     color: var(--gold);
     text-decoration: none;
@@ -37,7 +64,7 @@
 }
 
 .nav-btn-icon {
-    font-size: 1.1rem;
+    font-size: var(--font-size-nav);
     padding: 0.55rem 0.9rem 0.35rem 0.8rem;
 }
 
@@ -93,7 +120,7 @@
   text-decoration: underline;
 }
 
-/* Links (Joanna-inspired underline style) */
+/* Underline link style */
 .link-external {
     position: relative;
     display: inline-flex;
@@ -129,7 +156,7 @@
     transition: color 0.2s ease, border-color 0.2s ease;
 }
 .video-link::before {
-    content: '▶';
+    content: '>';
     font-size: 0.9em;
     line-height: 1;
 }
@@ -158,7 +185,7 @@
     border-color: var(--accent-blue);
 }
 
-.contact-icon { font-size: 3rem; margin-bottom: var(--spacing-md); }
+.contact-icon { font-size: calc(var(--font-size-h2) * 1.2); margin-bottom: var(--spacing-md); }
 
 .contact-method h3 {
     font-family: var(--font-family-heading);
@@ -178,4 +205,36 @@
 .product-card:hover, .expertise-card:hover, .blog-post:hover, .contact-method:hover {
   transform: none; box-shadow: none; border-color: var(--border-color);
 }
+
+.scroll-to-top {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--background-secondary);
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 20;
+}
+.scroll-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+.scroll-to-top:focus-visible {
+    outline: 2px solid var(--accent-blue);
+}
+
+
+
+
+
 

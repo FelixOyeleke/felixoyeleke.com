@@ -5,8 +5,7 @@
         --main-content-width: 100%;
         --sidebar-padding: 2rem;
         --content-padding: 2rem;
-        --font-size-hero: 4.7rem;
-        --font-size-h1: 2.5rem;
+        --font-size-nav: 1rem;
     }
 
     .site-sidebar {
@@ -26,24 +25,39 @@
         padding-top: var(--spacing-xs);
     }
 
-    .nav-vertical { flex-direction: column; gap: var(--spacing-lg); }
+    .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        justify-content: space-between;
+    }
+    .mobile-menu-toggle { display: flex; }
+    .nav-vertical {
+        width: 100%;
+        display: none;
+        gap: var(--spacing-sm);
+        margin-top: var(--spacing-md);
+    }
+    .nav-vertical.is-open {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
 
     .nav-group {
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-direction: column;
         gap: var(--spacing-xs);
-        justify-content: center;
     }
 
     .nav-btn {
-        font-size: 1.6rem;
+        font-size: var(--font-size-nav);
         padding: 0.6rem 0.9rem 0.4rem 0.8rem;
-        max-width: none;
-        flex: 0 0 auto;
+        width: 100%;
+        text-align: left;
     }
 
-    .nav-btn-icon { font-size: 1.3rem; padding: 0.5rem 0.8rem 0.3rem 0.7rem; }
+    .nav-btn-icon { font-size: var(--font-size-nav); padding: 0.5rem 0.8rem 0.3rem 0.7rem; }
 
     /* Store page mobile */
     .products-grid { grid-template-columns: 1fr; gap: var(--spacing-lg); }
@@ -59,6 +73,7 @@
     .contact-form-section { padding: var(--spacing-lg); }
 
     .social-links { flex-direction: column; gap: var(--spacing-sm); }
+    .section-card { padding: var(--spacing-lg); }
 
     .profile-section { flex-direction: column; text-align: center; padding: var(--spacing-xs) 0 var(--spacing-md) 0; gap: var(--spacing-lg); }
 
@@ -71,78 +86,78 @@
     .footer-social { align-items: center; }
 }
 
-/* Stronger fine-tune for smallest screens */
-@media (max-width: 900px) {
-  :root {
-    --font-size-hero: 1.9rem;
-    --font-size-h1: 1.6rem;
-    --font-size-h2: 1.3rem;
-    --font-size-h3: 1.1rem;
-    --font-size-body: 0.95rem;
-  }
-}
-@media (max-width: 480px) {
-  :root {
-    --font-size-hero: 1.45rem;
-    --font-size-h1: 1.30rem;
-    --font-size-h2: 1.10rem;
-    --font-size-h3: 0.95rem;
-    --font-size-body: 0.875rem;
-  }
-}
-
 /* Consistent header brand sizing across all pages */
 @media (max-width: 900px) { .nav-vertical { align-items: flex-start; } }
 
-/* Joanna-style mobile header: two-column grid, left-aligned */
-@media (max-width: 900px) {
-  .sidebar-inner { align-items: flex-start; }
-  .nav-vertical {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem 0.75rem;
-    align-items: start;
-    justify-items: start;
-  }
-  .nav-group { display: contents; }
-  .nav-btn { font-size: 1.2rem; line-height: 1.1; padding: 0.6rem 1rem 0.45rem 0.9rem; }
-  .nav-btn:hover, .nav-btn:focus { transform: none; }
-}
 
-/* Match Joanna: remove sidebar grain overlay on mobile for a clean header */
+/* Remove sidebar grain overlay on mobile for a clean header */
 @media (max-width: 900px) { .site-sidebar::after { display: none; } }
 
-@media (max-width: 360px) { .nav-vertical { grid-template-columns: 1fr; } }
 
-/* Match Joanna: brand minimal on mobile */
+/* Compact brand treatment on mobile */
 @media (max-width: 900px) {
   .nav-brand { margin-bottom: 1rem; }
-  .brand-link { font-size: 1.05rem; }
+  .brand-link { font-size: calc(var(--font-size-h3) * 0.85); }
   .brand-name { font-weight: 500; }
 }
 @media (max-width: 480px) {
-  .brand-link { font-size: 0.95rem; }
-  .nav-btn { font-size: 1.05rem; line-height: 1.05; padding: 0.5rem 0.9rem 0.4rem 0.8rem; }
+  .brand-link { font-size: calc(var(--font-size-h3) * 0.75); }
+  .nav-vertical.is-open { grid-template-columns: 1fr; }
+  .nav-btn { font-size: calc(var(--font-size-nav) * 0.9); line-height: 1.05; padding: 0.5rem 0.9rem 0.4rem 0.8rem; }
+  .section-card { padding: var(--spacing-md); }
 }
 
 /* iOS Chrome only: align font scale to match Safari */
 @media (max-width: 900px) {
-  html.ua-ios-chrome {
-    --font-size-hero: 1.85rem;
-    --font-size-h1: 1.55rem;
-    --font-size-h2: 1.25rem;
-    --font-size-h3: 1.05rem;
-    --font-size-body: 0.9rem;
-  }
+  html.ua-ios-chrome { font-size: 14px; }
+}
+@media (max-width: 720px) {
+  html.ua-ios-chrome { font-size: 12.5px; }
 }
 @media (max-width: 480px) {
-  html.ua-ios-chrome {
-    --font-size-hero: 1.4rem;
-    --font-size-h1: 1.25rem;
-    --font-size-h2: 1.05rem;
-    --font-size-h3: 0.9rem;
-    --font-size-body: 0.85rem;
-  }
-  html.ua-ios-chrome .nav-btn { font-size: 1rem; }
+  html.ua-ios-chrome { font-size: 11.5px; }
+  html.ua-ios-chrome .nav-btn { font-size: var(--font-size-nav); }
 }
-
+/* Mobile typography scaling */
+@media (max-width: 900px) {
+  :root {
+    --font-size-hero: 1.8rem;
+    --font-size-h1: 1.5rem;
+    --font-size-h2: 1.3rem;
+    --font-size-h3: 1.1rem;
+    --font-size-body: 0.95rem;
+    --font-size-small: 0.88rem;
+    --font-size-xs: 0.8rem;
+    --font-size-nav: 0.9rem;
+    --font-size-eyebrow: 0.85rem;
+  }
+  html { font-size: 15px; }
+}
+@media (max-width: 720px) {
+  :root {
+    --font-size-hero: 1.5rem;
+    --font-size-h1: 1.3rem;
+    --font-size-h2: 1.1rem;
+    --font-size-h3: 1rem;
+    --font-size-body: 0.9rem;
+    --font-size-small: 0.82rem;
+    --font-size-xs: 0.76rem;
+    --font-size-nav: 0.85rem;
+    --font-size-eyebrow: 0.8rem;
+  }
+  html { font-size: 13px; }
+}
+@media (max-width: 480px) {
+  :root {
+    --font-size-hero: 1.35rem;
+    --font-size-h1: 1.2rem;
+    --font-size-h2: 1.05rem;
+    --font-size-h3: 0.95rem;
+    --font-size-body: 0.85rem;
+    --font-size-small: 0.78rem;
+    --font-size-xs: 0.72rem;
+    --font-size-nav: 0.8rem;
+    --font-size-eyebrow: 0.76rem;
+  }
+  html { font-size: 12px; }
+}

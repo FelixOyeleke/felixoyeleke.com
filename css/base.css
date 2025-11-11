@@ -30,14 +30,16 @@
     --font-family-cursive: 'Crimson Text', 'Times New Roman', serif;
     --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-    /* Font Sizes */
-    --font-size-hero: 4.7rem;
-    --font-size-h1: 3.05rem;
-    --font-size-h2: 3rem;
-    --font-size-h3: 2.25rem;
-    --font-size-body: 1.25rem;
-    --font-size-small: 1.1rem;
-    --font-size-xs: 0.875rem;
+    /* Font Sizes (desktop defaults) */
+    --font-size-hero: clamp(2.6rem, 6vw, 4.7rem);
+    --font-size-h1: clamp(2.1rem, 4.5vw, 3.05rem);
+    --font-size-h2: clamp(1.7rem, 3.5vw, 3rem);
+    --font-size-h3: clamp(1.35rem, 2.6vw, 2.25rem);
+    --font-size-body: clamp(1rem, 1.35vw, 1.25rem);
+    --font-size-small: clamp(0.9rem, 1.1vw, 1.1rem);
+    --font-size-xs: clamp(0.8rem, 0.95vw, 0.875rem);
+    --font-size-nav: clamp(0.95rem, 1.2vw, 1.2rem);
+    --font-size-eyebrow: clamp(0.85rem, 1vw, 1.2rem);
 
     /* Spacing */
     --spacing-xs: 0.5rem;
@@ -108,7 +110,7 @@ body::before {
 
 /* Enhanced grain for sidebar */
 .site-sidebar::after {
-    content: none; /* Match Joanna: no grain overlay in header on desktop */
+    content: none; /* No grain overlay in header on desktop */
 }
 
 @keyframes grainMove {

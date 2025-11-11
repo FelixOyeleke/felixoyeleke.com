@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360">
+  <defs>
+    <linearGradient id="dg-bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#031022"/>
+      <stop offset="100%" stop-color="#071a33"/>
+    </linearGradient>
+    <style>
+      .panel { fill:#030b1f; stroke:#14213d; stroke-width:2; rx:20; ry:20; }
+      .window { fill:#0b1a33; stroke:#1d3557; stroke-width:1.5; }
+      .tab { fill:#1f2937; stroke:#0f172a; stroke-width:1; }
+      .accent { fill:#38bdf8; }
+      .text { fill:#e2e8f0; font-family:"Segoe UI",sans-serif; }
+      .title { font-size:22px; font-weight:600; }
+      .body { font-size:15px; }
+    </style>
+  </defs>
+  <rect width="960" height="360" rx="24" fill="url(#dg-bg)"/>
+  <rect class="panel" x="60" y="60" width="560" height="240"/>
+  <rect class="window" x="90" y="90" width="500" height="180" rx="12"/>
+  <rect class="tab" x="110" y="110" width="80" height="24" rx="6"/>
+  <rect class="tab" x="200" y="110" width="90" height="24" rx="6" fill="#38bdf8"/>
+  <rect class="tab" x="300" y="110" width="110" height="24" rx="6" fill="#1f2937"/>
+  <rect x="120" y="150" width="200" height="100" rx="8" fill="#0f172a" stroke="#1d4ed8" stroke-dasharray="6 4"/>
+  <rect x="340" y="150" width="220" height="100" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-dasharray="6 4"/>
+  <line x1="120" y1="205" x2="560" y2="205" stroke="#1d4ed8" stroke-dasharray="4 8"/>
+  <circle cx="510" cy="125" r="6" class="accent"/>
+  <circle cx="530" cy="125" r="6" fill="#fbbf24"/>
+  <circle cx="550" cy="125" r="6" fill="#ef4444"/>
+  <g transform="translate(650 80)">
+    <text class="title text" x="0" y="30">GUI Workspace</text>
+    <text class="body text" x="0" y="70">Status: In development</text>
+    <text class="body text" x="0" y="105">• Dockable panes for waterfall, map, telemetry</text>
+    <text class="body text" x="0" y="140">• GPU-accelerated zoom/pan controls</text>
+    <text class="body text" x="0" y="175">• Real-time annotation + measure tools</text>
+    <text class="body text" x="0" y="210">Next milestone: Electron shell preview</text>
+  </g>
+</svg>
