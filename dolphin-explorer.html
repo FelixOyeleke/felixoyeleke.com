@@ -96,7 +96,7 @@
           <div class="research-metric">
             <span class="metric-label">GUI shell</span>
             <span class="metric-value">In build</span>
-            <span class="metric-note">PySide + C++/GPU workspace</span>
+            <span class="metric-note">PySide6 + C++/GPU workspace</span>
           </div>
         </div>
       </section>
@@ -131,7 +131,7 @@
             <h3>GUI workspace</h3>
             <p>Dockable panes, timeline playback, and annotation tools under active development.</p>
             <ul class="contribution-list">
-              <li>PySide/Qt shell prototype</li>
+              <li>PySide6/Qt shell prototype</li>
               <li>C++ bridge sharing memory with the Rust core</li>
             </ul>
           </article>
@@ -140,21 +140,21 @@
 
       <section class="content-section section-card research-grid">
         <div>
-          <h2>PySide performance pass</h2>
+          <h2>PySide6 performance pass</h2>
           <p>
-            The desktop client ships with PySide so UI iterations stay fast, but hot paths now live inside native C++ modules that expose Qt-friendly hooks.
+            The desktop client ships with PySide6 so UI iterations stay fast, but hot paths now live inside native C++ modules that expose Qt-friendly hooks.
             Those modules stream buffers straight from the Rust parser into GPU textures, eliminating the copy overhead that used to block the event loop.
           </p>
           <ul class="research-list">
             <li>Render loop rewritten in C++ (/O2 on Windows, Clang on macOS) and invoked through Qt signals.</li>
-            <li>Shared-memory bridge keeps PySide widgets in sync with GPU textures without starving the main thread.</li>
+            <li>Shared-memory bridge keeps PySide6 widgets in sync with GPU textures without starving the main thread.</li>
             <li>Optional CUDA/OpenCL kernels accelerate palette transforms and measurement overlays when a capable GPU is available.</li>
           </ul>
         </div>
         <div class="research-card">
           <h3>Optimization snapshot</h3>
           <ul class="research-checklist">
-            <li><span class="status-pill status-done">Done</span> 48% faster PySide repaint cycle after moving interpolation to C++.</li>
+            <li><span class="status-pill status-done">Done</span> 48% faster PySide6 repaint cycle after moving interpolation to C++.</li>
             <li><span class="status-pill status-done">Done</span> GPU shaders collapse palette swaps to &lt;10&nbsp;ms even on mid-tier cards.</li>
             <li><span class="status-pill status-progress">In progress</span> Unified profiler overlay comparing CPU vs. GPU workloads in real time.</li>
           </ul>
@@ -175,8 +175,8 @@
           </ul>
         </div>
         <figure class="research-figure">
-          <video class="project-video" autoplay muted loop playsinline preload="metadata" aria-label="Dolphin Explorer GUI preview" width="960" height="360">
-            <source src="videos/dolphinexplorer_GUI.mp4" type="video/mp4">
+          <video class="project-video" autoplay muted loop playsinline preload="metadata" aria-label="Dolphin Explorer Waterfall preview" width="960" height="360">
+            <source src="videos/dolphinexplorer_waterfall.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
           <figcaption>Figure 1. Waterfall module streaming parsed XTF packets with amplitude overlays.</figcaption>
@@ -185,17 +185,20 @@
 
       <section class="content-section section-card research-grid research-grid--reverse">
         <figure class="research-figure">
-          <img src="images/products/dolphin-gui.svg" alt="Stylized Dolphin Explorer GUI workspace mock" loading="lazy" width="960" height="360">
+          <video class="project-video" autoplay muted loop playsinline preload="metadata" aria-label="Dolphin Explorer GUI workspace" width="960" height="360">
+            <source src="videos/GUI_Workspace.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
           <figcaption>Figure 2. Upcoming GUI workspace with dockable panes and annotation tools.</figcaption>
         </figure>
         <div>
           <h2>GUI workspace (in development)</h2>
           <p>
-            The next milestone is a PySide-based shell backed by the same Rust core. It will bundle a map window, waterfall panel, and telemetry console
+            The next milestone is a PySide6-based shell backed by the same Rust core. It will bundle a map window, waterfall panel, and telemetry console
             so operators can cross-reference anomalies instantly while the C++ layer streams GPU frames into Qt widgets.
           </p>
           <ul class="badge-list">
-            <li><span class="badge">Sprint</span> Integrate WebGL canvas for panning/zooming.</li>
+            <li><span class="badge">Sprint</span> Integrate OpenGL viewport for panning/zooming.</li>
             <li><span class="badge">Sprint</span> Build measurement + annotation overlays.</li>
             <li><span class="badge">Sprint</span> Hook keyboard macros for rapid QA workflows.</li>
           </ul>
