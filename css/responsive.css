@@ -39,22 +39,29 @@
         margin-top: var(--spacing-md);
     }
     .nav-vertical.is-open {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: var(--spacing-sm);
+        align-items: stretch;
+        justify-items: stretch;
+        padding-bottom: 0.25rem;
     }
+    .nav-vertical.is-open .nav-group { display: contents; }
 
     .nav-group {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: var(--spacing-xs);
+        align-items: center;
+        flex: 0 0 auto;
     }
 
     .nav-btn {
         font-size: var(--font-size-nav);
         padding: 0.6rem 0.9rem 0.4rem 0.8rem;
         width: 100%;
-        text-align: left;
+        text-align: center;
+        justify-content: center;
     }
 
     .nav-btn-icon { font-size: var(--font-size-nav); padding: 0.5rem 0.8rem 0.3rem 0.7rem; }
@@ -102,7 +109,7 @@
 }
 @media (max-width: 480px) {
   .brand-link { font-size: calc(var(--font-size-h3) * 0.75); }
-  .nav-vertical.is-open { grid-template-columns: 1fr; }
+  .nav-vertical.is-open { grid-template-columns: repeat(3, 1fr); }
   .nav-btn { font-size: calc(var(--font-size-nav) * 0.9); line-height: 1.05; padding: 0.5rem 0.9rem 0.4rem 0.8rem; }
   .section-card { padding: var(--spacing-md); }
 }

@@ -18,6 +18,7 @@ class ModuleLoader {
     if (typeof window !== 'undefined' && typeof window.NavigationManager === 'function') {
       new window.NavigationManager();
     }
+    try { this.initCookieConsent(); } catch (_) {}
   }
 
   static async loadHeader() {
@@ -42,6 +43,8 @@ class ModuleLoader {
           '/contact.html': 'contact.html',
           '/blog.html': 'blog.html',
           '/store.html': 'store.html',
+          '/privacy.html': 'privacy.html',
+          '/cookies.html': 'cookies.html',
           '/documents/Felix Oyeleke - Property Management.pdf': 'documents/Felix Oyeleke - Property Management.pdf'
         };
         headerContainer.querySelectorAll('a[href^="/"]').forEach((anchor) => {
@@ -108,7 +111,9 @@ class ModuleLoader {
           '/about.html': 'about.html',
           '/contact.html': 'contact.html',
           '/blog.html': 'blog.html',
-          '/store.html': 'store.html'
+          '/store.html': 'store.html',
+          '/privacy.html': 'privacy.html',
+          '/cookies.html': 'cookies.html'
         };
         footerContainer.querySelectorAll('a[href^="/"]').forEach((anchor) => {
           const href = anchor.getAttribute('href');
@@ -117,6 +122,7 @@ class ModuleLoader {
       }
 
       console.log('[modules] Footer module loaded');
+      try { this.initScrollToTop(); } catch (_) {}
     } catch (error) {
       console.error('[modules] Failed to load footer:', error);
     }
@@ -147,6 +153,31 @@ class ModuleLoader {
       window.addEventListener('scroll', updateActive, { passive: true });
     }, 150);
   }
+  static initScrollToTop() {
+    try {
+      const button = document.getElementById('scrollToTop');
+      if (!button) return;
+      if (button.dataset.inited === '1') return;
+      button.dataset.inited = '1';
+
+      const toggleVisibility = () => {
+        if (window.scrollY > 400) {
+          button.classList.add('visible');
+        } else {
+          button.classList.remove('visible');
+        }
+      };
+
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      window.addEventListener('scroll', toggleVisibility, { passive: true });
+      toggleVisibility();
+    } catch (_) {}
+  }
+
 
   static async ensureAppInit() {
     const base = (location && location.protocol === 'file:') ? '' : '/';
@@ -182,7 +213,47 @@ class ModuleLoader {
     } catch (err) {
       console.warn('AppEffects.init failed', err);
     }
+
   }
+
+  static initCookieConsent() {
+    try {
+      const KEY = 'cookieConsent';
+      if (typeof window === 'undefined' || typeof document === 'undefined') return;
+      if (window.localStorage && window.localStorage.getItem(KEY)) return;
+
+      const banner = document.createElement('div');
+      banner.className = 'cookie-consent';
+      banner.setAttribute('role', 'dialog');
+      banner.setAttribute('aria-live', 'polite');
+      banner.innerHTML = `
+        <p>
+          We use only essential cookies for reliability. See our
+          <a href="/privacy.html">Privacy Policy</a> and <a href="/cookies.html">Cookie Policy</a>.
+        </p>
+        <div class="cookie-actions">
+          <button type="button" class="cookie-btn" id="cookieDismiss">Dismiss</button>
+          <button type="button" class="cookie-btn primary" id="cookieAccept">Accept</button>
+        </div>
+      `;
+      document.body.appendChild(banner);
+
+      const accept = banner.querySelector('#cookieAccept');
+      const dismiss = banner.querySelector('#cookieDismiss');
+      const close = (value) => {
+        try {
+          if (window.localStorage) window.localStorage.setItem(KEY, value);
+          document.cookie = `consent=${value}; Max-Age=31536000; Path=/`;
+        } catch (_) {}
+        if (banner && banner.parentNode) banner.parentNode.removeChild(banner);
+      };
+      if (accept) accept.addEventListener('click', () => close('accepted'));
+      if (dismiss) dismiss.addEventListener('click', () => close('dismissed'));
+    } catch (e) {
+      console.warn('cookie consent init failed', e);
+    }
+  }
+
 }
 
 ModuleLoader.initAuthUI = function initAuthUI() { /* auth removed */ };

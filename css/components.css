@@ -200,11 +200,6 @@
     line-height: 1.6;
 }
 
-/* Frameless media + calm hover overrides */
-.project-media-wide { background: transparent; border: 0; }
-.product-card:hover, .expertise-card:hover, .blog-post:hover, .contact-method:hover {
-  transform: none; box-shadow: none; border-color: var(--border-color);
-}
 
 .scroll-to-top {
     position: fixed;
@@ -223,7 +218,7 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s ease, transform 0.2s ease;
-    z-index: 20;
+    z-index: 10000;
 }
 .scroll-to-top.visible {
     opacity: 1;
