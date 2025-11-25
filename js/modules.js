@@ -10,9 +10,100 @@ try {
   }
 } catch (_) {}
 
+const ASSET_VERSION = '20251201-1';
+
+// Clear any caches left by previous service workers or fetch caches
+try {
+  if (typeof caches !== 'undefined') {
+    caches.keys().then((keys) => Promise.all(keys.map((k) => caches.delete(k)))).catch(() => {});
+  }
+} catch (_) {}
+
 class ModuleLoader {
+
+  /**
+   * Fallback header markup used if the fetched header.html fragment
+   * arrives truncated or incomplete (for example, when only WORKS/BLOG
+   * show up and STORE/RESUME/ABOUT/CONTACT are missing).
+   *
+   * This guarantees a complete navigation even if caching or network
+   * issues interfere with loading /components/header.html.
+   */
+  static getHeaderFallbackHTML() {
+    return `<!-- Sidebar Header Component -->
+<aside class="site-sidebar" role="banner">
+  <div class="sidebar-inner">
+    <div class="nav-brand">
+      <a href="/" class="brand-link" aria-label="Felix Oyeleke - Home">
+        <h1 class="brand-name">Felix Oyeleke</h1>
+      </a>
+      <button id="mobileMenuToggle"
+              class="mobile-menu-toggle"
+              type="button"
+              aria-label="Toggle navigation"
+              aria-controls="navMenu"
+              aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+    </div>
+
+    <nav class="nav-vertical is-open" id="navMenu" aria-label="Primary navigation">
+      <div class="nav-group">
+        <a href="/" class="nav-btn">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></g></svg>
+          </span>
+          <span class="nav-label">WORKS</span>
+        </a>
+        <a href="/blog.html" class="nav-btn">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><rect x="6" y="8" width="5" height="4" rx="1"/><path d="M13 8h5M13 12h5M6 16h12"/></g></svg>
+          </span>
+          <span class="nav-label">BLOG</span>
+        </a>
+        <a href="/store.html" class="nav-btn">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 12H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></g></svg>
+          </span>
+          <span class="nav-label">STORE</span>
+        </a>
+      </div>
+
+      <div class="nav-group">
+        <a href="/documents/Felix Oyeleke - Property Management.pdf"
+           class="nav-btn"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v6h6"/><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M8 13h8M8 17h8"/></g></svg>
+          </span>
+          <span class="nav-label">RESUME</span>
+        </a>
+      </div>
+
+      <div class="nav-group">
+        <a href="/about.html" class="nav-btn">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></g></svg>
+          </span>
+          <span class="nav-label">ABOUT</span>
+        </a>
+        <a href="/contact.html" class="nav-btn">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></g></svg>
+          </span>
+          <span class="nav-label">CONTACT</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+</aside>`;
+  }
   static async loadModules() {
     await Promise.all([this.loadHeader(), this.loadFooter()]);
+    try { this.ensureFonts(); } catch (_) {}
+
     this.setActiveNavigation();
     try { await this.ensureAppInit(); } catch (err) { console.warn('ensureAppInit failed', err); }
     if (typeof window !== 'undefined' && typeof window.NavigationManager === 'function') {
@@ -24,7 +115,8 @@ class ModuleLoader {
   static async loadHeader() {
     try {
       const base = (location && location.protocol === 'file:') ? '' : '/';
-      const response = await fetch(`${base}components/header.html`);
+      const url = `${base}components/header.html?v=${ASSET_VERSION}`;
+      const response = await fetch(url, { cache: 'no-store' });
       const headerHTML = await response.text();
 
       let headerContainer = document.getElementById('header-placeholder');
@@ -33,7 +125,25 @@ class ModuleLoader {
         headerContainer.id = 'header-placeholder';
         document.body.insertBefore(headerContainer, document.body.firstChild);
       }
+
+      // First, try to use the server-provided header fragment.
       headerContainer.innerHTML = headerHTML;
+
+      // Validate header completeness. If we don't see all 6 labels,
+      // fall back to a known-good inline header so WORKS/BLOG/STORE/
+      // RESUME/ABOUT/CONTACT always show up.
+      try {
+        const expectedCount = 6;
+        const labels = headerContainer.querySelectorAll('#navMenu a.nav-btn .nav-label');
+        if (!labels || labels.length < expectedCount) {
+          console.warn('[modules] Header fragment incomplete (labels:', labels ? labels.length : 0, '), using inline fallback header');
+          headerContainer.innerHTML = ModuleLoader.getHeaderFallbackHTML();
+        }
+      } catch (e) {
+        console.warn('[modules] Header completeness check failed, using inline fallback header:', e);
+        headerContainer.innerHTML = ModuleLoader.getHeaderFallbackHTML();
+      }
+
 
       if (location && location.protocol === 'file:') {
         const map = {
@@ -54,6 +164,7 @@ class ModuleLoader {
       }
 
       this.bindMobileToggle();
+      this.highlightActiveNav();
       console.log('[modules] Header module loaded');
     } catch (error) {
       console.error('[modules] Failed to load header:', error);
@@ -65,13 +176,20 @@ class ModuleLoader {
     const menu = document.getElementById('navMenu');
     if (!toggle || !menu) return;
 
+    const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
+
     const setState = (open) => {
       menu.classList.toggle('is-open', open);
       toggle.classList.toggle('active', open);
       toggle.setAttribute('aria-expanded', String(open));
     };
 
-    setState(false);
+    // Keep the menu open by default on small screens so all links are visible.
+    setState(isMobile());
+
+    // Sync menu visibility if the viewport is resized.
+    window.addEventListener('resize', () => setState(isMobile()), { passive: true });
+
     toggle.addEventListener('click', () => setState(!menu.classList.contains('is-open')));
     menu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
@@ -80,10 +198,27 @@ class ModuleLoader {
     });
   }
 
+  static highlightActiveNav() {
+    try {
+      const links = document.querySelectorAll('#navMenu a.nav-btn[href]');
+      if (!links || !links.length) return;
+      const current = location.pathname.replace(/\/index\.html$/, '/');
+      links.forEach((a) => {
+        const href = a.getAttribute('href') || '';
+        const normalized = href.replace(/\/index\.html$/, '/');
+        const active = normalized === current;
+        a.classList.toggle('active', active);
+        if (active) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+      });
+    } catch (_) {}
+  }
+
+
   static async loadFooter() {
     try {
       const base = (location && location.protocol === 'file:') ? '' : '/';
-      const response = await fetch(`${base}components/footer.html`);
+      const url = `${base}components/footer.html?v=${ASSET_VERSION}`;
+      const response = await fetch(url, { cache: 'no-store' });
       const footerHTML = await response.text();
 
       const main = document.querySelector('main.main-content');
@@ -126,7 +261,34 @@ class ModuleLoader {
     } catch (error) {
       console.error('[modules] Failed to load footer:', error);
     }
+
   }
+
+  static ensureFonts() {
+    try {
+      const head = document.head;
+      if (!head) return;
+      if (head.querySelector('link[href*="fonts.googleapis.com"]')) return;
+
+      const pre1 = document.createElement('link');
+      pre1.rel = 'preconnect';
+      pre1.href = 'https://fonts.googleapis.com';
+      head.appendChild(pre1);
+
+      const pre2 = document.createElement('link');
+      pre2.rel = 'preconnect';
+      pre2.href = 'https://fonts.gstatic.com';
+      pre2.crossOrigin = 'anonymous';
+      head.appendChild(pre2);
+
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;500&family=Oswald:wght@500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap';
+      head.appendChild(link);
+    } catch (_) {}
+  }
+
+
 
   static setActiveNavigation() {
     setTimeout(() => {
@@ -183,9 +345,11 @@ class ModuleLoader {
     const base = (location && location.protocol === 'file:') ? '' : '/';
 
     const load = (src) => new Promise((resolve, reject) => {
-      if (document.querySelector(`script[src="${src}"]`)) return resolve();
+      const withVersion = (s) => s + (s.includes('?') ? `&v=${ASSET_VERSION}` : `?v=${ASSET_VERSION}`);
+      const targetSrc = withVersion(src);
+      if (document.querySelector(`script[src="${src}"]`) || document.querySelector(`script[src="${targetSrc}"]`)) return resolve();
       const script = document.createElement('script');
-      script.src = src;
+      script.src = targetSrc;
       script.async = true;
       script.onload = () => resolve();
       script.onerror = () => reject(new Error(`Failed to load ${src}`));
@@ -261,4 +425,3 @@ ModuleLoader.initAuthUI = function initAuthUI() { /* auth removed */ };
 document.addEventListener('DOMContentLoaded', () => {
   ModuleLoader.loadModules();
 });
-

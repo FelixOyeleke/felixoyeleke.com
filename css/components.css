@@ -42,8 +42,9 @@
 }
 
 /* Brand (desktop defaults) */
-.brand-link { font-size: var(--font-size-h3); line-height: 1; }
-.brand-name { font-weight: 500; }
+.brand-link { font-size: var(--font-size-h3); line-height: 1; text-decoration: none; }
+.brand-link:hover { text-decoration: none; }
+.brand-name { font-family: 'Engravers Old English'; font-weight: 400; letter-spacing: -0.015em; }
 
 /* Navigation buttons */
 .nav-btn {
@@ -56,7 +57,9 @@
     border: 1px solid var(--gold);
     border-radius: var(--border-radius-full);
     transition: all 0.2s ease;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     text-align: left;
     max-width: fit-content;
     width: auto;
@@ -82,6 +85,16 @@
     color: var(--accent-blue);
     border-color: var(--accent-blue);
 }
+
+
+/* Icon before nav labels */
+.nav-icon { display: inline-flex; width: 18px; height: 18px; line-height: 0; }
+.nav-icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.8; }
+.nav-btn .nav-label { display: inline-block; line-height: 1; }
+
+    /* Ensure old .nav-btn-icon patterns still show labels */
+    .nav-btn-icon .nav-label { display: inline-block !important; opacity: 1 !important; visibility: visible !important; }
+
 
 /* Section titles */
 .section-title {
@@ -117,7 +130,7 @@
 .button-primary:hover {
   color: var(--accent-blue);
   border-color: var(--accent-blue);
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 /* Underline link style */

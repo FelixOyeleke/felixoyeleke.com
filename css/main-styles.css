@@ -58,7 +58,7 @@
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
     padding: var(--spacing-xl);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
     margin-bottom: var(--spacing-xl);
     border-bottom: none;
 }
@@ -123,7 +123,7 @@
     color: var(--text-primary);
     margin: 0 0 var(--spacing-md) 0;
     text-transform: uppercase;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.03em;
 }
 
 .project-title a {
@@ -180,14 +180,6 @@
     margin-top: var(--spacing-lg);
 }
 
-#store .featured-card,
-#newsletter .featured-card,
-#blog.section-card .featured-card {
-    background: var(--background-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    padding: var(--spacing-xl);
-}
 
 .project-video {
     width: 100%;

@@ -24,32 +24,12 @@
     });
   }
 
-  function initScrollToTop() {
-    const button = document.getElementById('scrollToTop');
-    if (!button) return;
 
-    const toggleVisibility = () => {
-      if (window.scrollY > 400) {
-        button.classList.add('visible');
-      } else {
-        button.classList.remove('visible');
-      }
-    };
-
-    button.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-    document.addEventListener('scroll', toggleVisibility, { passive: true });
-    toggleVisibility();
-  }
 
   async function init() {
     addUAClasses();
 
-    await Promise.all([
-      loadScript('/js/app-core.js'),
-      loadScript('/js/effects.js')
-    ]);
+
 
     try {
       if (window.AppCore && typeof window.AppCore.init === 'function') {
@@ -90,7 +70,7 @@
       }
     } catch (_) {}
 
-    initScrollToTop();
+
     console.log('[main] Felix Oyeleke website loaded successfully');
   }
 

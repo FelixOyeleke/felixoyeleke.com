@@ -2,19 +2,29 @@
 /* Clean, minimal portfolio design with grain effects */
 
 /* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Oswald:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+/* Fonts are loaded via <link> in HTML for performance */
+
+/* Self-hosted font: Engravers Old English */
+@font-face {
+  font-family: 'Engravers Old English';
+  src: local('Engravers Old English'),
+       url('/fonts/Engravers Old English BQ Regular/Engravers Old English BQ Regular.woff2?v=20251125-1') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* CSS Variables - Design System */
 :root {
-    /* Colors - Professional Palette */
+    /* Colors - Editorial Palette */
     --gold: #222222;
     --gold-dark: #111111;
-    --text-primary: #404e4d;
-    --text-secondary: #666;
-    --background-primary: #f1f2f6;
-    --background-secondary: #ffffff;
-    --accent-blue: #758bfd;
-    --border-color: #e1e5e9;
+    --text-primary: #111111;
+    --text-secondary: #4B5563;
+    --background-primary: #F8F5F0;
+    --background-secondary: #FFFFFF;
+    --accent-blue: #8C1D18;
+    --border-color: #E5DED0;
 
     /* Layout */
     --sidebar-width: 31%;
@@ -98,14 +108,14 @@ body::before {
     height: 100%;
     background-image:
         radial-gradient(circle at 25% 25%, rgba(0, 0, 0, 0.04) 0%, transparent 60%),
-        radial-gradient(circle at 75% 75%, rgba(117, 139, 253, 0.03) 0%, transparent 60%),
+        radial-gradient(circle at 75% 75%, rgba(140, 29, 24, 0.03) 0%, transparent 60%),
         radial-gradient(circle at 50% 10%, rgba(0, 0, 0, 0.02) 0%, transparent 40%),
         url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><defs><filter id="grain"><feTurbulence baseFrequency="0.95" numOctaves="5" result="noise" seed="3"/><feColorMatrix in="noise" type="saturate" values="0"/><feComponentTransfer><feFuncA type="discrete" tableValues="0.01 0.03 0.05 0.07 0.09 0.11"/></feComponentTransfer></filter></defs><rect width="120" height="120" filter="url(%23grain)" opacity="0.5"/></svg>');
     background-size: 100% 100%, 100% 100%, 100% 100%, 180px 180px;
     pointer-events: none;
     z-index: 1;
-    opacity: 0.7;
-    animation: grainMove 12s ease-in-out infinite;
+    opacity: 0.55;
+    animation: none;
 }
 
 /* Enhanced grain for sidebar */

@@ -3,37 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Contact Felix Oyeleke for offshore project management and property management services. Get in touch to discuss your business needs and operations.">
     <meta name="keywords" content="contact Felix Oyeleke, offshore project manager contact, property management services, business consultation">
     <meta name="author" content="Felix Oyeleke">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://felixoyeleke.com/contact.html">
-    <meta property="og:title" content="Contact Felix Oyeleke - Offshore Project Manager & Property Specialist">
+    <meta property="og:title" content="Contact Felix Oyeleke">
     <meta property="og:description" content="Get in touch with Felix Oyeleke for offshore project management and property management services.">
     <meta property="og:image" content="https://felixoyeleke.com/images/profile-picture.jpg">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Contact Felix Oyeleke - Offshore Project Manager & Property Specialist">
+    <meta name="twitter:title" content="Contact Felix Oyeleke">
     <meta name="twitter:description" content="Get in touch with Felix Oyeleke for offshore project management and property management services.">
     <meta name="twitter:image" content="https://felixoyeleke.com/images/profile-picture.jpg">
 
-    <title>Contact Felix Oyeleke - Offshore Project Manager & Property Management Specialist</title>
-    
+    <title>Contact Felix Oyeleke</title>
+
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="/images/profile-picture.jpg">
-    
+
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;500&family=Oswald:wght@500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+        <link rel="preload" href="/fonts/Engravers Old English BQ Regular/Engravers Old English BQ Regular.woff2?v=20251125-1" as="font" type="font/woff2" crossorigin>
+
+
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/main-styles.css">
+	    <link rel="stylesheet" href="/css/main-styles.css?v=20251201-1">
 </head>
 <body>
     <div id="header-placeholder"></div>
-    
+
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
@@ -41,7 +48,7 @@
             <section class="contact-header content-section">
                 <h1>Let's Connect</h1>
                 <p class="contact-intro">
-                    Ready to discuss your project or property management needs? 
+                    Ready to discuss your project or property management needs?
                     I'd love to hear about your challenges and explore how we can work together.
                 </p>
             </section>
@@ -53,16 +60,16 @@
                         <div class="contact-icon">📧</div>
                         <h3>Email</h3>
                         <p>For detailed project discussions and formal inquiries</p>
-                        <a href="mailto:hi@felixoyeleke.com" class="contact-link">hi@felixoyeleke.com</a>
+                        <a href="mailto:hello@felixoyeleke.com" class="contact-link">hello@felixoyeleke.com</a>
                     </div>
-                    
+
                     <div class="contact-method">
                         <div class="contact-icon">💼</div>
                         <h3>Professional Network</h3>
                         <p>Connect with me for business opportunities</p>
                         <a href="https://github.com/felixoyeleke" class="contact-link" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
                     </div>
-                    
+
                     <div class="contact-method">
                         <div class="contact-icon">📱</div>
                         <h3>Social Media</h3>
@@ -82,11 +89,14 @@
                     <p class="form-description">
                         Fill out the form below and I'll get back to you within 24 hours.
                     </p>
-                    
-                    <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/success.html">
-                        <input type="hidden" name="form-name" value="contact">
-                        <p class="hidden" style="display:none;">
-                            <label>Don’t fill this out if you're human: <input name="bot-field"></label>
+
+                    <!-- Formspree integration: replace YOUR_FORM_ID below with your actual Formspree form ID -->
+                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/manzaolp" method="POST" accept-charset="UTF-8">
+                        <input type="hidden" name="formName" value="contact">
+                        <input type="hidden" name="_subject" value="New contact message from felixoyeleke.com">
+                        <input type="hidden" name="_redirect" value="/success.html">
+                        <p class="hidden" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
+                            <label>Leave this field empty: <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
                         </p>
                         <div class="form-group">
                             <label for="name">Full Name *</label>
@@ -123,6 +133,7 @@
                         <div class="form-group">
                             <button type="submit" class="submit-button">Send Message</button>
                         </div>
+                        <p id="contactStatus" class="form-status" aria-live="polite" role="status"></p>
                     </form>
                 </div>
             </section>
@@ -134,24 +145,24 @@
                     <div class="faq-item">
                         <h4 class="faq-question">What's your typical response time?</h4>
                         <p class="faq-answer">
-                            I aim to respond to all inquiries within 24 hours during business days. 
+                            I aim to respond to all inquiries within 24 hours during business days.
                             For urgent matters, please mention it in your message.
                         </p>
                     </div>
-                    
+
                     <div class="faq-item">
                         <h4 class="faq-question">Do you work with international clients?</h4>
                         <p class="faq-answer">
-                            Absolutely! I specialize in offshore operations and work with clients 
+                            Absolutely! I specialize in offshore operations and work with clients
                             across different time zones and regions.
                         </p>
                     </div>
-                    
+
                     <div class="faq-item">
                         <h4 class="faq-question">What information should I include in my inquiry?</h4>
                         <p class="faq-answer">
-                            Please include details about your project scope, timeline, budget range, 
-                            and any specific challenges you're facing. The more context you provide, 
+                            Please include details about your project scope, timeline, budget range,
+                            and any specific challenges you're facing. The more context you provide,
                             the better I can assist you.
                         </p>
                     </div>
@@ -160,29 +171,9 @@
         </div>
     </main>
 
-    <div id="footer-placeholder"></div>
-    
-    <!-- Scripts -->
-    <script src="/js/modules.js"></script>
-    <script>
-        // Let Netlify handle the contact form if present; fallback to JS only when not on Netlify
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('contactForm');
-            if (!form) return;
-            if (form.hasAttribute('data-netlify')) return; // allow normal POST submit on Netlify
+        <div id="footer-placeholder"></div>
 
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const formData = new FormData(this);
-                const data = Object.fromEntries(formData);
-                if (!data.name || !data.email || !data.message) {
-                    alert('Please fill in all required fields.');
-                    return;
-                }
-                alert('Thank you for your message! I\'ll get back to you within 24 hours.');
-                this.reset();
-            });
-        });
-    </script>
+        <!-- Scripts -->
+	    <script src="/js/modules.js?v=20251201-1"></script>
 </body>
 </html>

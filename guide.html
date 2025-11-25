@@ -55,14 +55,14 @@
       </section>
 
       <section class="content-section">
-        <h2>4) Cache busting for visitors (Service Worker)</h2>
-        <p class="note">If visitors don’t see updates, increase the cache version and refresh.</p>
-        <ol>
-          <li>Open <code>sw.js</code>.</li>
-          <li>Change <code>const CACHE_NAME = 'felix-oyeleke-vX'</code> to the next number (e.g., v3).</li>
-          <li>Optionally add new files to <code>urlsToCache</code> (CSS, images, pages).</li>
-          <li>Save, deploy, then reload the site. On desktop, do a hard refresh (Cmd/Ctrl+Shift+R).</li>
-        </ol>
+        <h2>4) Refresh cache for visitors</h2>
+        <p class="note">This site no longer uses a Service Worker for caching. If someone doesn't see the latest changes, try:</p>
+        <ul>
+          <li>Hard refresh the page (Cmd/Ctrl+Shift+R).</li>
+          <li>Append a version query to asset URLs (e.g., <code>?v=2</code>) if needed.</li>
+          <li>Purge/invalidate CDN or hosting cache (e.g., Netlify "Clear cache and deploy").</li>
+          <li>Ask the user to clear browser cache for the site if problems persist.</li>
+        </ul>
       </section>
 
       <section class="content-section">
@@ -84,7 +84,7 @@
     </div>
   </main>
   <div id="footer-placeholder"></div>
-  <script src="js/modules.js"></script>
+	  <script src="/js/modules.js?v=20251201-1"></script>
 </body>
 </html>
 

@@ -1,6 +1,6 @@
 # Robots.txt for felixoyeleke.com
 # Professional portfolio website of Felix Oyeleke
-# Updated: 2024-12-19
+# Updated: 2025-11-25
 
 # Allow all crawlers access to most content
 User-agent: *
@@ -29,8 +29,7 @@ Allow: /icons/
 Disallow: /*.log$
 Disallow: /*.env$
 Disallow: /*.config$
-Disallow: /sw.js
-Disallow: /manifest.json
+
 
 # Allow specific crawlers with optimized settings
 User-agent: Googlebot
@@ -66,7 +65,7 @@ Disallow: /
 
 # Sitemap locations
 Sitemap: https://felixoyeleke.com/sitemap.xml
-Sitemap: https://felixoyeleke.com/sitemap-images.xml
+
 
 # Host directive (preferred domain)
 Host: felixoyeleke.com
