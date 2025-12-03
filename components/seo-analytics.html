@@ -1,49 +1,47 @@
-<!-- SEO and Analytics -->
-<!-- Add this to the <head> section of each page -->
-
-<!-- Google Analytics 4 (Replace GA_MEASUREMENT_ID with your actual ID) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+<!-- SEO and Analytics (guarded: only runs when IDs are provided) -->
 <script>
+(function() {
+  const GA_ID = window.__GA_MEASUREMENT_ID;
+  if (!GA_ID) {
+    console.info('seo-analytics: GA disabled (no measurement ID set)');
+    return;
+  }
+  const tag = document.createElement('script');
+  tag.async = true;
+  tag.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_ID)}`;
+  document.head.appendChild(tag);
+
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){ window.dataLayer.push(arguments); }
   gtag('js', new Date());
-  gtag('config', 'GA_MEASUREMENT_ID', {
+  gtag('config', GA_ID, {
     page_title: document.title,
     page_location: window.location.href,
     content_group1: 'Felix Oyeleke Website'
   });
+})();
 </script>
 
-<!-- Google Search Console Verification (Replace with your verification code) -->
-<meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE">
+<script>
+(function() {
+  const googleVerify = window.__GOOGLE_SITE_VERIFICATION;
+  if (googleVerify) {
+    const meta = document.createElement('meta');
+    meta.name = 'google-site-verification';
+    meta.content = googleVerify;
+    document.head.appendChild(meta);
+  }
 
-<!-- Bing Webmaster Tools Verification (Replace with your verification code) -->
-<meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE_HERE">
-
-<!-- Optional: Google Tag Manager (Alternative to GA4) -->
-<!-- Google Tag Manager -->
-<!--
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
--->
-<!-- End Google Tag Manager -->
-
-<!-- Optional: Microsoft Clarity (Heat mapping and user behavior) -->
-<!--
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "YOUR_CLARITY_ID");
+  const bingVerify = window.__BING_SITE_VERIFICATION;
+  if (bingVerify) {
+    const meta = document.createElement('meta');
+    meta.name = 'msvalidate.01';
+    meta.content = bingVerify;
+    document.head.appendChild(meta);
+  }
+})();
 </script>
--->
 
-
-<!-- Schema.org for Contact Information -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -56,26 +54,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 </script>
 
-<!-- Rich Snippets for Professional Service -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "name": "Felix Oyeleke — Offshore Project Manager & Property Management Specialist",
-  "description": "Project and property management services, business operations, and digital workflow solutions for offshore coordination.",
+	  "name": "Felix Oyeleke  Documentary-Style YouTube Creator",
+	  "description": "Documentary-style YouTube videos and storytelling on geophysics, technology, and human stories from Atlantic Canada.",
   "provider": {
     "@type": "Person",
     "name": "Felix Oyeleke",
     "url": "https://felixoyeleke.com"
   },
-  "areaServed": ["Newfoundland and Labrador", "Atlantic Canada", "Remote"],
-  "serviceType": [
-    "Project Management",
-    "Property Management",
-    "Business Operations",
-    "Process Optimization",
-    "Digital Solutions"
-  ],
+	  "areaServed": ["Newfoundland and Labrador", "Atlantic Canada", "Remote"],
+	  "serviceType": [
+	    "Documentary Filmmaking",
+	    "YouTube Content Creation",
+	    "Video Essays",
+	    "Educational Content",
+	    "Storytelling"
+	  ],
   "url": "https://felixoyeleke.com"
 }
 </script>

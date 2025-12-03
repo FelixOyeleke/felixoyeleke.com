@@ -94,7 +94,7 @@
     padding: 0;
     background: transparent;
     border: none;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-xs);
 }
 .project-item:last-child {
     margin-bottom: 0;
@@ -208,7 +208,7 @@
     border: 0;
     height: 1px;
     display: block;
-    margin: var(--spacing-xl) 0;
+    margin: var(--spacing-xs) 0 0;
     width: 100%;
 }
 

@@ -91,6 +91,11 @@
     .footer-content { grid-template-columns: 1fr; gap: var(--spacing-lg); text-align: center; }
 
     .footer-social { align-items: center; }
+
+    /* Tighten project spacing on mobile */
+    .featured-projects { gap: var(--spacing-sm); }
+    .project-item { margin-bottom: 0; }
+    .project-separator { margin: 0; }
 }
 
 /* Consistent header brand sizing across all pages */

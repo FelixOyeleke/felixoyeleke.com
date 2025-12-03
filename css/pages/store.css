@@ -25,20 +25,18 @@
 }
 
 .product-card {
-    background: var(--background-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    padding: var(--spacing-lg);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
+	    background: var(--background-secondary);
+	    border: 1px solid var(--border-color);
+	    border-radius: var(--border-radius-md);
+	    padding: var(--spacing-lg);
+	    transition: border-color 0.2s ease;
+	    position: relative;
+	    overflow: hidden;
+	}
 
 .product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    border-color: var(--accent-blue);
-}
+	    border-color: var(--accent-blue);
+	}
 
 .product-card.featured {
     border: 2px solid var(--border-color);

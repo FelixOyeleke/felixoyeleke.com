@@ -27,24 +27,28 @@
   <!-- Canonical URL -->
   <link rel="canonical" href="https://felixoyeleke.com/links.html" />
   
-  <!-- Site Stylesheets -->
-  <link rel="stylesheet" href="/css/main-styles.css?v=20251125-3">
-  <script src="js/modules.js?v=20251125-3" defer></script>
+	  <!-- Site Stylesheets -->
+	  <link rel="stylesheet" href="/css/main-styles.css?v=20251201-1">
+	  <script src="js/modules.js?v=20251201-1" defer></script>
   
-  <style>
-    /* Links Page - Matching Your Clean, Minimal Design */
-    body { 
-      background: var(--background-secondary); 
-      color: var(--text-primary); 
-    }
-    
+	  <style>
+	    /* Links Page - Matching Your Clean, Minimal Design */
     .links-page { 
       display: flex; 
       align-items: center; 
       justify-content: center; 
-      padding: 48px 16px; 
-      min-height: calc(100vh - 160px); 
+	      padding: 48px 16px; 
+	      min-height: calc(100vh - 160px); 
     }
+
+	    /* Desktop / large tablet: keep links clear of fixed sidebar header */
+	    @media (min-width: 901px) {
+	      .links-page {
+	        margin-left: var(--sidebar-width);
+	        padding: var(--content-padding);
+	        min-height: 100vh;
+	      }
+	    }
     
     .links-container { 
       width: 100%; 
@@ -84,26 +88,35 @@
       } 
     }
     
-    .link-card { 
-      display: flex; 
-      align-items: center; 
-      gap: 12px; 
-      padding: 16px 18px; 
-      border: 1px solid var(--border-color); 
-      border-radius: 12px; 
-      background: var(--background-primary); 
-      text-decoration: none; 
-      color: var(--text-primary); 
-      transition: all 0.2s ease; 
-      position: relative;
-    }
-    
-    .link-card:hover {
-      background: var(--background-secondary);
-      border-color: var(--gold);
-      transform: none;
-      box-shadow: none;
-    }
+	    .link-card { 
+	      display: flex; 
+	      align-items: center; 
+	      gap: 12px; 
+	      padding: 16px 18px; 
+	      border: 1px solid var(--border-color); 
+	      border-radius: 12px; 
+	      background: var(--background-primary); 
+		      text-decoration: none; 
+		      color: var(--text-primary); 
+	      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease; 
+	      position: relative;
+	    }
+	    
+	    .link-card:hover {
+		      border-color: var(--accent-blue);
+		      text-decoration: none; /* override global a:hover underline */
+	    }
+
+	    .link-card:hover .link-title {
+		      color: var(--accent-blue);
+	    }
+
+	    .link-card:focus-visible {
+		      outline: 2px solid var(--accent-blue);
+		      outline-offset: 3px;
+		      border-color: var(--accent-blue);
+		      text-decoration: none;
+	    }
     
     .link-icon { 
       width: 32px; 
@@ -147,7 +160,7 @@
     
     /* External link indicator */
     .link-external::after {
-      content: '↗';
+      content: '->';
       margin-left: auto;
       font-size: 16px;
       color: var(--text-secondary);
@@ -208,6 +221,13 @@
         padding: 18px 20px;
       }
     }
+
+	    /* Ensure breathing room below the mobile/tablet header */
+	    @media (max-width: 900px) {
+	      .links-page {
+	        padding-top: 88px; /* keeps the buttons from visually touching the header */
+	      }
+	    }
   </style>
   
   <!-- SEO Analytics -->
@@ -387,8 +407,8 @@
       
       <!-- Footer -->
       <div class="links-footer">
-        <p>© 2025 Felix Oyeleke. All rights reserved.</p>
-        <a href="index.html" class="back-link">← Back to main site</a>
+        <p>&copy; 2025 Felix Oyeleke. All rights reserved.</p>
+        <a href="index.html" class="back-link">&larr; Back to main site</a>
       </div>
     </div>
   </main>
@@ -396,3 +416,5 @@
   <div id="footer-placeholder"></div>
 </body>
 </html>
+
+

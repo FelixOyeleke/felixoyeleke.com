@@ -184,19 +184,17 @@
 }
 
 .contact-method {
-    background: var(--background-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    padding: var(--spacing-lg);
-    text-align: center;
-    transition: all 0.3s ease;
-}
+	    background: var(--background-secondary);
+	    border: 1px solid var(--border-color);
+	    border-radius: var(--border-radius-md);
+	    padding: var(--spacing-lg);
+	    text-align: center;
+	    transition: border-color 0.2s ease;
+	}
 
 .contact-method:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    border-color: var(--accent-blue);
-}
+	    border-color: var(--accent-blue);
+	}
 
 .contact-icon { font-size: calc(var(--font-size-h2) * 1.2); margin-bottom: var(--spacing-md); }
 
