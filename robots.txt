@@ -1,6 +1,6 @@
 # Robots.txt for felixoyeleke.com
 # Professional portfolio website of Felix Oyeleke
-# Updated: 2025-11-25
+# Updated: 2025-12-18
 
 # Allow all crawlers access to most content
 User-agent: *
