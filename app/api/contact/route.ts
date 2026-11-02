@@ -66,9 +66,9 @@ export async function POST(request: Request) {
     return Response.json({ error: "Could not send message." }, { status: 502 });
   }
 
-  // A no-JS form post lands back on the contact page.
+  // A no-JS form post lands back on the contact section of the About page.
   if (!(request.headers.get("content-type") ?? "").includes("application/json")) {
-    return Response.redirect(new URL("/contact?sent=1", request.url), 303);
+    return Response.redirect(new URL("/about?sent=1#contact", request.url), 303);
   }
   return Response.json({ ok: true });
 }

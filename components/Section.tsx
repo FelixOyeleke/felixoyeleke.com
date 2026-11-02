@@ -1,10 +1,21 @@
 import type { ReactNode } from "react";
 
 /** Content section used on inner pages. */
-export function PageSection({ title, children }: { title?: string; children: ReactNode }) {
+export function PageSection({
+  id,
+  title,
+  lede,
+  children,
+}: {
+  id?: string;
+  title?: string;
+  lede?: ReactNode;
+  children: ReactNode;
+}) {
   return (
-    <section className="page-section">
+    <section className="page-section" id={id}>
       {title && <h2>{title}</h2>}
+      {lede && <p className="section-lede">{lede}</p>}
       {children}
     </section>
   );

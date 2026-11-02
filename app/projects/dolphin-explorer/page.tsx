@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleHeader, CtaPanel, DetailCards, StatRow, StatusList, Tldr } from "@/components/Article";
-import { site } from "@/lib/content";
+import { brandLogos, site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Dolphin Explorer",
@@ -24,15 +24,22 @@ export default function DolphinExplorerPage() {
   return (
     <main className="article">
       <Link className="back-link" href="/projects">
-        ← All projects
+        ‹ All projects
       </Link>
 
       <ArticleHeader
+        logo={brandLogos.dolphinExplorer}
         eyebrow="Project · Build log · 2025"
         title="Dolphin Explorer"
         lede="A field-ready hydrographic console that ingests raw XTF captures, renders a responsive waterfall view, and is gaining a desktop GUI so survey teams can review data on board in minutes."
         tags={["Hydrography", "XTF", "Desktop", "Visualization"]}
       />
+
+      <div className="hero-actions article-actions">
+        <a className="button-link" href="https://dolphinexplorer.dev/" target="_blank" rel="noreferrer">
+          Visit dolphinexplorer.dev ↗
+        </a>
+      </div>
 
       <StatRow
         stats={[

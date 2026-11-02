@@ -14,7 +14,7 @@ export default function NotFound() {
         eyebrow="404 · Off the chart"
         title={
           <>
-            No soundings
+            No soundings{" "}
             <br />
             at this location.
           </>
@@ -29,7 +29,7 @@ export default function NotFound() {
             Back to home
           </Link>
           <Link className="section-link" href="/projects">
-            Browse projects <span aria-hidden="true">→</span>
+            Browse projects <span aria-hidden="true">›</span>
           </Link>
         </div>
       </PageIntro>

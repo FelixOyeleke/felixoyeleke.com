@@ -8,11 +8,11 @@
       .panel { fill:#181818; stroke:#232323; stroke-width:2; rx:18; ry:18; }
       .panel-text { font-family:"Segoe UI",sans-serif; font-size:16px; fill:#f5f5f5; }
       .panel-title { font-size:20px; font-weight:600; fill:#f5f5f5; }
-      .arrow { stroke:#1ed760; stroke-width:3; marker-end:url(#arrowHead); }
+      .arrow { stroke:#d6d6d6; stroke-width:3; marker-end:url(#arrowHead); }
       .caption { font-family:"Segoe UI",sans-serif; font-size:14px; fill:#b3b3b3; }
     </style>
     <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L6,3 L0,6" fill="#1ed760"/>
+      <path d="M0,0 L6,3 L0,6" fill="#d6d6d6"/>
     </marker>
   </defs>
   <rect width="960" height="360" fill="url(#bg)" rx="24"/>

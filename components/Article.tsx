@@ -1,11 +1,15 @@
 import type { ReactNode } from "react";
+import type { BrandLogo } from "@/lib/content";
+import { BrandMark } from "./BrandMark";
 
 export function ArticleHeader({
+  logo,
   eyebrow,
   title,
   lede,
   tags,
 }: {
+  logo?: BrandLogo;
   eyebrow: ReactNode;
   title: string;
   lede: string;
@@ -13,6 +17,11 @@ export function ArticleHeader({
 }) {
   return (
     <header className="article-header">
+      {logo && (
+        <div className="article-logo">
+          <BrandMark logo={logo} large />
+        </div>
+      )}
       <p className="eyebrow">{eyebrow}</p>
       <h1>{title}</h1>
       <p className="article-lede">{lede}</p>

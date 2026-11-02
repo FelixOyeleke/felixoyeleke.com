@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleHeader, CtaPanel, DetailCards, StatRow, StatusList, Tldr } from "@/components/Article";
-import { site } from "@/lib/content";
+import { brandLogos, site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Visual Tokenization of Sonar Data",
@@ -27,12 +27,13 @@ function Figure({ src, alt }: { src: string; alt: string }) {
 export default function SonarTokenizationPost() {
   return (
     <main className="article">
-      <Link className="back-link" href="/writing">
-        ← All writing
+      <Link className="back-link" href="/blog">
+        ‹ All posts
       </Link>
 
       <article>
         <ArticleHeader
+          logo={brandLogos.dolphinExplorer}
           eyebrow={
             <>
               Hydrographic R&amp;D · Field log 01 · <time dateTime="2025-11">November 2025</time>

@@ -6,29 +6,30 @@ import { themeScript } from "@/components/ThemeToggle";
 import { site } from "@/lib/content";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-inter" });
+// Use one typeface throughout so headings, cards, and body copy share the same letterforms.
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: "Felix Oyeleke — Technology, GIS, Data", template: "%s — Felix Oyeleke" },
   description: "Felix Oyeleke builds software and geospatial systems.",
   openGraph: { siteName: site.name, type: "website", locale: "en_CA" },
+  twitter: { card: "summary", site: site.xHandle, creator: site.xHandle },
+  alternates: { types: { "application/rss+xml": "/blog/rss.xml" } },
 };
 
-export const viewport: Viewport = { themeColor: "#121212" };
+export const viewport: Viewport = { themeColor: "#ffffff" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} light`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
-        <div className="page-shell">
-          <SiteHeader />
-          {children}
-          <SiteFooter />
-        </div>
+        <SiteHeader />
+        <div className="page-shell">{children}</div>
+        <SiteFooter />
       </body>
     </html>
   );

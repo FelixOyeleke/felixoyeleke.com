@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleHeader, CtaPanel, DetailCards, StatRow, StatusList, Tldr } from "@/components/Article";
+import { brandLogos } from "@/lib/content";
 
 const SITE_URL = "https://stjohnsproperties.ca";
 
@@ -25,10 +26,11 @@ export default function StJohnsPropertiesPage() {
   return (
     <main className="article">
       <Link className="back-link" href="/projects">
-        ← All projects
+        ‹ All projects
       </Link>
 
       <ArticleHeader
+        logo={brandLogos.stJohnsProperties}
         eyebrow="Project · Live · 2026"
         title="St. John’s Properties"
         lede="An MLS®-powered real estate platform for St. John’s and Newfoundland: live listing search, a neighbourhood-level market data page, and tools for buyers, sellers and investors — designed, built and run by me as a REALTOR® with eXp Realty."

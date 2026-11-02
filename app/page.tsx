@@ -1,83 +1,118 @@
 import Link from "next/link";
-import { building, formatMonth, posts } from "@/lib/content";
+import { BrandMark } from "@/components/BrandMark";
+import { BlogCard } from "@/components/BlogCard";
+import { CardGo, Icon } from "@/components/Icon";
+import { Subscribe } from "@/components/Subscribe";
+import { NoteCard } from "@/components/NoteCard";
+import { building, noteTopics, publishedPosts } from "@/lib/content";
 
-function RowLink({ href, external, children }: { href: string; external?: boolean; children: React.ReactNode }) {
+function TileLink({ href, external, className, children }: { href: string; external?: boolean; className: string; children: React.ReactNode }) {
   return external ? (
-    <a className="hub-row" href={href} target="_blank" rel="noreferrer">
+    <a className={className} href={href} target="_blank" rel="noreferrer">
       {children}
     </a>
   ) : (
-    <Link className="hub-row" href={href}>
+    <Link className={className} href={href}>
       {children}
     </Link>
   );
 }
 
 export default function HomePage() {
-  const published = posts.filter((post) => post.href);
+  const published = publishedPosts;
 
   return (
     <main id="top" className="hub">
       <section className="hub-intro" aria-labelledby="hero-title">
-        <img className="hub-photo" src="/images/felix.webp" width={88} height={88} alt="Felix Oyeleke" />
+        <img className="hub-photo" src="/images/felix.webp" width={112} height={112} alt="Felix Oyeleke" />
         <h1 id="hero-title">
-          I’m Felix — I build software and geospatial systems, and help people buy homes in Newfoundland.
+          I’m Felix — I build businesses, lead projects, and turn ideas into practical solutions.
         </h1>
         <p>
-          I spent 6+ years in offshore geophysics and hydrographic survey across Canada, the North Sea and West Africa,
-          on projects for Shell, ExxonMobil and Chevron. Now I build tools for data-heavy work and run St. John’s
-          Properties as a REALTOR® with eXp Realty. PMP, MBA candidate at Memorial University.
+          With a background in international offshore operations, technology, and project management, my work has
+          evolved from technical delivery into business leadership and entrepreneurship. I currently lead St. John’s
+          Properties, pursue independent technology ventures, and am completing an MBA at Memorial University. I’m also
+          a PMP-certified professional with experience across Canada, Europe, and West Africa.
         </p>
         <p className="hub-actions">
-          <Link href="/contact">
-            Work with me <span aria-hidden="true">→</span>
+          <Link className="button-link button-link--square" href="/about#contact">
+            Work with me
           </Link>
-          <Link href="/about">
-            More about me <span aria-hidden="true">→</span>
+          <Link className="section-link" href="/about">
+            More about me <span aria-hidden="true">›</span>
           </Link>
         </p>
       </section>
 
-      <section className="hub-section" aria-labelledby="building-title">
-        <h2 className="hub-label" id="building-title">
-          Building
-        </h2>
-        <div className="hub-list">
+      <section className="hub-section hub-building" aria-labelledby="building-title">
+        <div className="hub-section-heading">
+          <h2 className="hub-label" id="building-title">
+            Building
+          </h2>
+          <p>Products, tools and systems I’m actively making.</p>
+        </div>
+        <div className="hub-grid">
           {building.map((item) => (
-            <RowLink key={item.title} href={item.href} external={item.external}>
-              <span className="hub-title">
-                {item.title} <span aria-hidden="true">{item.external ? "↗" : "→"}</span>
+            <TileLink key={item.title} className="hub-tile" href={item.href} external={item.external}>
+              <span className="hub-tile-head">
+                {item.logo ? (
+                  <BrandMark logo={item.logo} />
+                ) : (
+                  <span className="tile-icon">
+                    <Icon name={item.icon} size={28} />
+                  </span>
+                )}
+                <CardGo external={item.external} />
               </span>
+              <span className="hub-tile-kicker">{item.label}</span>
+              <span className="hub-title">{item.title}</span>
               <span className="hub-line">{item.line}</span>
-            </RowLink>
+              {item.external && <span className="sr-only"> (opens in a new tab)</span>}
+            </TileLink>
           ))}
         </div>
       </section>
 
       {published.length > 0 && (
-        <section className="hub-section" aria-labelledby="writing-title">
-          <h2 className="hub-label" id="writing-title">
-            Writing
-          </h2>
+        <section className="hub-section hub-blog" aria-labelledby="blog-title">
+          <div className="hub-section-heading">
+            <h2 className="hub-label" id="blog-title">
+              Blog
+            </h2>
+            <p>Notes from the work behind the work.</p>
+          </div>
           <div className="hub-list">
             {published.slice(0, 3).map((post) => (
-              <Link className="hub-row hub-post" href={post.href!} key={post.title}>
-                {post.thumbnail && <img src={post.thumbnail} width={56} height={56} alt="" loading="lazy" />}
-                <span>
-                  <span className="hub-title">
-                    {post.title} <span aria-hidden="true">→</span>
-                  </span>
-                  <span className="hub-line">{post.opening ?? post.summary}</span>
-                  {post.date && <time dateTime={post.date}>{formatMonth(post.date)}</time>}
-                </span>
-              </Link>
+              <BlogCard post={post} key={post.title} />
             ))}
           </div>
-          <Link className="hub-more" href="/writing">
-            All writing <span aria-hidden="true">→</span>
+          <Link className="section-link hub-more" href="/blog">
+            All posts <span aria-hidden="true">›</span>
           </Link>
         </section>
       )}
+
+      <section className="hub-section hub-notes" aria-labelledby="notes-title">
+        <div className="hub-section-heading">
+          <h2 className="hub-label" id="notes-title">
+            Notes
+          </h2>
+          <p>Technical experiments and systems I am documenting as I build.</p>
+        </div>
+        <div className="hub-notes-grid">
+          {noteTopics.map((topic) => (
+            <NoteCard topic={topic} key={topic.slug} />
+          ))}
+        </div>
+        <Link className="section-link hub-more" href="/notes">
+          All notes <span aria-hidden="true">›</span>
+        </Link>
+      </section>
+
+      <Subscribe
+        title="Stay in the loop"
+        text="An occasional email when I publish a new post, guide or project. Unsubscribe anytime."
+      />
     </main>
   );
 }

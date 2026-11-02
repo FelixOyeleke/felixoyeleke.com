@@ -7,19 +7,22 @@ const nextConfig: NextConfig = {
     return [
       // Static-HTML URLs from the previous builds of the site
       permanent("/index.html", "/"),
-      ...["about", "projects", "writing", "resume", "contact"].map((page) =>
-        permanent(`/${page}.html`, `/${page}`),
-      ),
+      ...["about", "projects", "blog", "store", "resume"].map((page) => permanent(`/${page}.html`, `/${page}`)),
+      // Contact was merged into the About page
+      permanent("/contact", "/about#contact"),
+      permanent("/contact.html", "/about#contact"),
       permanent("/experience", "/about"),
       permanent("/experience.html", "/about"),
       permanent("/dolphin-explorer.html", "/projects/dolphin-explorer"),
-      permanent("/blog/visual-tokenization-of-sonar-data.html", "/writing/visual-tokenization-of-sonar-data"),
-      permanent("/blog.html", "/writing"),
-      permanent("/blog/:slug*", "/writing"),
+      permanent("/blog/visual-tokenization-of-sonar-data.html", "/blog/visual-tokenization-of-sonar-data"),
+      permanent("/blog/:slug(.+)\\.html", "/blog"),
+      // The blog lived at /writing before it was renamed
+      permanent("/writing.html", "/blog"),
+      permanent("/writing", "/blog"),
+      permanent("/writing/:slug*", "/blog/:slug*"),
       permanent("/guide.html", "/"),
       permanent("/links.html", "/"),
-      permanent("/store.html", "/projects"),
-      permanent("/success.html", "/contact"),
+      permanent("/success.html", "/about#contact"),
       permanent("/privacy.html", "/"),
       permanent("/cookies.html", "/"),
     ];

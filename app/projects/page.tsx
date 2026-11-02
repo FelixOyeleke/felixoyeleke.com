@@ -15,7 +15,7 @@ export default function ProjectsPage() {
         eyebrow="Projects"
         title={
           <>
-            Tools that make
+            Tools that make{" "}
             <br />
             complex work clearer.
           </>
@@ -24,15 +24,19 @@ export default function ProjectsPage() {
         <p>A selection of software and data products built around geospatial analysis, automation and useful interfaces.</p>
       </PageIntro>
       <PageSection title="Selected work">
-        <PageList
-          items={projects.filter((project) => project.href).map((project) => ({
-            key: project.title,
-            title: project.title,
-            summary: project.summary,
-            tags: project.tags,
-            href: project.href,
-          }))}
-        />
+        <div className="projects-list">
+          <PageList
+            items={projects.filter((project) => project.href).map((project) => ({
+              key: project.title,
+              logo: project.logo,
+              title: project.title,
+              summary: project.summary,
+              tags: project.tags,
+              href: project.href,
+              external: project.external,
+            }))}
+          />
+        </div>
       </PageSection>
       <PageSection title="How I build">
         <div className="prose">

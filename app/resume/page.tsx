@@ -15,7 +15,7 @@ export default function ResumePage() {
         eyebrow="Resume"
         title={
           <>
-            Technical context
+            Technical context{" "}
             <br />
             with a delivery mindset.
           </>
