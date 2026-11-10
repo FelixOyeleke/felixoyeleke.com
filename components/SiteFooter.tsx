@@ -13,6 +13,9 @@ export function SiteFooter() {
           <a href={site.linkedin} target="_blank" rel="noreferrer">
             LinkedIn
           </a>
+          <a href={site.instagram} target="_blank" rel="noreferrer">
+            Instagram
+          </a>
           <a href={site.x} target="_blank" rel="noreferrer">
             X
           </a>

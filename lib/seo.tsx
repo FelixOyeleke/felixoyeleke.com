@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { site } from "./content";
 
-const socialProfiles = [site.linkedin, site.github, site.youtube, site.x, site.threads];
+const socialProfiles = [site.linkedin, site.github, site.youtube, site.instagram, site.x, site.threads, site.realtor];
 
 const memorial = {
   "@type": "CollegeOrUniversity",

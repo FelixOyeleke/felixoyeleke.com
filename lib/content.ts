@@ -9,6 +9,8 @@ export const site = {
   x: "https://x.com/felixoyeleke10",
   xHandle: "@felixoyeleke10",
   threads: "https://www.threads.com/@felixoyeleke",
+  instagram: "https://www.instagram.com/felixoyeleke",
+  realtor: "https://www.realtor.ca/agent/2255501/felix-oyeleke-33-pippy-place-suite-304-st-johns-newfoundland-labrador-a1b3x2",
 };
 
 /** A project's real logo, shown in its own colours. `fill`: it has its own background, so it fills its box. */
