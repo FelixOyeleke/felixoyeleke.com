@@ -11,7 +11,7 @@ const memorial = {
 
 /** One sentence used for the site description, the person profile and social cards. */
 export const bio =
-  "Felix Oyeleke builds hydrographic and geospatial software, leads projects as a PMP, and runs ventures in technology and real estate from St. John's, Canada.";
+  "Felix Oyeleke turns strategy into execution, combining business thinking, technical expertise and the ability to build. PMP and MBA candidate at Memorial University.";
 
 export const personJsonLd = {
   "@context": "https://schema.org",
@@ -22,7 +22,7 @@ export const personJsonLd = {
   familyName: "Oyeleke",
   url: site.url,
   image: `${site.url}/images/felix.webp`,
-  jobTitle: "Entrepreneur, Geospatial Software Builder and PMP Project Manager",
+  jobTitle: "Entrepreneur, Technologist and PMP Project Manager",
   description: bio,
   email: `mailto:${site.email}`,
   sameAs: socialProfiles,
@@ -57,6 +57,17 @@ export const personJsonLd = {
     { "@type": "EducationalOccupationalCredential", name: "Licensed REALTOR®", credentialCategory: "license" },
   ],
   knowsAbout: [
+    "Strategy and operations",
+    "Strategic management",
+    "Program management",
+    "Project management",
+    "Business development",
+    "Business transformation",
+    "Operations management",
+    "Product operations",
+    "Innovation management",
+    "Stakeholder management",
+    "Entrepreneurship",
     "Hydrography",
     "Ocean mapping",
     "Side-scan sonar",
@@ -72,7 +83,6 @@ export const personJsonLd = {
     "Python",
     "Data engineering",
     "Scientific visualization",
-    "Project management",
     "Offshore surveying",
     "Offshore wind",
     "Oil and gas operations",
@@ -119,7 +129,7 @@ export const websiteJsonLd = {
   "@id": `${site.url}/#website`,
   name: site.name,
   url: site.url,
-  description: "The personal website of Felix Oyeleke: hydrographic and geospatial software, project management, writing and notes.",
+  description: "The personal website of Felix Oyeleke: strategy, technology and execution, with projects, writing and notes.",
   publisher: { "@id": `${site.url}/#person` },
   inLanguage: "en-CA",
 };

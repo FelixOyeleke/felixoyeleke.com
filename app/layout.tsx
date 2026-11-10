@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Felix Oyeleke | Geospatial Software Builder & PMP Project Manager",
+    default: "Felix Oyeleke | Strategy, Technology & Execution",
     template: "%s | Felix Oyeleke",
   },
   description: bio,
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     type: "website",
     locale: "en_CA",
-    title: "Felix Oyeleke | Geospatial Software Builder & PMP Project Manager",
+    title: "Felix Oyeleke | Strategy, Technology & Execution",
     description: bio,
     images: [{ url: "/images/felix.webp", alt: "Felix Oyeleke" }],
   },
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: site.xHandle,
     creator: site.xHandle,
-    title: "Felix Oyeleke | Geospatial Software Builder & PMP Project Manager",
+    title: "Felix Oyeleke | Strategy, Technology & Execution",
     description: bio,
     images: ["/images/felix.webp"],
   },

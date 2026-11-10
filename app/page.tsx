@@ -25,15 +25,27 @@ export default function HomePage() {
     <main id="top" className="hub">
       <section className="hub-intro" aria-labelledby="hero-title">
         <img className="hub-photo" src="/images/felix.webp" width={112} height={112} alt="Felix Oyeleke" />
-        <h1 id="hero-title">
-          Felix builds businesses, leads projects, and turns ideas into practical technology and real estate solutions.
+        <h1 className="hub-headline" id="hero-title">
+          I turn strategy into execution, combining business thinking, technical expertise and the ability to build.
         </h1>
         <p>
-          With a background in international offshore operations, technology, and project management, my work has
-          evolved from technical delivery into business leadership and entrepreneurship. I currently lead St. John’s
-          Properties, pursue independent technology ventures, and am completing an MBA at Memorial University. I’m also
-          a PMP-certified professional with experience across Canada, Europe, and West Africa.
+          I work at the intersection of strategic management, technology and business development. My experience spans
+          international offshore operations, engineering, geospatial technology and entrepreneurship. I bring together
+          commercial thinking and technical capabilities to identify opportunities, develop solutions, lead complex
+          initiatives and turn ideas into working systems and businesses. I’m PMP-certified and completing an MBA at
+          Memorial University.
         </p>
+        <ul className="tag-list hub-tags" aria-label="Focus areas">
+          {[
+            "Strategic Management",
+            "Technology & Innovation",
+            "Business Development",
+            "Project Leadership",
+            "Systems Building",
+          ].map((tag) => (
+            <li key={tag}>{tag}</li>
+          ))}
+        </ul>
         <p className="hub-actions">
           <Link className="button-link button-link--square" href="/about#contact">
             Work with me

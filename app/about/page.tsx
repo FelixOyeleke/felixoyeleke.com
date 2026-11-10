@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { PageIntro, PageSection } from "@/components/Section";
 import { site } from "@/lib/content";
-import { JsonLd, profilePageJsonLd } from "@/lib/seo";
+import { bio, JsonLd, profilePageJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "About",
@@ -39,13 +39,13 @@ export default function AboutPage() {
         eyebrow="About"
         title={
           <>
-            Building businesses,{" "}
+            Strategy, technology{" "}
             <br />
-            leading projects.
+            and the ability to build.
           </>
         }
       >
-        <p>Felix builds businesses, leads projects, and turns ideas into practical technology and real estate solutions.</p>
+        <p>{bio}</p>
       </PageIntro>
 
       <PageSection>

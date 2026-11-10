@@ -2539,3 +2539,21 @@ a.page-list-item:hover,
   .note-gallery { gap: 10px; margin-bottom: 44px; }
   .note-gallery figcaption { margin-top: 8px; font-size: 12px; }
 }
+
+/* Home hero: credentials, headline, summary, focus tags */
+.hub-intro .hub-headline {
+  text-wrap: pretty;
+  max-width: 680px;
+  margin: 0 0 16px;
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -.012em;
+  line-height: 1.4;
+}
+
+.hub-intro .hub-tags { margin-top: 20px; }
+
+@media (max-width: 734px) {
+  .hub-intro .hub-headline { font-size: 20px; }
+}
