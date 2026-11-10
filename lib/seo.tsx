@@ -131,6 +131,7 @@ export const websiteJsonLd = {
   "@type": "WebSite",
   "@id": `${site.url}/#website`,
   name: site.name,
+  alternateName: "felixoyeleke.com",
   url: site.url,
   description: "The personal website of Felix Oyeleke: strategy, technology and execution, with projects, writing and notes.",
   publisher: { "@id": `${site.url}/#person` },
