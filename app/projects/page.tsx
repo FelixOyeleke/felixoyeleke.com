@@ -5,7 +5,8 @@ import { projects } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Selected software, geospatial and automation projects by Felix Oyeleke.",
+  description:
+    "Projects by Felix Oyeleke: Dolphin Explorer hydrographic sonar software (C++, Qt, OpenGL), geospatial data tools, St. John's Properties and Altair Studio.",
 };
 
 export default function ProjectsPage() {

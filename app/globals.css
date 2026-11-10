@@ -656,10 +656,15 @@ a:hover > * > .card-go {
 .fact-list > div {
   display: grid;
   grid-template-columns: 160px minmax(0, 1fr);
-  gap: 24px;
+  gap: 6px 24px;
   padding: 16px 0;
   border-bottom: 1px solid var(--rule);
 }
+
+.fact-list dd { grid-column: 2; }
+
+/* The label spans every line beside it, so a two-line label never stretches the first row */
+.fact-list dt { grid-row: span var(--lines, 1); }
 
 .fact-list dt {
   color: var(--muted);
@@ -1073,6 +1078,8 @@ a:hover > * > .card-go {
   white-space: nowrap;
 }
 
+.blog-card-title time::before { content: "· "; }
+
 .blog-card-summary {
   display: -webkit-box;
   overflow: hidden;
@@ -1210,7 +1217,8 @@ a:hover > * > .card-go {
   font-size: 26px;
 }
 
-.article-body h2:first-child { margin-top: 0; }
+.article-body > h2:first-child,
+.article-body > section:first-child > h2:first-child { margin-top: 0; }
 
 .article-body h3 {
   margin: 0 0 8px;
@@ -1238,6 +1246,7 @@ a:hover > * > .card-go {
 .article-body .detail-grid { margin: 28px 0 12px; }
 
 .article-body .detail-card p {
+  margin: 0;
   color: var(--muted);
   font-size: 15px;
   line-height: 1.5;
@@ -1265,7 +1274,8 @@ a:hover > * > .card-go {
   line-height: 1.45;
 }
 
-.status-list {
+.status-list,
+.article-body .status-list {
   margin: 0 0 24px;
   padding: 0;
   list-style: none;
@@ -1972,7 +1982,8 @@ a.product-tile:hover .tile-name { text-decoration: underline; text-underline-off
     align-items: stretch;
     gap: 0;
     margin: 0;
-    padding: 24px 48px;
+    /* Side padding equals the page gutter, so links line up with the wordmark */
+    padding: 24px 22px;
     background: var(--bg);
   }
   .menu-open .main-nav { display: flex; }
@@ -1985,6 +1996,7 @@ a.product-tile:hover .tile-name { text-decoration: underline; text-underline-off
     animation: menu-in .4s var(--ease) both;
     animation-delay: calc(var(--i, 0) * 40ms + 60ms);
   }
+  .main-nav a.active { font-weight: 600; }
   .main-nav a:not(.active) { color: var(--muted); }
   .main-nav a:hover { color: var(--ink); }
   .page-list-item { flex-wrap: wrap; gap: 6px 20px; }
@@ -1996,7 +2008,7 @@ a.product-tile:hover .tile-name { text-decoration: underline; text-underline-off
   .page-shell,
   .site-header-inner,
   .site-footer-inner { width: min(calc(100% - 32px), var(--max)); }
-  .main-nav { left: -16px; right: -16px; padding: 20px 32px; }
+  .main-nav { left: -16px; right: -16px; padding: 20px 16px; }
   .menu-toggle,
   .theme-toggle { width: 40px; height: 40px; }
   .inner-page { padding: 56px 0 88px; }
@@ -2023,7 +2035,7 @@ a.product-tile:hover .tile-name { text-decoration: underline; text-underline-off
   .page-list,
   .detail-grid { grid-template-columns: 1fr; gap: 10px; }
 
-  .hub-tile:not(.hub-post) {
+  .hub-tile:not(.hub-post, .blog-card) {
     min-height: 0;
     display: grid;
     grid-template-columns: 44px minmax(0, 1fr) auto;
@@ -2044,7 +2056,7 @@ a.product-tile:hover .tile-name { text-decoration: underline; text-underline-off
     grid-area: kicker;
     align-self: end;
     margin-bottom: 0;
-    font-size: 10px;
+    font-size: 11px;
   }
   .hub-tile .hub-title { grid-area: title; align-self: end; font-size: 17px; letter-spacing: -.008em; }
   .hub-tile .hub-line { grid-area: line; align-self: start; margin-top: 0; font-size: 14px; line-height: 1.4; }
@@ -2061,11 +2073,13 @@ a.product-tile:hover .tile-name { text-decoration: underline; text-underline-off
   .hub-blog .hub-post .hub-title { font-size: 19px; }
   .blog-post-list .hub-post .hub-title { font-size: 17px; }
   .blog-post-list .hub-post-date { font-size: 11px; }
-  .blog-card { grid-template-columns: 60px minmax(0, 1fr); gap: 12px; padding: 10px; }
+  .blog-card { grid-template-columns: 60px minmax(0, 1fr); gap: 12px; padding: 10px; border-radius: var(--radius); }
   .blog-card img { width: 60px; height: 60px; }
   .blog-card .card-go { display: none; }
   .blog-card-title { font-size: 17px; }
-  .blog-card-title time { font-size: 11px; }
+  /* Date on its own line, so it never orphans after a wrapped title */
+  .blog-card-title time { display: block; margin-top: 3px; font-size: 12px; }
+  .blog-card-title time::before { content: none; }
   .blog-card-summary { font-size: 12px; }
   .hub-more { margin-top: 20px; }
   .page-list-item { position: relative; padding: 20px; border-radius: var(--radius); }
@@ -2084,6 +2098,8 @@ a.product-tile:hover .tile-name { text-decoration: underline; text-underline-off
   .resume-panel h2 { font-size: 20px; }
   .page-intro h1 br { display: none; }
   .fact-list > div { grid-template-columns: 1fr; gap: 4px; }
+  .fact-list dt { grid-row: auto; margin-bottom: 2px; }
+  .fact-list dd { grid-column: 1; }
   .blog-feature { grid-template-columns: 1fr; gap: 18px; padding: 20px; border-radius: var(--radius); }
   .blog-feature-thumb { order: -1; width: 72px; border-radius: var(--radius-sm); }
   .blog-meta { margin-bottom: 10px; font-size: 13px; }
@@ -2095,7 +2111,11 @@ a.product-tile:hover .tile-name { text-decoration: underline; text-underline-off
   .product-grid { grid-template-columns: 1fr; gap: 10px; }
   .tile-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 12px; }
   .tile-badge { top: 8px; right: 8px; padding: 2px 7px; font-size: 10px; }
-  .tile-stage .cover { width: 50%; }
+  /* Drop the cover a little so the badge sits in clear space above it, not on its corner */
+  .tile-stage:has(.tile-badge) { padding-top: 24px; }
+  /* Small tiles: let the title scale with the tile so long names fit inside the cover */
+  .tile-stage .cover { width: 56%; }
+  .tile-stage .cover-title { font-size: max(10px, 7cqi); }
   .tile-name { font-size: 14px; }
   .tile-price { font-size: 13px; }
   .product-page { padding-top: 24px; }
@@ -2145,5 +2165,377 @@ a.product-tile:hover .tile-name { text-decoration: underline; text-underline-off
   .article-figure img,
   .article-figure video { border-radius: var(--radius); }
   .site-footer-inner { align-items: flex-start; flex-direction: column; justify-content: center; gap: 12px; padding: 20px 0; }
-  .footer-links { flex-wrap: wrap; }
+  .footer-links { flex-wrap: wrap; gap: 0 20px; }
+  /* Taller hit areas for thumbs; the header already carries the theme toggle */
+  .footer-links a { padding: 10px 0; font-size: 13px; }
+  .footer-theme-toggle { display: none; }
+}
+
+/* ==========================================================================
+   Colour palette: neutral greys on a soft off-white page. Colours only; every
+   size, spacing and shape above is unchanged. Both themes use the same neutral
+   scale (#fbfbfb, #f5f5f5, #e5e5e5, #a3a3a3, #737373, #666666, #404040, #262626,
+   #171717, #0a0a0a), so light and dark stay consistent.
+   ========================================================================== */
+
+:root {
+  --bg: #0a0a0a;
+  --card: #171717;
+  --card-hover: #1c1c1c;
+  --card-raised: #262626;
+  --ink: #f5f5f5;
+  --body-text: #d4d4d4;
+  --muted: #a3a3a3;
+  --soft: #737373;
+  --rule: #262626;
+  --grid: #1c1c1c;
+  --field-bg: #121212;
+  --field-border: #2e2e2e;
+  --nav-bg: rgba(10, 10, 10, .72);
+  --footer-bg: #121212;
+  --accent: #f5f5f5;
+  --accent-hover: #ffffff;
+  --on-accent: #171717;
+  --accent-text: #fafafa;
+}
+
+:root.light {
+  --bg: #fbfbfb;
+  --card: #f5f5f5;
+  --card-hover: #efefef;
+  --card-raised: #ffffff;
+  --ink: #171717;
+  --body-text: #404040;
+  --muted: #666666;
+  --soft: #737373;
+  --rule: #e5e5e5;
+  --grid: #ececec;
+  --field-bg: #ffffff;
+  --field-border: #e5e5e5;
+  --nav-bg: rgba(251, 251, 251, .72);
+  --footer-bg: #f5f5f5;
+  --accent: #262626;
+  --accent-hover: #404040;
+  --on-accent: #ffffff;
+  --accent-text: #171717;
+}
+
+/* ==========================================================================
+   Type scale: a smaller, quieter set of sizes. Font sizes only; spacing,
+   weights and layout above are unchanged. 14px body, 16px card titles,
+   20px section headings, 30px page titles (26px on phones).
+   ========================================================================== */
+
+body { font-size: 14px; }
+
+h1,
+.article-header h1 { font-size: 30px; }
+.product-info h1 { font-size: 28px; }
+h2 { font-size: 20px; }
+
+/* Line spacing tuned for the smaller sizes (the originals were set for 40px+ type) */
+h1,
+.article-header h1,
+.product-info h1 { line-height: 1.2; }
+h2 { line-height: 1.3; }
+
+.wordmark { font-size: 15px; }
+.main-nav a { font-size: 14px; }
+.button-link,
+.section-link { font-size: 14px; }
+.eyebrow,
+.back-link { font-size: 13px; }
+
+/* Home */
+.hub-intro h1 { font-size: 22px; line-height: 1.4; }
+.hub-intro p { font-size: 15px; }
+.hub-section-heading p { font-size: 13px; }
+
+/* Cards */
+.hub-tile-kicker,
+.hub-tile .hub-tile-kicker { font-size: 11px; }
+.hub-title,
+.hub-tile .hub-title,
+.hub-post .hub-title,
+.hub-blog .hub-post .hub-title,
+.blog-post-list .hub-post .hub-title { font-size: 16px; }
+.hub-line,
+.hub-tile .hub-line { font-size: 14px; }
+.blog-post-list .hub-post .hub-line { font-size: 13px; }
+.hub-post-meta,
+.hub-post time,
+.hub-post-date,
+.blog-post-list .hub-post-date { font-size: 12px; }
+
+.blog-card-title { font-size: 16px; }
+.blog-card-title time { font-size: 12px; }
+.blog-card-summary { font-size: 13px; }
+
+.detail-card h3 { font-size: 16px; }
+.detail-card p,
+.article-body .detail-card p { font-size: 14px; }
+
+.page-list-label { font-size: 13px; }
+.page-list-item h3,
+.projects-list .page-list-item h3 { font-size: 16px; }
+.page-list-item p { font-size: 14px; }
+
+.resume-panel h2 { font-size: 18px; }
+.resume-panel p { font-size: 14px; }
+
+/* Inner pages */
+.page-intro p:not(.eyebrow),
+.page-section > .section-lede,
+.prose p { font-size: 15px; }
+
+.fact-list dt { font-size: 13px; }
+.fact-list dd,
+.contact-alt { font-size: 14px; }
+.contact-form label,
+.form-status { font-size: 13px; }
+.contact-form input,
+.contact-form textarea { font-size: 14px; }
+
+/* Articles */
+.article-lede { font-size: 15px; }
+.tag-list li { font-size: 12px; }
+.tag-list--small li { font-size: 11px; }
+.stat-row dt,
+.stat-row dd { font-size: 13px; }
+.stat-row dd strong { font-size: 22px; }
+.tldr { font-size: 14px; }
+.article-body h2 { font-size: 20px; }
+.article-body h3 { font-size: 16px; }
+.article-body p,
+.article-body li,
+.article-body .status-list li { font-size: 15px; }
+.article-figure figcaption { font-size: 13px; }
+.status { font-size: 11px; }
+
+.blog-meta { font-size: 13px; }
+.blog-feature-title { font-size: 20px; }
+.blog-feature-summary { font-size: 14px; }
+
+/* Store */
+.product-kind { font-size: 12px; }
+.product-card h2 { font-size: 16px; }
+.product-card p,
+.product-card .product-more,
+.store-empty { font-size: 14px; }
+.fine-print { font-size: 13px; }
+.product-foot .button-link { font-size: 13px; }
+.product-price,
+.info-price { font-size: 18px; }
+.segmented button,
+.sort-button,
+.sort-options li { font-size: 13px; }
+.tile-name { font-size: 14px; }
+.tile-price { font-size: 13px; }
+.info-lede { font-size: 15px; }
+.product-info h2 { font-size: 16px; }
+.info-list { font-size: 14px; }
+
+/* Signup and footer */
+.subscribe h2 { font-size: 18px; }
+.subscribe p { font-size: 14px; }
+.subscribe-field input,
+.subscribe-field .button-link { font-size: 14px; }
+.site-footer,
+.footer-links a { font-size: 12px; }
+
+@media (max-width: 734px) {
+  body { font-size: 14px; }
+  h1,
+  .article-header h1,
+  .product-info h1 { font-size: 26px; }
+  .hub-intro h1 { font-size: 22px; }
+  .main-nav a { font-size: 20px; }
+  .footer-links a { font-size: 13px; }
+  /* iPhones zoom the page when a field under 16px is focused */
+  .subscribe-field input,
+  .contact-form input,
+  .contact-form textarea { font-size: 16px; }
+}
+
+/* ==========================================================================
+   Lists as hairline rows: no grey boxes. Each item is a row divided by a thin
+   line: logo or thumbnail left, text in the middle, chevron right. Used for
+   Building, Notes and Blog (home and their own pages) and the Projects list.
+   ========================================================================== */
+
+.hub-grid,
+.hub-notes-grid,
+.hub-list,
+.page-list,
+.projects-list .page-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.hub-tile,
+.page-list-item,
+.projects-list .page-list-item {
+  min-height: 0;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.hub-tile:hover,
+.hub-tile:focus-visible,
+a.page-list-item:hover,
+.projects-list .page-list-item:hover,
+.projects-list .page-list-item:focus-visible,
+.blog-card:hover,
+.blog-card:focus-visible {
+  border-color: var(--rule);
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.hub-building .hub-tile::after { display: none; }
+
+/* Building and Notes rows: icon | label, title, line | chevron */
+.hub-tile:not(.hub-post, .blog-card) {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  grid-template-areas: "icon kicker go" "icon title go" "icon line go";
+  column-gap: 16px;
+  row-gap: 2px;
+  align-items: center;
+  padding: 18px 0;
+  border-radius: 0;
+}
+
+.hub-building .hub-tile { min-height: 0; }
+.hub-tile .hub-tile-head { display: contents; }
+.hub-tile .tile-icon { grid-area: icon; width: 44px; height: 44px; }
+.hub-tile .tile-icon .icon { width: 22px; height: 22px; }
+.hub-tile .tile-icon--logo img { width: 28px; height: 28px; }
+.hub-tile .tile-icon--fill img { width: 100%; height: 100%; }
+.hub-tile .card-go { grid-area: go; width: 30px; height: 30px; }
+.hub-tile .hub-tile-kicker { grid-area: kicker; align-self: end; margin: 0; }
+.hub-tile .hub-title { grid-area: title; align-self: center; }
+.hub-tile .hub-line { grid-area: line; align-self: start; margin-top: 0; line-height: 1.45; }
+
+/* Blog rows: thumbnail | title, date, summary | chevron */
+.blog-card {
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  gap: 16px;
+  padding: 16px 0;
+  border-radius: 0;
+}
+
+.blog-card img { width: 56px; height: 56px; }
+.blog-card .card-go { grid-area: auto; }
+
+/* Projects rows: logo | title, summary, tags | chevron */
+.page-list-item,
+.projects-list .page-list-item {
+  gap: 16px;
+  padding: 20px 0;
+}
+
+.page-list-item > .card-go { right: 0; }
+
+@media (max-width: 734px) {
+  .hub-tile:not(.hub-post, .blog-card) { padding: 16px 0; }
+  .blog-card { grid-template-columns: 56px minmax(0, 1fr); gap: 14px; padding: 14px 0; }
+  .page-list-item,
+  .projects-list .page-list-item { padding: 18px 0; }
+  /* Keep the whole text column clear of the chevron pinned top-right */
+  a.page-list-item .page-list-body { padding-right: 40px; }
+  a.page-list-item .page-list-body h3 { padding-right: 0; }
+}
+
+/* ==========================================================================
+   Email signup: a grey filled field beside a separate dark button, no outer
+   frame. Stacks to full width on phones.
+   ========================================================================== */
+
+:root { --signup-fill: #1f1f1f; }
+:root.light { --signup-fill: #e8e8e8; }
+
+.subscribe-field {
+  gap: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.subscribe-field:focus-within { border-color: transparent; box-shadow: none; }
+
+.subscribe-field input {
+  height: 40px;
+  padding: 0 15px;
+  border-radius: 3px;
+  background: var(--signup-fill);
+  transition: box-shadow .2s var(--ease);
+}
+
+.subscribe-field input:focus { box-shadow: inset 0 0 0 1px var(--soft); }
+
+.subscribe-field input:-webkit-autofill,
+.subscribe-field input:-webkit-autofill:hover,
+.subscribe-field input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--signup-fill) inset;
+}
+
+.subscribe-field .button-link {
+  min-height: 40px;
+  padding: 0 22px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.subscribe-form .form-status { padding-left: 0; }
+
+@media (max-width: 734px) {
+  .subscribe-field { flex-direction: column; align-items: stretch; }
+  .subscribe-field input,
+  .subscribe-field .button-link { flex: none; width: 100%; }
+}
+
+/* Note gallery: product shots on a neutral panel, so dark hardware stays visible in both themes */
+.note-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0 0 56px;
+}
+
+.note-gallery figure { margin: 0; }
+
+.note-gallery-stage {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  padding: 10%;
+  border: 1px solid var(--card-border);
+  background: var(--stage-bg);
+}
+
+.note-gallery-stage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.note-gallery figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media (max-width: 734px) {
+  .note-gallery { gap: 10px; margin-bottom: 44px; }
+  .note-gallery figcaption { margin-top: 8px; font-size: 12px; }
 }

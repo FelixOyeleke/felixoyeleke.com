@@ -111,6 +111,8 @@ export type NoteWriting = NoteTopic & {
   tldr: string;
   tags: string[];
   specs?: { label: string; value: string; note: string }[];
+  /** Product shots with transparent backgrounds, shown on a neutral panel under the specs. */
+  gallery?: { src: string; alt: string; caption: string }[];
   sections: { heading: string; body: string; bullets?: string[] }[];
 };
 
@@ -124,6 +126,10 @@ export const noteWritings: NoteWriting[] = [
       { label: "Graphics", value: "RTX 5070 Ti", note: "NVIDIA GeForce · 16 GB VRAM" },
       { label: "Processor", value: "5900X", note: "AMD Ryzen 9 · 12 cores" },
       { label: "Memory", value: "64 GB", note: "System RAM" },
+    ],
+    gallery: [
+      { src: "/images/notes/workstation-gpu.webp", alt: "NVIDIA GeForce RTX 5070 Ti graphics card", caption: "GeForce RTX 5070 Ti" },
+      { src: "/images/notes/workstation-case.webp", alt: "Fractal Design PC case with mesh front panel", caption: "Fractal Design case" },
     ],
     sections: [
       { heading: "My development setup", body: "My development machine uses an NVIDIA GeForce RTX 5070 Ti with 16 GB of dedicated VRAM, an AMD Ryzen 9 5900X, 64 GB of system RAM, and an ASUS TUF Gaming X570-Pro WiFi motherboard. In the captured Task Manager reading, the GPU is using 4.2 GB of dedicated memory at 3% utilization and 40°C. DirectX reports Feature Level 12.2 and the driver version is 32.0.16.1742.", bullets: ["Dedicated GPU memory: 16 GB", "Shared GPU memory: 47.9 GB", "Total available GPU memory: 63.9 GB", "Shared memory is system RAM available to the GPU, not additional dedicated VRAM."] },

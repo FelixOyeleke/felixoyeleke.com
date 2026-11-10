@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleHeader, CtaPanel, DetailCards, StatRow, StatusList, Tldr } from "@/components/Article";
 import { brandLogos, site } from "@/lib/content";
+import { articleJsonLd, JsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Visual Tokenization of Sonar Data",
@@ -27,6 +28,15 @@ function Figure({ src, alt }: { src: string; alt: string }) {
 export default function SonarTokenizationPost() {
   return (
     <main className="article">
+      <JsonLd
+        data={articleJsonLd({
+          path: "/blog/visual-tokenization-of-sonar-data",
+          title: "Visual Tokenization of Sonar Data",
+          description:
+            "Translating XTF side-scan sonar captures into visual tokens so image-native compressors can stream hydrographic surveys faster.",
+          date: "2025-11-01",
+        })}
+      />
       <Link className="back-link" href="/blog">
         ‹ All posts
       </Link>
@@ -36,7 +46,7 @@ export default function SonarTokenizationPost() {
           logo={brandLogos.dolphinExplorer}
           eyebrow={
             <>
-              Hydrographic R&amp;D · Field log 01 · <time dateTime="2025-11">November 2025</time>
+              Hydrographic R&amp;D · <time dateTime="2025-11">November 2025</time>
             </>
           }
           title="Visual tokenization of sonar data"
@@ -125,12 +135,12 @@ export default function SonarTokenizationPost() {
             receives a deterministic ID derived from a histogram signature plus Sobel edges, so compressors and ML
             models see exactly the same ordering.
           </p>
-          <ol>
+          <ul>
             <li>Decode packet headers, align channels and cache navigation metadata.</li>
             <li>Render amplitude rasters and apply adaptive contrast curves for shallow-water noise.</li>
             <li>Slice tiles, build descriptors and emit chunks that existing compressors already understand.</li>
             <li>Rebuild rasters from tokens and compare against the source packets before releasing to storage.</li>
-          </ol>
+          </ul>
         </div>
 
         <Figure
@@ -178,11 +188,11 @@ export default function SonarTokenizationPost() {
           />
 
           <h2>Near-term milestones</h2>
-          <ol>
+          <ul>
             <li>Wrap the tokenizer in a headless service between acquisition laptops and cloud buckets.</li>
             <li>Attach a lightweight anomaly detector that flags cables, wrecks or debris directly from the token stream.</li>
             <li>Publish a whitepaper and demo reel on cost savings for mixed multibeam and side-scan campaigns.</li>
-          </ol>
+          </ul>
         </div>
       </article>
 

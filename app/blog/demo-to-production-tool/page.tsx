@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 export default function DemoToProductionPost() {
   return (
     <BlogPostPage
+      slug="demo-to-production-tool"
       logo={brandLogos.dolphinExplorer}
       eyebrow="Software delivery · Systems notes"
       date="2026-07"

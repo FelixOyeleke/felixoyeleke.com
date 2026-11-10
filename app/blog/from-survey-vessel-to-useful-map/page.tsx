@@ -13,8 +13,9 @@ export const metadata: Metadata = {
 export default function FromSurveyVesselPost() {
   return (
     <BlogPostPage
+      slug="from-survey-vessel-to-useful-map"
       logo={brandLogos.dolphinExplorer}
-      eyebrow="Hydrographic field notes · Field log 02"
+      eyebrow="Hydrographic field notes"
       date="2026-10"
       title="From survey vessel to useful map"
       lede="A useful map is the final frame of a much longer chain of decisions made offshore. This is the workflow I keep coming back to when I think about better hydrographic tools."
@@ -47,7 +48,7 @@ export default function FromSurveyVesselPost() {
         ]}
       />
 
-      <h2>1. Capture more than the signal</h2>
+      <h2>Capture more than the signal</h2>
       <p>
         The ping is only one part of a survey record. A later analyst also needs to know when it was captured, where the
         vessel was, how the sensor was configured and whether the navigation solution was stable. A fast reader that
@@ -58,7 +59,7 @@ export default function FromSurveyVesselPost() {
         whether the user is reviewing a single line on board or rebuilding a complete mosaic later.
       </p>
 
-      <h2>2. QA while the decision is still reversible</h2>
+      <h2>QA while the decision is still reversible</h2>
       <p>
         The most valuable QA result is often a small warning delivered early: a navigation gap, a noisy channel, a gain
         change or an unexpected seam. If the warning arrives after a full processing run, the cost of acting on it is
@@ -70,7 +71,7 @@ export default function FromSurveyVesselPost() {
         <li><strong>Make uncertainty visible:</strong> a greyed-out or flagged region is more useful than false precision.</li>
       </ul>
 
-      <h2>3. Deliver evidence with the map</h2>
+      <h2>Deliver evidence with the map</h2>
       <p>
         A useful delivery answers three questions: what is here, how do we know, and what should happen next? The map is
         the centre of that answer, but the supporting metadata and processing notes are what make it portable between a

@@ -3,35 +3,49 @@ import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { PageIntro, PageSection } from "@/components/Section";
 import { site } from "@/lib/content";
+import { JsonLd, profilePageJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "About Felix Oyeleke — an entrepreneur, project management professional, and MBA candidate building businesses across technology and real estate.",
+  description:
+    "About Felix Oyeleke: a Newfoundland-based entrepreneur, PMP project manager, MBA candidate, and builder of geospatial and real estate technology.",
 };
 
 const facts = [
-  { label: "Based in", value: "St. John's, Newfoundland and Labrador, Canada" },
+  { label: "Based in", value: ["St. John's, Newfoundland and Labrador, Canada"] },
   {
     label: "Education",
-    value: "MBA Candidate — Memorial University · Master of Applied Ocean Technology (Ocean Mapping), Distinction — Memorial University · Bachelor of Technology, Marine Science & Technology — Federal University of Technology, Akure",
+    value: [
+      "MBA Candidate — Memorial University",
+      "Master of Applied Ocean Technology (Ocean Mapping), Distinction — Memorial University",
+      "Bachelor of Technology, Marine Science & Technology — Federal University of Technology, Akure",
+    ],
   },
-  { label: "Professional credentials", value: "Project Management Professional (PMP) · Category A Hydrographer · Licensed REALTOR® — eXp Realty, Newfoundland and Labrador" },
+  {
+    label: "Professional credentials",
+    value: [
+      "Project Management Professional (PMP)",
+      "Category A Hydrographer",
+      "Licensed REALTOR® — eXp Realty, Newfoundland and Labrador",
+    ],
+  },
 ];
 
 export default function AboutPage() {
   return (
     <main className="inner-page">
+      <JsonLd data={profilePageJsonLd} />
       <PageIntro
         eyebrow="About"
         title={
           <>
-            Building businesses,
+            Building businesses,{" "}
             <br />
             leading projects.
           </>
         }
       >
-        <p>Building businesses, leading projects, and turning ideas into results.</p>
+        <p>Felix builds businesses, leads projects, and turns ideas into practical technology and real estate solutions.</p>
       </PageIntro>
 
       <PageSection>
@@ -66,8 +80,10 @@ export default function AboutPage() {
         <dl className="fact-list">
           {facts.map((fact) => (
             <div key={fact.label}>
-              <dt>{fact.label}</dt>
-              <dd>{fact.value}</dd>
+              <dt style={{ "--lines": fact.value.length } as React.CSSProperties}>{fact.label}</dt>
+              {fact.value.map((line) => (
+                <dd key={line}>{line}</dd>
+              ))}
             </div>
           ))}
         </dl>

@@ -1,12 +1,14 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import type { BrandLogo } from "@/lib/content";
+import { site, type BrandLogo } from "@/lib/content";
+import { JsonLd, personJsonLd } from "@/lib/seo";
 import { ArticleHeader, CtaPanel, StatRow, Tldr } from "./Article";
 
 type Stat = { label: string; value: string; note: string };
 
 export function BlogPostPage({
   logo,
+  slug,
   eyebrow,
   date,
   title,
@@ -18,6 +20,7 @@ export function BlogPostPage({
   cta,
 }: {
   logo?: BrandLogo;
+  slug: string;
   eyebrow: string;
   date: string;
   title: string;
@@ -28,8 +31,25 @@ export function BlogPostPage({
   children: ReactNode;
   cta: { title: string; body: string; href: string; action: string };
 }) {
+  const articleUrl = `${site.url}/blog/${slug}`;
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${articleUrl}#article`,
+    headline: title,
+    description: lede,
+    url: articleUrl,
+    datePublished: `${date}-01`,
+    dateModified: `${date}-01`,
+    author: { "@id": personJsonLd["@id"] },
+    publisher: { "@id": personJsonLd["@id"] },
+    mainEntityOfPage: articleUrl,
+    inLanguage: "en-CA",
+  };
+
   return (
     <main className="article">
+      <JsonLd data={articleJsonLd} />
       <Link className="back-link" href="/blog">
         ‹ All posts
       </Link>

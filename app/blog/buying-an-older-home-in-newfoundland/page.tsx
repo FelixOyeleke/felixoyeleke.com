@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 export default function OlderHomePost() {
   return (
     <BlogPostPage
+      slug="buying-an-older-home-in-newfoundland"
       logo={brandLogos.stJohnsProperties}
       eyebrow="Home buying · Newfoundland field guide"
       date="2026-08"

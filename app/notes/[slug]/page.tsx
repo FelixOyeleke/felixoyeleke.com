@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArticleHeader, DetailCards, StatRow, Tldr } from "@/components/Article";
 import { formatMonth, noteWritings } from "@/lib/content";
+import { articleJsonLd, JsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return noteWritings.map((note) => ({ slug: note.slug }));
@@ -23,6 +24,15 @@ export default async function NotePage({ params }: { params: Promise<{ slug: str
 
   return (
     <main className="article">
+      <JsonLd
+        data={articleJsonLd({
+          path: `/notes/${note.slug}`,
+          title: note.title,
+          description: note.lede,
+          date: `${note.updated}-01`,
+          type: "TechArticle",
+        })}
+      />
       <Link className="back-link" href="/notes">
         ‹ All notes
       </Link>
@@ -31,6 +41,19 @@ export default async function NotePage({ params }: { params: Promise<{ slug: str
       <Tldr>{note.tldr}</Tldr>
 
       {note.specs && <StatRow stats={note.specs} />}
+
+      {note.gallery && (
+        <div className="note-gallery">
+          {note.gallery.map((item) => (
+            <figure key={item.src}>
+              <span className="note-gallery-stage">
+                <img src={item.src} width={800} height={800} alt={item.alt} loading="lazy" />
+              </span>
+              <figcaption>{item.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
 
       <div className="article-body">
         {note.sections.map((section) => (

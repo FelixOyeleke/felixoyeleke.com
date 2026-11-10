@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleHeader, CtaPanel, DetailCards, StatRow, StatusList, Tldr } from "@/components/Article";
 import { brandLogos, site } from "@/lib/content";
+import { dolphinExplorerJsonLd, JsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Dolphin Explorer",
   description:
-    "Dolphin Explorer: a field-ready hydrographic console that parses XTF side-scan data, renders a GPU waterfall and is gaining a desktop GUI.",
+    "Dolphin Explorer, built by Felix Oyeleke: a hydrographic console that parses XTF side-scan sonar data, renders a GPU waterfall and is gaining a C++/Qt desktop GUI.",
 };
 
 function Video({ src, label, caption }: { src: string; label: string; caption: string }) {
@@ -23,6 +24,7 @@ function Video({ src, label, caption }: { src: string; label: string; caption: s
 export default function DolphinExplorerPage() {
   return (
     <main className="article">
+      <JsonLd data={dolphinExplorerJsonLd} />
       <Link className="back-link" href="/projects">
         ‹ All projects
       </Link>
@@ -95,7 +97,7 @@ export default function DolphinExplorerPage() {
       <Video
         src="/videos/dolphinexplorer_waterfall.mp4"
         label="Dolphin Explorer waterfall view scrolling through side-scan sonar data"
-        caption="Figure 1. Waterfall module streaming parsed XTF packets with amplitude overlays."
+        caption="Waterfall module streaming parsed XTF packets with amplitude overlays."
       />
 
       <div className="article-body">
@@ -123,7 +125,7 @@ export default function DolphinExplorerPage() {
       <Video
         src="/videos/GUI_Workspace.mp4"
         label="Dolphin Explorer GUI workspace with dockable panes"
-        caption="Figure 2. GUI workspace in development, with dockable panes and annotation tools."
+        caption="GUI workspace in development, with dockable panes and annotation tools."
       />
 
       <div className="article-body">
@@ -139,11 +141,11 @@ export default function DolphinExplorerPage() {
         />
 
         <h2>Roadmap</h2>
-        <ol>
+        <ul>
           <li>Release a command-line build so teams can batch-parse XTF before the GUI ships.</li>
           <li>Ship the desktop workspace with synchronized map and waterfall panes.</li>
           <li>Add anomaly-detection hooks so partners can plug in their own models.</li>
-        </ol>
+        </ul>
       </div>
 
       <CtaPanel

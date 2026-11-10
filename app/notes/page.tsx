@@ -6,7 +6,7 @@ import { noteTopics } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Notes",
-  description: "Technical notes from Felix Oyeleke on GPU optimization, SEO systems, and practical AI workflows.",
+  description: "Technical notes from Felix Oyeleke on GPU-accelerated scientific software, C++ and OpenGL, technical SEO and practical AI workflows.",
 };
 
 export default function NotesPage() {
@@ -16,7 +16,7 @@ export default function NotesPage() {
         eyebrow="Notes"
         title={
           <>
-            Experiments, systems
+            Experiments, systems{" "}
             <br />
             and useful details.
           </>

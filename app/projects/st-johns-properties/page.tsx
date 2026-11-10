@@ -92,7 +92,7 @@ export default function StJohnsPropertiesPage() {
       <Screenshot
         src="/images/projects/st-johns-properties-home.webp"
         alt="St. John’s Properties home page: a search bar for address, postcode or MLS® number with type, price and bedroom filters over an aerial photo of downtown St. John’s."
-        caption="Figure 1. Home page search — address, postcode, MLS® number or free-text, with type, price and bedroom filters."
+        caption="Home page search — address, postcode, MLS® number or free-text, with type, price and bedroom filters."
       />
 
       <div className="article-body">
@@ -138,7 +138,7 @@ export default function StJohnsPropertiesPage() {
       <Screenshot
         src="/images/projects/st-johns-properties-market.webp"
         alt="St. John’s real estate market page showing 627 homes for sale in the metro area on October 21, 2026, a $465,000 median asking price, $216 median price per square foot, 110 new listings in 7 days, 363 in 30 days and 24 median days listed."
-        caption="Figure 2. Live market page, 21 October 2026 — every figure recalculates as listings change."
+        caption="Live market page, 21 October 2026 — every figure recalculates as listings change."
       />
 
       <div className="article-body">

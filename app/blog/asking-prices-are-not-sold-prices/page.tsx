@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 export default function AskingPricesPost() {
   return (
     <BlogPostPage
+      slug="asking-prices-are-not-sold-prices"
       logo={brandLogos.stJohnsProperties}
       eyebrow="Real estate data · Market notes"
       date="2026-09"

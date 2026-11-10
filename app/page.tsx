@@ -26,7 +26,7 @@ export default function HomePage() {
       <section className="hub-intro" aria-labelledby="hero-title">
         <img className="hub-photo" src="/images/felix.webp" width={112} height={112} alt="Felix Oyeleke" />
         <h1 id="hero-title">
-          I’m Felix — I build businesses, lead projects, and turn ideas into practical solutions.
+          Felix builds businesses, leads projects, and turns ideas into practical technology and real estate solutions.
         </h1>
         <p>
           With a background in international offshore operations, technology, and project management, my work has
