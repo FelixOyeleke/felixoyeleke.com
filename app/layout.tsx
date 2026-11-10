@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { themeScript } from "@/components/ThemeToggle";
+import { THEME_COLORS, themeScript } from "@/lib/theme";
 import { site } from "@/lib/content";
 import { bio, JsonLd, personJsonLd, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   alternates: { types: { "application/rss+xml": "/blog/rss.xml" } },
 };
 
-export const viewport: Viewport = { themeColor: "#fbfbfb" };
+export const viewport: Viewport = { themeColor: THEME_COLORS.light };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

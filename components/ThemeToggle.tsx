@@ -1,19 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { THEME_COLOR_ID, THEME_COLORS, THEME_STORAGE_KEY as STORAGE_KEY } from "@/lib/theme";
 
-const STORAGE_KEY = "felix-theme";
-
-// Runs before hydration (see app/layout.tsx) so a saved dark theme applies without a flash.
-// Light is the default class rendered by the root layout.
-export const themeScript = `try{if(localStorage.getItem("${STORAGE_KEY}")==="dark")document.documentElement.classList.remove("light")}catch(e){}`;
+function syncThemeColor(light: boolean) {
+  document.getElementById(THEME_COLOR_ID)?.setAttribute("content", light ? THEME_COLORS.light : THEME_COLORS.dark);
+}
 
 export function ThemeToggle({ className = "theme-toggle" }: { className?: string }) {
   const [light, setLight] = useState(true);
 
   useEffect(() => {
     const root = document.documentElement;
-    const sync = () => setLight(root.classList.contains("light"));
+    const sync = () => {
+      const isLight = root.classList.contains("light");
+      setLight(isLight);
+      syncThemeColor(isLight);
+    };
     sync();
     // Keep the header and footer toggles in step with each other.
     const observer = new MutationObserver(sync);

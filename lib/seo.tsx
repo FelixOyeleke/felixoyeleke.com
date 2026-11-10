@@ -161,3 +161,16 @@ export const dolphinExplorerJsonLd = {
   author: { "@id": `${site.url}/#person` },
   creator: { "@id": `${site.url}/#person` },
 };
+
+/** St. John's Properties as a business Felix founded. */
+export const stJohnsPropertiesJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${site.url}/projects/st-johns-properties#organization`,
+  name: "St. John's Properties",
+  url: "https://stjohnsproperties.ca",
+  description:
+    "A Newfoundland real estate business and MLS®-powered platform with live listing search, neighbourhood market data and buyer tools.",
+  areaServed: "Newfoundland and Labrador, Canada",
+  founder: { "@id": `${site.url}/#person` },
+};

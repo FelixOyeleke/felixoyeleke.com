@@ -1108,7 +1108,7 @@ a:hover > * > .card-go {
 
 .article { padding: 56px 0 120px; }
 
-/* Text sits in a left-hand reading column; figures break out to the full width */
+/* Everything, figures included, sits in one left-hand reading column so right edges line up */
 .article > :not(article),
 .article > article > * {
   max-width: 760px;
@@ -1253,7 +1253,7 @@ a:hover > * > .card-go {
 }
 
 .article .article-figure {
-  max-width: var(--max);
+  max-width: 760px;
   margin: 56px 0;
 }
 
@@ -2556,4 +2556,16 @@ a.page-list-item:hover,
 
 @media (max-width: 734px) {
   .hub-intro .hub-headline { font-size: 20px; }
+}
+
+/* Fact lists inside articles sit right under their heading */
+.article-body .fact-list { margin-top: 0; }
+
+/* Status list on phones: badge beside the text, not stacked above it */
+@media (max-width: 734px) {
+  .article-body .status-list li {
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: 12px;
+    align-items: baseline;
+  }
 }

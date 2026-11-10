@@ -2,6 +2,7 @@
 // Requires RESEND_API_KEY. CONTACT_TO and CONTACT_FROM are optional overrides.
 
 import { site } from "@/lib/content";
+import { formResultPage, wantsJson } from "@/lib/formResponse";
 
 const TO = process.env.CONTACT_TO || site.email;
 const FROM = process.env.CONTACT_FROM || "Website <contact@felixoyeleke.com>";
@@ -20,11 +21,26 @@ async function readBody(request: Request): Promise<ContactBody> {
 }
 
 export async function POST(request: Request) {
+  const json = wantsJson(request);
+  // Errors come back as JSON for the page's own fetch, or as a readable page for a plain form post.
+  const fail = (error: string, status: number) =>
+    json
+      ? Response.json({ error }, { status })
+      : formResultPage(request, { title: "Message not sent", message: error, status, fallback: "/about#contact" });
+  const sent = () =>
+    json
+      ? Response.json({ ok: true })
+      : formResultPage(request, {
+          title: "Message sent",
+          message: "Thanks for getting in touch. I’ll reply by email.",
+          fallback: "/about#contact",
+        });
+
   let body: ContactBody;
   try {
     body = await readBody(request);
   } catch {
-    return Response.json({ error: "Invalid request." }, { status: 400 });
+    return fail("Invalid request.", 400);
   }
 
   const str = (value: unknown) => (typeof value === "string" ? value.trim() : "");
@@ -33,19 +49,19 @@ export async function POST(request: Request) {
   const message = str(body.message);
 
   // Honeypot filled in: pretend success so bots learn nothing.
-  if (str(body.company)) return Response.json({ ok: true });
+  if (str(body.company)) return sent();
 
   if (!name || !EMAIL.test(email) || !message) {
-    return Response.json({ error: "Name, a valid email and a message are required." }, { status: 400 });
+    return fail("Name, a valid email and a message are required.", 400);
   }
   if (name.length > 200 || email.length > 320 || message.length > 10000) {
-    return Response.json({ error: "Message is too long." }, { status: 400 });
+    return fail("Message is too long.", 400);
   }
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error("RESEND_API_KEY is not set");
-    return Response.json({ error: "Email is not configured." }, { status: 500 });
+    return fail("Email is not configured. Please email me directly instead.", 500);
   }
 
   const response = await fetch("https://api.resend.com/emails", {
@@ -63,12 +79,8 @@ export async function POST(request: Request) {
 
   if (!response.ok) {
     console.error("Resend error", response.status, await response.text());
-    return Response.json({ error: "Could not send message." }, { status: 502 });
+    return fail("Could not send message. Please try again, or email me directly.", 502);
   }
 
-  // A no-JS form post lands back on the contact section of the About page.
-  if (!(request.headers.get("content-type") ?? "").includes("application/json")) {
-    return Response.redirect(new URL("/about?sent=1#contact", request.url), 303);
-  }
-  return Response.json({ ok: true });
+  return sent();
 }
