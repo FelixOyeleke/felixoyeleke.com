@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { shareImages } from "@/lib/seo";
 import { BlogPostPage } from "@/components/BlogPostPage";
 import { DetailCards } from "@/components/Article";
 import { brandLogos } from "@/lib/content";
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
   title: "Buying an Older Home in Newfoundland",
   description:
     "A practical starting point for evaluating older homes in Newfoundland: moisture, insulation, heating, foundations, roofs and the questions to ask early.",
-  openGraph: { type: "article", title: "Buying an Older Home in Newfoundland" },
+  openGraph: { type: "article", images: shareImages, title: "Buying an Older Home in Newfoundland" },
 };
 
 export default function OlderHomePost() {

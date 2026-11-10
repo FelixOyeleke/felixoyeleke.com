@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleHeader, CtaPanel, DetailCards, StatRow, StatusList, Tldr } from "@/components/Article";
 import { brandLogos, site } from "@/lib/content";
-import { articleJsonLd, JsonLd } from "@/lib/seo";
+import { articleJsonLd, JsonLd, shareImages } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Visual Tokenization of Sonar Data",
@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     "Translating XTF side-scan sonar captures into visual tokens so image-native compressors can stream hydrographic surveys faster, with under 0.9% amplitude drift.",
   openGraph: {
     type: "article",
+    images: shareImages,
     title: "Visual Tokenization of Sonar Data",
     description:
       "Streaming hydrographic surveys through image-native compressors: 32% faster ingest on 60 GB of Atlantic survey data.",

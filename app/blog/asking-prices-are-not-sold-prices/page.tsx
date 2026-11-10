@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { shareImages } from "@/lib/seo";
 import { BlogPostPage } from "@/components/BlogPostPage";
 import { DetailCards } from "@/components/Article";
 import { brandLogos } from "@/lib/content";
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
   title: "Asking Prices Are Not Sold Prices",
   description:
     "How to read a local real estate market page without confusing asking prices, inventory, days listed and actual sale outcomes.",
-  openGraph: { type: "article", title: "Asking Prices Are Not Sold Prices" },
+  openGraph: { type: "article", images: shareImages, title: "Asking Prices Are Not Sold Prices" },
 };
 
 export default function AskingPricesPost() {

@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { THEME_COLORS, themeScript } from "@/lib/theme";
 import { site } from "@/lib/content";
-import { bio, JsonLd, personJsonLd, websiteJsonLd } from "@/lib/seo";
+import { bio, JsonLd, personJsonLd, shareImages, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
 
 // Use one typeface throughout so headings, cards, and body copy share the same letterforms.
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     locale: "en_CA",
     title: "Felix Oyeleke | Strategy, Technology & Execution",
     description: bio,
-    images: [{ url: "/images/felix.webp", alt: "Felix Oyeleke" }],
+    images: shareImages,
   },
   twitter: {
     card: "summary_large_image",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     creator: site.xHandle,
     title: "Felix Oyeleke | Strategy, Technology & Execution",
     description: bio,
-    images: ["/images/felix.webp"],
+    images: shareImages,
   },
   robots: {
     index: true,

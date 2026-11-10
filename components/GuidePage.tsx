@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { isFree, products } from "@/lib/content";
-import { DetailCards } from "./Article";
+import { isFree, visibleProducts as products } from "@/lib/content";
 import { ProductCover } from "./ProductCover";
 import { ProductTile } from "./ProductTile";
 import { Subscribe } from "./Subscribe";
@@ -62,7 +61,7 @@ export function GuidePage({
         <div className="product-info">
           <p className="eyebrow">{product.buyUrl ? product.kind : `${product.kind} · Coming soon`}</p>
           <h1>{product.title}</h1>
-          <p className="info-price">{product.price ?? "Price coming soon"}</p>
+          {product.buyUrl && product.price && <p className="info-price">{product.price}</p>}
 
           <div className="product-buy">
             {product.buyUrl ? (
@@ -98,7 +97,14 @@ export function GuidePage({
 
       <section className="product-section" aria-labelledby="inside-title">
         <h2 id="inside-title">What’s inside</h2>
-        <DetailCards cards={chapters} />
+        <div className="chapter-list">
+          {chapters.map((chapter) => (
+            <div className="chapter-row" key={chapter.title}>
+              <h3>{chapter.title}</h3>
+              <p>{chapter.body}</p>
+            </div>
+          ))}
+        </div>
         <p className="fine-print">{note}</p>
       </section>
 

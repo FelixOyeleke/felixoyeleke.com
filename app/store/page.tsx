@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { PageIntro } from "@/components/Section";
 import { StoreProducts } from "@/components/StoreProducts";
 import { Subscribe } from "@/components/Subscribe";
-import { products } from "@/lib/content";
+import { visibleProducts as products } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Store",
-  description: "Guides, templates and courses by Felix Oyeleke for moving to Canada, buying a home, research and storytelling.",
+  description:
+    "Guides and toolkits by Felix Oyeleke: moving to and buying a home in Newfoundland, and researching and producing documentary-style stories.",
 };
 
 export default function StorePage() {
@@ -14,17 +15,11 @@ export default function StorePage() {
     <main className="inner-page">
       <PageIntro
         eyebrow="Store"
-        title={
-          <>
-            Creator tools{" "}
-            <br />
-            &amp; resources.
-          </>
-        }
+        title="Guides & toolkits."
       >
         <p>
-          Guides, templates and courses for moving to Canada, buying a home, researching a story and building useful
-          systems around life and work in Atlantic Canada.
+          Practical guides for moving to Canada and buying a home in Newfoundland, and toolkits for researching and
+          producing documentary-style stories.
         </p>
       </PageIntro>
 

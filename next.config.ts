@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
       permanent("/writing", "/blog"),
       permanent("/writing/:slug*", "/blog/:slug*"),
       permanent("/guide.html", "/"),
-      permanent("/links.html", "/"),
+      permanent("/links.html", "/links"),
       permanent("/success.html", "/about#contact"),
       permanent("/privacy.html", "/"),
       permanent("/cookies.html", "/"),

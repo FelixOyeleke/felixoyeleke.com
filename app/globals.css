@@ -1843,7 +1843,8 @@ a.product-tile:hover .tile-name { text-decoration: underline; text-underline-off
   margin-top: 0;
 }
 
-.product-section .fine-print { max-width: 760px; }
+/* Same width as the chapter rows above it */
+.product-section .fine-print { max-width: none; }
 
 /* Mailing list: an open section under a hairline, with the email field and button in one pill */
 
@@ -2568,4 +2569,78 @@ a.page-list-item:hover,
     gap: 12px;
     align-items: baseline;
   }
+}
+
+/* Guide chapters as hairline rows: title left, summary right; stacked on phones */
+.chapter-list { border-top: 1px solid var(--rule); }
+
+.chapter-row {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 6px 32px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.chapter-row h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.chapter-row p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* Unreleased guides have no price line, so the title needs the space the price used to give */
+.product-info h1 + .product-buy { margin-top: 24px; }
+
+@media (max-width: 734px) {
+  .chapter-row { grid-template-columns: minmax(0, 1fr); padding: 16px 0; }
+}
+
+/* Links page: a single column for the Instagram bio link, same rows and colours as the rest of the site */
+.links-page { width: min(100%, 560px); margin: 0 auto; padding: 72px 0 96px; }
+.links-head { display: grid; justify-items: center; text-align: center; }
+.links-photo { width: 96px; height: 96px; margin: 0 0 20px; }
+.links-head h1 { margin: 0 0 8px; color: var(--ink); font-size: 28px; font-weight: 500; letter-spacing: -.02em; line-height: 1.15; }
+.links-head p { max-width: 420px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
+.links-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 24px; }
+.links-actions .button-link { min-height: 40px; padding: 9px 20px; font-size: 15px; }
+.links-secondary { background: var(--card); color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule); }
+.links-secondary:hover { background: var(--card-hover); }
+.links-group { margin-top: 48px; }
+.links-label { margin: 0 0 8px; color: var(--muted); font-size: 13px; font-weight: 500; letter-spacing: 0; line-height: 1.4; }
+.links-list { border-top: 1px solid var(--rule); }
+.links-row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+  text-decoration: none;
+}
+.links-row .tile-icon { width: 44px; height: 44px; border-radius: 10px; }
+.links-row .tile-icon--logo:not(.tile-icon--fill) img { width: 28px; height: 28px; }
+.links-row .card-go { width: 32px; height: 32px; }
+/* The phone layout gives every .tile-icon a grid area for the home tiles; these rows use plain columns */
+.links-row > * { grid-area: auto; }
+.links-text { display: grid; gap: 2px; min-width: 0; }
+.links-title { font-size: 15px; font-weight: 500; line-height: 1.35; }
+.links-line { color: var(--muted); font-size: 13px; line-height: 1.45; }
+.links-social { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 22px; margin-top: 48px; }
+.links-social a { padding: 8px 0; color: var(--muted); font-size: 14px; text-decoration: none; }
+.links-social a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.links-home { margin: 16px 0 0; text-align: center; font-size: 14px; }
+@media (max-width: 734px) {
+  .links-page { padding: 40px 0 72px; }
+  .links-head h1 { font-size: 24px; }
 }

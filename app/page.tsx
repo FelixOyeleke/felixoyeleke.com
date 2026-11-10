@@ -30,10 +30,8 @@ export default function HomePage() {
         </h1>
         <p>
           I work at the intersection of strategic management, technology and business development. My experience spans
-          international offshore operations, engineering, geospatial technology and entrepreneurship. I bring together
-          commercial thinking and technical capabilities to identify opportunities, develop solutions, lead complex
-          initiatives and turn ideas into working systems and businesses. I’m PMP-certified and completing an MBA at
-          Memorial University.
+          international offshore operations, engineering, geospatial technology and entrepreneurship, and I turn ideas
+          into working systems and businesses. I’m PMP-certified and completing an MBA at Memorial University.
         </p>
         <ul className="tag-list hub-tags" aria-label="Focus areas">
           {[

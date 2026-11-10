@@ -10,6 +10,9 @@ const memorial = {
 };
 
 /** One sentence used for the site description, the person profile and social cards. */
+/** Wide crop of the headshot for link previews (Open Graph and X cards). */
+export const shareImages = [{ url: "/images/felix-oyeleke-share.jpg", width: 1200, height: 630, alt: "Felix Oyeleke" }];
+
 export const bio =
   "Felix Oyeleke turns strategy into execution, combining business thinking, technical expertise and the ability to build. PMP and MBA candidate at Memorial University.";
 
@@ -21,7 +24,7 @@ export const personJsonLd = {
   givenName: "Felix",
   familyName: "Oyeleke",
   url: site.url,
-  image: `${site.url}/images/felix.webp`,
+  image: `${site.url}/images/felix-oyeleke.jpg`,
   jobTitle: "Entrepreneur, Technologist and PMP Project Manager",
   description: bio,
   email: `mailto:${site.email}`,

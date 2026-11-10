@@ -190,6 +190,8 @@ export type Product = {
   icon: "play" | "map" | "image" | "cap" | "passport" | "home";
   href?: string;
   buyUrl?: string;
+  /** Kept in the catalogue but not shown anywhere until it has real content. */
+  hidden?: boolean;
 };
 
 export const isFree = (product: Product) => product.price?.toLowerCase() === "free";
@@ -197,11 +199,15 @@ export const isFree = (product: Product) => product.price?.toLowerCase() === "fr
 export const products: Product[] = [
   { title: "Creator Systems Mastery", summary: "A practical toolkit for planning, researching and producing YouTube videos — so you can ship documentary-style stories consistently without burning out.", kind: "Course + templates", category: "Courses", price: "$149", icon: "play" },
   { title: "Field Research & Story Planning Hub", summary: "Notion and spreadsheet templates for tracking sources, locations, interviews and b-roll for documentary-style projects.", kind: "Template pack", category: "Digital assets", price: "$79", icon: "map" },
-  { title: "Wallpapers", summary: "High-resolution wallpapers for desktop and phone.", kind: "Wallpaper pack", category: "Digital assets", icon: "image" },
+  { title: "Wallpapers", summary: "High-resolution wallpapers for desktop and phone.", kind: "Wallpaper pack", category: "Digital assets", icon: "image", hidden: true },
   { title: "Study in Canada", summary: "A step-by-step guide for international students: choosing a program, getting your study permit, and settling in once you land.", kind: "Guide", category: "Guides", price: "$25", icon: "cap", href: "/store/study-in-canada" },
   { title: "Canada PR", summary: "A step-by-step guide to becoming a permanent resident: finding your pathway, building your Express Entry profile, and applying once you’re invited.", kind: "Guide", category: "Guides", icon: "passport", href: "/store/canada-pr" },
   { title: "First-Time Home Buyer", summary: "Buying your first home in Newfoundland and Labrador, step by step: getting pre-approved, saving for the down payment, making an offer, and closing.", kind: "Guide", category: "Guides", price: "Free", icon: "home", href: "/store/first-time-home-buyer" },
 ];
+
+/** Products shown on the site; hidden ones stay in the list above for later. */
+export const visibleProducts = products.filter((product) => !product.hidden);
+
 
 export type Project = {
   title: string;

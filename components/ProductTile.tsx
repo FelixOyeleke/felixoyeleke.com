@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Product } from "@/lib/content";
 import { ProductCover } from "./ProductCover";
 
-/** Catalogue tile: the cover in a square, then just the name and price. Opens the product's page. */
+/** Catalogue tile: the cover in a square, then the name, and the price once it can be bought. Opens the product's page. */
 export function ProductTile({ product }: { product: Product }) {
   const body = (
     <>
@@ -11,7 +11,7 @@ export function ProductTile({ product }: { product: Product }) {
         {!product.buyUrl && <span className="tile-badge">Coming soon</span>}
       </span>
       <span className="tile-name">{product.title}</span>
-      {product.price && <span className="tile-price">{product.price}</span>}
+      {product.buyUrl && product.price && <span className="tile-price">{product.price}</span>}
     </>
   );
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { shareImages } from "@/lib/seo";
 import { BlogPostPage } from "@/components/BlogPostPage";
 import { DetailCards } from "@/components/Article";
 import { brandLogos, site } from "@/lib/content";
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
   title: "From Survey Vessel to Useful Map",
   description:
     "What happens between a sonar ping recorded offshore and a map that someone can trust: capture, navigation, QA, processing and delivery.",
-  openGraph: { type: "article", title: "From Survey Vessel to Useful Map" },
+  openGraph: { type: "article", images: shareImages, title: "From Survey Vessel to Useful Map" },
 };
 
 export default function FromSurveyVesselPost() {
