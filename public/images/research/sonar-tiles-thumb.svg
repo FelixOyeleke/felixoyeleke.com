@@ -77,5 +77,5 @@
   <rect class="badge" x="760" y="220" width="150" height="54"/>
   <text class="badge-text" x="775" y="250">Deterministic token ID</text>
 
-  <text class="caption" x="70" y="320">Figure 2: Each tile is described with lightweight statistics so compressors can reuse tokens across pings.</text>
+  <text class="caption" x="70" y="320">Each tile is described with lightweight statistics so compressors can reuse tokens across pings.</text>
 </svg>

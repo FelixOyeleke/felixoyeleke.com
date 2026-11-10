@@ -48,5 +48,5 @@
   <line class="arrow" x1="750" y1="180" x2="760" y2="180"/>
 
   <!-- Caption -->
-  <text class="caption" x="60" y="320">Figure 1: Tokenization path from raw hydrographic packets to compressor-friendly visual artifacts.</text>
+  <text class="caption" x="60" y="320">Tokenization path from raw hydrographic packets to compressor-friendly visual artifacts.</text>
 </svg>

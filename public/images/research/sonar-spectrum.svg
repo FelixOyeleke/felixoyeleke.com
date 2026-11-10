@@ -62,5 +62,5 @@
     <text class="panel-text" x="24" y="170">• GPS, layback, and INS fused</text>
     <text class="panel-text" x="24" y="200">• 1.2B amplitude samples</text>
   </g>
-  <text class="caption" x="80" y="320">Figure 3. Channel-normalized spectrum used for token QA and domain adaptation.</text>
+  <text class="caption" x="80" y="320">Channel-normalized spectrum used for token QA and domain adaptation.</text>
 </svg>

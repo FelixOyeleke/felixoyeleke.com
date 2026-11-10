@@ -1,6 +1,6 @@
 export const site = {
   name: "Felix Oyeleke",
-  url: "https://felixoyeleke.com",
+  url: "https://www.felixoyeleke.com",
   email: "hi@felixoyeleke.com",
   github: "https://github.com/felixoyeleke",
   githubUser: "felixoyeleke",

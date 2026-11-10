@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
 };
 
-// The SVG figures carry their own "Figure N" captions, so no <figcaption> here.
+// The SVG figures carry their own captions, so no <figcaption> here.
 function Figure({ src, alt }: { src: string; alt: string }) {
   return (
     <figure className="article-figure">
