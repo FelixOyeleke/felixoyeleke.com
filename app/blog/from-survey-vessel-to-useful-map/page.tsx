@@ -5,6 +5,7 @@ import { DetailCards } from "@/components/Article";
 import { brandLogos, site } from "@/lib/content";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog/from-survey-vessel-to-useful-map" },
   title: "From Survey Vessel to Useful Map",
   description:
     "What happens between a sonar ping recorded offshore and a map that someone can trust: capture, navigation, QA, processing and delivery.",

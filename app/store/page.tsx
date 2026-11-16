@@ -5,6 +5,7 @@ import { Subscribe } from "@/components/Subscribe";
 import { visibleProducts as products } from "@/lib/content";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/store" },
   title: "Store",
   description:
     "Guides and toolkits by Felix Oyeleke: moving to and buying a home in Newfoundland, and researching and producing documentary-style stories.",

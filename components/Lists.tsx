@@ -28,11 +28,13 @@ export function PageList({
             <div className="page-list-body">
               <h3>{item.title}</h3>
               <p>{item.summary}</p>
-              <ul className="tag-list tag-list--small">
-                {item.tags.map((tag) => (
-                  <li key={tag}>{tag}</li>
-                ))}
-              </ul>
+              {item.tags.length > 0 && (
+                <ul className="tag-list tag-list--small">
+                  {item.tags.map((tag) => (
+                    <li key={tag}>{tag}</li>
+                  ))}
+                </ul>
+              )}
             </div>
             {item.href && <CardGo external={item.external} />}
           </>

@@ -4,6 +4,7 @@ import { ArticleHeader, CtaPanel, DetailCards } from "@/components/Article";
 import { brandLogos, site } from "@/lib/content";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects/altair-studio" },
   title: "Altair Studio",
   description: "Real estate photography, videography and drone shots for properties and listings.",
 };

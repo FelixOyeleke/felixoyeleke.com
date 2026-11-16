@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { THEME_COLORS, themeScript } from "@/lib/theme";
 import { site } from "@/lib/content";
-import { bio, JsonLd, personJsonLd, shareImages, websiteJsonLd } from "@/lib/seo";
+import { bio, JsonLd, personJsonLd, shareImages, siteTitle, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
 
 // Use one typeface throughout so headings, cards, and body copy share the same letterforms.
@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Felix Oyeleke | Strategy, Technology & Execution",
+    default: siteTitle,
     template: "%s | Felix Oyeleke",
   },
   description: bio,
@@ -22,11 +22,15 @@ export const metadata: Metadata = {
   creator: site.name,
   publisher: site.name,
   category: "personal website",
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+  },
   openGraph: {
     siteName: site.name,
     type: "website",
     locale: "en_CA",
-    title: "Felix Oyeleke | Strategy, Technology & Execution",
+    title: siteTitle,
     description: bio,
     images: shareImages,
   },
@@ -34,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: site.xHandle,
     creator: site.xHandle,
-    title: "Felix Oyeleke | Strategy, Technology & Execution",
+    title: siteTitle,
     description: bio,
     images: shareImages,
   },

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GuidePage, ImmigrationNote } from "@/components/GuidePage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/store/study-in-canada" },
   title: "Study in Canada — guide",
   description:
     "A step-by-step guide for international students: choosing a program, getting a Canadian study permit, and settling in.",

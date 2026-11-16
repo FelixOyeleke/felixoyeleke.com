@@ -2,7 +2,16 @@ import type { MetadataRoute } from "next";
 import { noteWritings, posts, products, projects, site } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["", "/about", "/projects", "/blog", "/notes", "/store", "/resume", "/links"];
+  const pages = [
+    "",
+    "/about",
+    "/projects",
+    "/blog",
+    "/notes",
+    "/research",
+    "/store",
+    "/links",
+  ];
   const detail = [...projects, ...posts, ...products].flatMap((item) =>
     item.href?.startsWith("/") ? [item.href] : [],
   );

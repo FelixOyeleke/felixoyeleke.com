@@ -5,9 +5,7 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="site-footer-inner">
-        <p>
-          © {new Date().getFullYear()} {site.name}. All rights reserved.
-        </p>
+        <p>&copy; 2024 {site.name}. All rights reserved.</p>
         <div className="footer-links">
           <a href={`mailto:${site.email}`}>Email</a>
           <a href={site.linkedin} target="_blank" rel="noreferrer">

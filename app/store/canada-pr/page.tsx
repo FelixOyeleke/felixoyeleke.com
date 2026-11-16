@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GuidePage, ImmigrationNote } from "@/components/GuidePage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/store/canada-pr" },
   title: "Canada PR — guide",
   description:
     "A step-by-step guide to Canadian permanent residence: finding your pathway, building an Express Entry profile, and applying after your invitation.",

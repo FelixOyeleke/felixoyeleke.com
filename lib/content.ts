@@ -1,7 +1,7 @@
 export const site = {
   name: "Felix Oyeleke",
   url: "https://www.felixoyeleke.com",
-  email: "hi@felixoyeleke.com",
+  email: "fsoyeleke@gmail.com",
   github: "https://github.com/felixoyeleke",
   githubUser: "felixoyeleke",
   linkedin: "https://linkedin.com/in/felixoyeleke",
@@ -174,8 +174,43 @@ export const nav = [
   { href: "/projects", label: "Projects" },
   { href: "/blog", label: "Blog" },
   { href: "/notes", label: "Notes" },
+  { href: "/research", label: "Research" },
   { href: "/store", label: "Store" },
   { href: "/about", label: "About" },
+];
+
+export type Degree = {
+  degree: string;
+  school: string;
+  dates?: string;
+  note?: string;
+};
+
+export const education: Degree[] = [
+  {
+    degree: "Master of Business Administration (MBA)",
+    school: "Memorial University of Newfoundland",
+    dates: "2026 – present",
+    note: "School of Graduate Studies Scholarship Award, 2026.",
+  },
+  {
+    degree: "Master of Applied Ocean Technology, Ocean Mapping (with Distinction)",
+    school: "Fisheries and Marine Institute of Memorial University",
+    note: "Thesis on automated boulder detection in side-scan sonar mosaics with deep learning; poster presented at the Canadian Hydrographic Conference 2024.",
+  },
+  {
+    degree: "Bachelor of Technology, Marine Science & Technology (Geoscience)",
+    school: "Federal University of Technology Akure",
+  },
+];
+
+export const credentials: { name: string; issuer?: string }[] = [
+  { name: "Project Management Professional (PMP)", issuer: "Project Management Institute" },
+  { name: "Professional Scrum Master I (PSM I)", issuer: "Scrum.org, 2026" },
+  { name: "ISO 9001 Internal Auditor", issuer: "SGS" },
+  { name: "Category A Hydrographer" },
+  { name: "Environmental Impact Assessment" },
+  { name: "Licensed REALTOR®", issuer: "eXp Realty, Newfoundland and Labrador" },
 ];
 
 export const productCategories = ["Guides", "Digital assets", "Courses"] as const;
@@ -220,9 +255,10 @@ export type Project = {
 };
 
 export const projects: Project[] = [
-  { title: "Dolphin Explorer", summary: "Open-source hydrographic data exploration and processing software with interactive visualization and analysis tools.", tags: ["Python", "3D Visualization", "Geospatial", "Open Source"], href: "/projects/dolphin-explorer", featured: true, logo: brandLogos.dolphinExplorer },
+  { title: "Dolphin Explorer", summary: "Desktop software for marine survey data: XTF, JSF and SEG-Y import, 2D/3D mapping, sidescan waterfall review, sub-bottom interpretation and a node-based processing pipeline.", tags: ["C++20", "Qt 6", "OpenGL", "GDAL"], href: "/projects/dolphin-explorer", featured: true, logo: brandLogos.dolphinExplorer },
+  { title: "Automated Boulder Detection", summary: "Master’s research applying YOLO-based deep learning to find boulders in side-scan sonar mosaics, presented at the Canadian Hydrographic Conference 2024.", tags: ["Computer vision", "YOLO", "Side-scan sonar", "Research"], href: "/projects/automated-boulder-detection", featured: true },
   { title: "Altair Studio", summary: "Real estate photography and videography, including drone shots that help properties stand out online.", tags: ["Real Estate", "Photography", "Videography", "Drone"], href: "/projects/altair-studio", logo: brandLogos.altairStudio },
-  { title: "St. John’s Properties", summary: "Live MLS®-powered real estate platform for Newfoundland — listing search, neighbourhood market data and buyer tools.", tags: ["Next.js", "Python", "PostgreSQL", "PostGIS", "CREA DDF"], href: "/projects/st-johns-properties", featured: true, logo: brandLogos.stJohnsProperties },
+  { title: "St. John’s Properties", summary: "Live MLS®-powered real estate platform for Newfoundland — listing search, neighbourhood market data and buyer tools.", tags: ["Next.js", "TypeScript", "PostgreSQL", "PostGIS", "CREA DDF"], href: "/projects/st-johns-properties", featured: true, logo: brandLogos.stJohnsProperties },
   { title: "AI & Automation Tools", summary: "A collection of tools and scripts for data processing, AI-assisted workflows and productivity.", tags: ["Python", "AI/ML", "Automation", "APIs"], featured: true },
 ];
 export type Post = {
@@ -240,6 +276,28 @@ export type Post = {
 };
 
 export const posts: Post[] = [
+  {
+    title: "Understanding side-scan sonar processing",
+    summary:
+      "What happens between a raw side-scan ping and an image you can interpret: bottom tracking, slant-range correction, TVG, gain normalisation, layback and reading height from shadows.",
+    tags: ["Side-scan sonar", "Hydrography", "Signal processing"],
+    logo: brandLogos.dolphinExplorer,
+    date: "2026-11",
+    href: "/blog/understanding-side-scan-sonar-processing",
+    opening: "A raw side-scan record is not yet a picture of the seabed…",
+    thumbnail: "/images/research/sidescan-waterfall-thumb.webp",
+  },
+  {
+    title: "Recognising the same house twice",
+    summary:
+      "Matching MLS® listings to permanent property records: address normalization, deterministic IDs, strong and weak evidence, and the 518 wrong merges that shaped the rules.",
+    tags: ["Data engineering", "Entity resolution", "Real estate"],
+    logo: brandLogos.stJohnsProperties,
+    date: "2026-11",
+    href: "/blog/recognising-the-same-house-twice",
+    opening: "A listing feed tells you what is for sale today…",
+    thumbnail: "/images/projects/st-johns-properties-home.webp",
+  },
   {
     title: "From survey vessel to useful map",
     summary:

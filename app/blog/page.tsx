@@ -5,6 +5,7 @@ import { Subscribe } from "@/components/Subscribe";
 import { publishedPosts } from "@/lib/content";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog", types: { "application/rss+xml": "/blog/rss.xml" } },
   title: "Blog",
   description: "Blog posts by Felix Oyeleke on data, software and project delivery.",
 };

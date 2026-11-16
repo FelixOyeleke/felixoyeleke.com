@@ -5,6 +5,7 @@ import { DetailCards, StatusList } from "@/components/Article";
 import { brandLogos, site } from "@/lib/content";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog/demo-to-production-tool" },
   title: "The Difference Between a Demo and a Production Tool",
   description:
     "The practical gap between software that works once and software people can rely on every day: failure states, observability, documentation and ownership.",

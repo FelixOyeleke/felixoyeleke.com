@@ -4,9 +4,10 @@ import { PageIntro, PageSection } from "@/components/Section";
 import { projects } from "@/lib/content";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects" },
   title: "Projects",
   description:
-    "Projects by Felix Oyeleke: Dolphin Explorer hydrographic sonar software (C++, Qt, OpenGL), geospatial data tools, St. John's Properties and Altair Studio.",
+    "Projects by Felix Oyeleke: Dolphin Explorer marine survey software (C++, Qt, OpenGL), automated boulder detection research in side-scan sonar, the St. John’s Properties data platform and Altair Studio.",
 };
 
 export default function ProjectsPage() {

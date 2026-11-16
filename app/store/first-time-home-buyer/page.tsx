@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GuidePage } from "@/components/GuidePage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/store/first-time-home-buyer" },
   title: "First-Time Home Buyer — guide",
   description:
     "A step-by-step guide to buying your first home in Newfoundland and Labrador: pre-approval, down payment, making an offer and closing.",

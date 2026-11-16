@@ -5,6 +5,7 @@ import { NoteCard } from "@/components/NoteCard";
 import { noteTopics } from "@/lib/content";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/notes" },
   title: "Notes",
   description: "Technical notes from Felix Oyeleke on GPU-accelerated scientific software, C++ and OpenGL, technical SEO and practical AI workflows.",
 };

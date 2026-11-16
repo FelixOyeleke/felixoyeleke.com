@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { site } from "./content";
 
@@ -9,12 +10,58 @@ const memorial = {
   url: "https://www.mun.ca",
 };
 
-/** One sentence used for the site description, the person profile and social cards. */
 /** Wide crop of the headshot for link previews (Open Graph and X cards). */
 export const shareImages = [{ url: "/images/felix-oyeleke-share.jpg", width: 1200, height: 630, alt: "Felix Oyeleke" }];
 
+/** One sentence used for the site description, the person profile and social cards. */
 export const bio =
   "Felix Oyeleke turns strategy into execution, combining business thinking, technical expertise and the ability to build. PMP and MBA candidate at Memorial University.";
+
+/** Default page title, used on the home page and as the fallback for social cards. */
+export const siteTitle = `${site.name} | Strategy, Technology & Execution`;
+
+/**
+ * Metadata for one indexable page: title, description, canonical URL and matching social cards.
+ * Next.js replaces (not merges) `openGraph` and `twitter` from the layout, so the full card is rebuilt here.
+ */
+export function pageMetadata({
+  path,
+  title,
+  description,
+  type = "website",
+  absoluteTitle,
+}: {
+  path: string;
+  title: string;
+  description: string;
+  type?: "website" | "article" | "profile";
+  /** Set when the title should not get the " | Felix Oyeleke" suffix. */
+  absoluteTitle?: boolean;
+}): Metadata {
+  const fullTitle = absoluteTitle ? title : `${title} | ${site.name}`;
+  return {
+    title: absoluteTitle ? { absolute: title } : title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      siteName: site.name,
+      type,
+      locale: "en_CA",
+      url: path,
+      title: fullTitle,
+      description,
+      images: shareImages,
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: site.xHandle,
+      creator: site.xHandle,
+      title: fullTitle,
+      description,
+      images: shareImages,
+    },
+  };
+}
 
 export const personJsonLd = {
   "@context": "https://schema.org",
@@ -35,6 +82,7 @@ export const personJsonLd = {
   },
   alumniOf: [
     memorial,
+    { "@type": "CollegeOrUniversity", name: "Fisheries and Marine Institute of Memorial University of Newfoundland", url: "https://www.mi.mun.ca" },
     { "@type": "CollegeOrUniversity", name: "Federal University of Technology, Akure" },
   ],
   hasCredential: [
@@ -43,6 +91,18 @@ export const personJsonLd = {
       name: "Project Management Professional (PMP)",
       credentialCategory: "certification",
       recognizedBy: { "@type": "Organization", name: "Project Management Institute", url: "https://www.pmi.org" },
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      name: "Professional Scrum Master I (PSM I)",
+      credentialCategory: "certification",
+      recognizedBy: { "@type": "Organization", name: "Scrum.org", url: "https://www.scrum.org" },
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      name: "ISO 9001 Internal Auditor",
+      credentialCategory: "certification",
+      recognizedBy: { "@type": "Organization", name: "SGS" },
     },
     { "@type": "EducationalOccupationalCredential", name: "Category A Hydrographer", credentialCategory: "certification" },
     {
@@ -53,7 +113,7 @@ export const personJsonLd = {
     },
     {
       "@type": "EducationalOccupationalCredential",
-      name: "Bachelor of Technology, Marine Science and Technology",
+      name: "Bachelor of Technology, Marine Science and Technology (Geoscience)",
       credentialCategory: "degree",
       recognizedBy: { "@type": "CollegeOrUniversity", name: "Federal University of Technology, Akure" },
     },
@@ -133,7 +193,7 @@ export const websiteJsonLd = {
   name: site.name,
   alternateName: "felixoyeleke.com",
   url: site.url,
-  description: "The personal website of Felix Oyeleke: strategy, technology and execution, with projects, writing and notes.",
+  description: "The professional website of Felix Oyeleke: technology, strategy and digital transformation, with experience, projects, research and writing.",
   publisher: { "@id": `${site.url}/#person` },
   inLanguage: "en-CA",
 };
@@ -148,6 +208,20 @@ export const profilePageJsonLd = {
   mainEntity: { "@id": `${site.url}/#person` },
 };
 
+/** Breadcrumb trail from Home through each `{ name, path }` given, e.g. Projects > Dolphin Explorer. */
+export function breadcrumbJsonLd(...trail: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [{ name: "Home", path: "" }, ...trail].map((crumb, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: crumb.name,
+      item: `${site.url}${crumb.path}`,
+    })),
+  };
+}
+
 export function JsonLd({ data }: { data: Record<string, unknown> }): ReactNode {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
 }
@@ -159,9 +233,11 @@ export const dolphinExplorerJsonLd = {
   "@id": `${site.url}/projects/dolphin-explorer#software`,
   name: "Dolphin Explorer",
   url: "https://dolphinexplorer.dev/",
-  applicationCategory: "Hydrographic data processing software",
+  applicationCategory: "Marine survey data processing software",
+  operatingSystem: "Windows",
+  programmingLanguage: ["C++", "Qt"],
   description:
-    "A hydrographic console that parses XTF side-scan sonar data, renders a GPU waterfall view and is gaining a desktop GUI built with C++, Qt and OpenGL.",
+    "A native desktop application for importing, visualizing, processing and exporting marine survey data: XTF, EdgeTech JSF and SEG-Y sonar files, 2D/3D mapping, sidescan waterfall review, sub-bottom interpretation and a node-based processing pipeline.",
   author: { "@id": `${site.url}/#person` },
   creator: { "@id": `${site.url}/#person` },
 };

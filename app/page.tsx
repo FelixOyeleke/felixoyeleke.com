@@ -4,7 +4,11 @@ import { BlogCard } from "@/components/BlogCard";
 import { CardGo, Icon } from "@/components/Icon";
 import { Subscribe } from "@/components/Subscribe";
 import { NoteCard } from "@/components/NoteCard";
+import { GitHubActivity } from "@/components/GitHubActivity";
 import { building, noteTopics, publishedPosts } from "@/lib/content";
+
+// Metadata only: the canonical URL for the home page (the layout's RSS link is kept alongside it).
+export const metadata = { alternates: { canonical: "/", types: { "application/rss+xml": "/blog/rss.xml" } } };
 
 function TileLink({ href, external, className, children }: { href: string; external?: boolean; className: string; children: React.ReactNode }) {
   return external ? (
@@ -31,7 +35,15 @@ export default function HomePage() {
         <p>
           I work at the intersection of strategic management, technology and business development. My experience spans
           international offshore operations, engineering, geospatial technology and entrepreneurship, and I turn ideas
-          into working systems and businesses. I’m PMP-certified and completing an MBA at Memorial University.
+          into working systems and businesses. I’m PMP-certified and completing an MBA at{" "}
+          <a
+            href="https://www.mun.ca/business/graduate/master-of-business-administration-mba/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Memorial University
+          </a>
+          .
         </p>
         <ul className="tag-list hub-tags" aria-label="Focus areas">
           {[
@@ -118,6 +130,8 @@ export default function HomePage() {
           All notes <span aria-hidden="true">›</span>
         </Link>
       </section>
+
+      <GitHubActivity />
 
       <Subscribe
         title="Stay in the loop"

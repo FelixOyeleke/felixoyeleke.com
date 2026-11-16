@@ -66,12 +66,6 @@ const groups: { title: string; rows: LinkRow[] }[] = [
         href: "/projects",
         icon: "tiles",
       },
-      {
-        title: "Resume",
-        line: "Experience, credentials and capabilities.",
-        href: "/resume",
-        icon: "check",
-      },
     ],
   },
 ];

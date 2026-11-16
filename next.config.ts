@@ -7,10 +7,13 @@ const nextConfig: NextConfig = {
     return [
       // Static-HTML URLs from the previous builds of the site
       permanent("/index.html", "/"),
-      ...["about", "projects", "blog", "store", "resume"].map((page) => permanent(`/${page}.html`, `/${page}`)),
-      // Contact was merged into the About page
+      ...["about", "projects", "blog", "store"].map((page) => permanent(`/${page}.html`, `/${page}`)),
+      // Contact lives in the About page
       permanent("/contact", "/about#contact"),
       permanent("/contact.html", "/about#contact"),
+      // Career detail lives on LinkedIn; the resume page was removed (Nov 2026)
+      permanent("/resume", "/about"),
+      permanent("/resume.html", "/about"),
       permanent("/experience", "/about"),
       permanent("/experience.html", "/about"),
       permanent("/dolphin-explorer.html", "/projects/dolphin-explorer"),

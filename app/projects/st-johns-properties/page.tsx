@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleHeader, CtaPanel, DetailCards, StatRow, StatusList, Tldr } from "@/components/Article";
 import { brandLogos } from "@/lib/content";
-import { JsonLd, stJohnsPropertiesJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, JsonLd, stJohnsPropertiesJsonLd } from "@/lib/seo";
 
 const SITE_URL = "https://stjohnsproperties.ca";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects/st-johns-properties" },
   title: "St. John’s Properties",
   description:
     "St. John’s Properties, founded and built by Felix Oyeleke: a Newfoundland real estate business and MLS®-powered platform with live listing search, neighbourhood market data and buyer tools.",
@@ -27,6 +28,7 @@ export default function StJohnsPropertiesPage() {
   return (
     <main className="article">
       <JsonLd data={stJohnsPropertiesJsonLd} />
+      <JsonLd data={breadcrumbJsonLd({ name: "Projects", path: "/projects" }, { name: "St. John’s Properties", path: "/projects/st-johns-properties" })} />
       <Link className="back-link" href="/projects">
         ‹ All projects
       </Link>
@@ -36,7 +38,7 @@ export default function StJohnsPropertiesPage() {
         eyebrow="Project · Live · 2026"
         title="St. John’s Properties"
         lede="A real estate business and the platform behind it: live MLS® search, neighbourhood market data and tools for buyers, sellers and investors in St. John’s and Newfoundland. I founded it, built it and run it as a REALTOR® with eXp Realty."
-        tags={["Next.js", "Python", "PostgreSQL", "PostGIS", "CREA DDF", "Vercel"]}
+        tags={["Next.js", "TypeScript", "PostgreSQL", "PostGIS", "CREA DDF", "Vercel"]}
       />
 
       <div className="hero-actions article-actions">
@@ -163,6 +165,99 @@ export default function StJohnsPropertiesPage() {
       />
 
       <div className="article-body">
+        <h2>One property, one permanent page</h2>
+        <p>
+          A house in St. John’s may be listed, withdrawn and listed again under a new MLS® number. The feed treats each
+          of those as a separate listing; a buyer thinks of it as one house. So the platform separates three things:
+        </p>
+        <ul>
+          <li>
+            <strong>The property:</strong> the physical home, with a stable identity, a location and a lifecycle.
+          </li>
+          <li>
+            <strong>Listing episodes:</strong> each period it is marketed, with the raw feed record kept alongside the
+            version the website shows.
+          </li>
+          <li>
+            <strong>History:</strong> what happened during each episode: discovered, relisted, price reduced or
+            increased, details changed (with the before and after), back on market, or removed from the feed.
+          </li>
+        </ul>
+        <p>
+          Every property has one permanent URL, and every other URL for it, including old listing links and merged
+          duplicates, redirects there before the page renders. Pages, history and the stored snapshot are kept after a
+          home leaves the market, so a property page stays useful as a record of the home rather than disappearing with
+          the listing.
+        </p>
+
+        <h2>Matching the same home across listings</h2>
+        <p>
+          Recognising the same home is harder than it sounds. A property’s identity comes from its normalized address
+          and municipality, after folding the variations the feed actually contains: street suffixes, directions,
+          “Saint” and “St”, “Mount” and “Mt”, and every way of writing a unit (“Unit#403”, “#403”, “Apt 403”, “Suite
+          403”).
+        </p>
+        <p>
+          New listings are merged into an existing property automatically only on strong evidence: a recorded alias of
+          its address, or a property within 30 metres with the same civic number and the same unit. Condo units never
+          merge. Weaker evidence (identical long descriptions, similar street names a short distance apart, the same
+          address filed under a neighbouring town) goes to a review queue instead. That limit came from testing: the
+          first run without it proposed 518 pairs, nearly all of them different parcels, many of them neighbouring lots
+          in the same subdivision sharing a builder’s description. I wrote this up in{" "}
+          <Link href="/blog/recognising-the-same-house-twice">Recognising the same house twice</Link>.
+        </p>
+        <p>
+          Parcel numbers would make this easier, but the feed fills them on only 11 of about 3,400 records, so parcel
+          identifiers have to come from municipal data instead.
+        </p>
+
+        <h2>Geography and search</h2>
+        <p>
+          Locations live in PostgreSQL with PostGIS. Seven site neighbourhoods follow the City of St. John’s official
+          community boundaries; areas without a City polygon use defined circles, and every home belongs to exactly one
+          neighbourhood, never to a St. John’s one when it sits in another town. Nearby-home search uses PostGIS distance
+          queries on a spatial index.
+        </p>
+        <p>
+          The search box also reads plain language. A query such as “two-apartment house under $500k near MUN” is
+          parsed into an area, a home type, a price and a bedroom count and sent to the matching page, while addresses,
+          MLS® numbers and place names go to keyword search.
+        </p>
+
+        <h2>Classifying homes from the data</h2>
+        <p>
+          Categories such as two-apartment homes, condos and commercial property drive much of the site, and the feed
+          does not always state them cleanly. Classification uses the structured fields first and the listing remarks
+          second, and it ignores hedged wording: “potential for a basement apartment” does not make a home a
+          two-apartment, but “fully developed basement with an in-law suite” does. Every classification records its
+          source and evidence so it can be checked.
+        </p>
+
+        <h2>Keeping the data reliable</h2>
+        <ul>
+          <li>Listings sync in batches, with retries for brief database failures and only one sync running at a time.</li>
+          <li>Unchanged listings are detected by a content hash and not rewritten.</li>
+          <li>
+            A home is only marked as gone after a complete, successful sync, and a short drop-out is treated as a blip
+            rather than a status change.
+          </li>
+          <li>
+            If the feed is unavailable, search falls back to the last synced inventory and property pages to their
+            stored snapshot.
+          </li>
+          <li>An admin view shows each sync run, database health and a set of data-quality checks.</li>
+        </ul>
+
+        <h2>Search architecture</h2>
+        <p>
+          Many searches are a place and an intent: condos in Mount Pearl, homes under $400K near the Health Sciences
+          Centre. The site defines a grid of areas and intents and decides each day, from live inventory, which of those
+          pages deserve to exist. A page is published and indexed only when it has at least three homes and is not
+          simply a copy of a broader page; thinner pages are kept out of the index, and duplicates point search engines
+          to the page they repeat. Against the September 2026 feed this produced about 200 live landing pages, each
+          with figures computed from its own listings.
+        </p>
+
         <h2>Search growth</h2>
         <p>
           Search is where the structure pays off. Every listing, category and neighbourhood page is a specific, local
@@ -171,17 +266,50 @@ export default function StJohnsPropertiesPage() {
           around 250 to roughly 10,000 — about forty times higher.
         </p>
 
-        <h2>Next: local guides</h2>
-        <p>
-          The next step is content that answers the questions people search before they are ready to talk to an agent.
-          A first batch of ten buyer and seller guides is drafted and awaiting review, including:
-        </p>
+        <h2>Tools for buyers and sellers</h2>
         <ul>
-          <li>Buying a home in St. John’s during winter</li>
-          <li>Buying in Newfoundland from another province</li>
-          <li>Questions to ask before buying a condo</li>
-          <li>What it costs to sell a house in St. John’s</li>
-          <li>Paradise vs. Conception Bay South</li>
+          <li>
+            <strong>What can I buy?</strong> Savings and a comfortable monthly payment give the highest price where the
+            minimum down payment and the mortgage (with CMHC insurance) fit, then the homes listed under it. It states
+            clearly that it is not a pre-approval.
+          </li>
+          <li>
+            <strong>Compare:</strong> up to four saved homes side by side.
+          </li>
+          <li>
+            <strong>Similar homes</strong> weigh building form, second units, neighbourhood and real distance, not just
+            the town name.
+          </li>
+          <li>
+            <strong>Accounts</strong> with saved homes, saved searches and new-listing alerts.
+          </li>
+        </ul>
+
+        <h2>Local guides</h2>
+        <p>
+          Guides answer the questions people search before they are ready to talk to an agent: buying from away,
+          budgeting beyond the asking price, renting rules, newcomers to Canada, selling step by step, and individual
+          subdivisions. They are published on{" "}
+          <a href={`${SITE_URL}/guides`} target="_blank" rel="noreferrer">
+            stjohnsproperties.ca/guides
+          </a>
+          .
+        </p>
+
+        <h2>Related writing</h2>
+        <ul>
+          <li>
+            <Link href="/blog/recognising-the-same-house-twice">Recognising the same house twice: matching listings to properties</Link>
+          </li>
+          <li>
+            <Link href="/blog/asking-prices-are-not-sold-prices">Asking prices are not sold prices</Link>
+          </li>
+          <li>
+            <Link href="/blog/buying-an-older-home-in-newfoundland">Buying an older home in Newfoundland</Link>
+          </li>
+          <li>
+            <Link href="/notes/seo-systems">SEO systems: working notes</Link>
+          </li>
         </ul>
 
         <h2>Status</h2>

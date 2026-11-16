@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const note = noteWritings.find((item) => item.slug === slug);
   return note
-    ? { title: note.title, description: note.lede }
+    ? { title: note.title, description: note.lede, alternates: { canonical: `/notes/${note.slug}` } }
     : { title: "Note" };
 }
 

@@ -5,6 +5,7 @@ import { DetailCards } from "@/components/Article";
 import { brandLogos } from "@/lib/content";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog/buying-an-older-home-in-newfoundland" },
   title: "Buying an Older Home in Newfoundland",
   description:
     "A practical starting point for evaluating older homes in Newfoundland: moisture, insulation, heating, foundations, roofs and the questions to ask early.",

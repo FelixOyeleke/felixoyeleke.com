@@ -5,6 +5,7 @@ import { brandLogos, site } from "@/lib/content";
 import { articleJsonLd, JsonLd, shareImages } from "@/lib/seo";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog/visual-tokenization-of-sonar-data" },
   title: "Visual Tokenization of Sonar Data",
   description:
     "Translating XTF side-scan sonar captures into visual tokens so image-native compressors can stream hydrographic surveys faster, with under 0.9% amplitude drift.",
